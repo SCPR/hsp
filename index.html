@@ -157,7 +157,7 @@
 
       <p>“I remember we were just about to go and they were like: it’s too late,” Marshall recalled. “And I just broke. You know. I broke.”
 
-      <p>An autopsy would turn up no illness that could explain it. Zahnyah’s death was reported as SIDS and the medical examiner noted “co-sleeping” as a factor. 
+      <p>An autopsy would turn up no illness that could explain it. Zahnyah’s death was reported as SIDS and the medical examiner noted “co-sleeping” as a factor.
 
       <p>The shelter didn’t have a crib, just bunk beds. Marshall said the shelter operators didn’t allow her to bring a bassinet or any other “outside” furniture. Fearing Zahnyah would fall and hurt herself, Marshall had dragged the mattresses onto the floor and that’s where the two slept every night.
 
@@ -189,10 +189,10 @@
       <hr />
       <h3>Maximum monthly CalWORKs check for family of three (2007-2016)</h3>
       <img large
-        src="../../images/charts/Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16.png" 
+        src="../../images/charts/Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16.png"
         alt="Maximum monthly CalWORKs check for family of three (2007-2016)">
       <img small
-        src="../../images/charts/Maximum_monthly_CalWORKs_check_for_family_of_three_in_California_07-16_-_SMALL.png" 
+        src="../../images/charts/Maximum_monthly_CalWORKs_check_for_family_of_three_in_California_07-16_-_SMALL.png"
         alt="Maximum monthly CalWORKs check for family of three (2007-2016)">
       <hr />
     </figure>
@@ -213,10 +213,10 @@
       <hr />
       <h3>Homeless families on CalWORKs in LA County</h3>
       <img large
-        src="../../images/charts/Homeless_families_on_CalWORKs_in_LA_County.png" 
+        src="../../images/charts/Homeless_families_on_CalWORKs_in_LA_County.png"
         alt="Homeless families on CalWORKs in LA County">
       <img small
-        src="../../images/charts/Homeless_families_on_CalWORKs_in_LA_County_-_SMALL.png" 
+        src="../../images/charts/Homeless_families_on_CalWORKs_in_LA_County_-_SMALL.png"
         alt="Homeless families on CalWORKs in LA County">
       <hr />
     </figure>
@@ -247,10 +247,10 @@
       <hr />
       <h3>Chronically mentally ill homeless people compared to the number of homeless families on CalWORKs</h3>
       <img large
-        src="../../images/charts/Chronically_mentally_ill_homeless_people_compared_to_the_number_of_homeless_families_on_CalWORKs.png" 
+        src="../../images/charts/Chronically_mentally_ill_homeless_people_compared_to_the_number_of_homeless_families_on_CalWORKs.png"
         alt="Chronically mentally ill homeless people compared to the number of homeless families on CalWORKs">
       <img small
-        src="../../images/charts/Chronically_mentally_ill_homeless_people_compared_to_the_number_of_homeless_families_on_CalWORKs_-_SMALL.png" 
+        src="../../images/charts/Chronically_mentally_ill_homeless_people_compared_to_the_number_of_homeless_families_on_CalWORKs_-_SMALL.png"
         alt="Chronically mentally ill homeless people compared to the number of homeless families on CalWORKs">
       <hr />
     </figure>
@@ -302,7 +302,7 @@
       <p>For now, Monteagudo and Salvago sleep in the RV’s full-size bed with A.J. Aaron curls up on the kitchen bench. They cook on portable stoves and drink bottled water. They shower at a nearby 24-hour fitness. The monthly fee is worth it for the showers. </p>
 
       <p>During the day, while Aaron’s at school, Salvago sometimes works as an in-home caregiver.</p>
-      
+
       <p>But it’s hard.</p>
 
       <p>Even before he was born, A.J. was diagnosed with a serious neurological condition, spina bifida. Doctors performed an emergency C section and A.J. emerged with fluid in his brain. Doctors in East L.A. rushed him to L.A.’s Children’s Hospital, where he spent months in the neonatal intensive care unit.</p>
@@ -343,7 +343,7 @@
     </section>
 
 
-    <hr fancy>    
+    <hr fancy>
 
 
     <h2>The number of displaced families in Southern California is growing exponentially:</h2>
@@ -370,10 +370,10 @@
       <hr />
       <h3>Students in public schools who are homeless</h3>
       <img large
-        src="../../images/charts/Students_in_public_schools_who_are_homeless.png" 
+        src="../../images/charts/Students_in_public_schools_who_are_homeless.png"
         alt="Students in public schools who are homeless">
       <img small
-        src="../../images/charts/Students_in_public_schools_who_are_homeless_-_SMALL.png" 
+        src="../../images/charts/Students_in_public_schools_who_are_homeless_-_SMALL.png"
         alt="Students in public schools who are homeless">
       <hr />
     </figure>
@@ -459,10 +459,10 @@
       <hr />
       <h3>Maximum monthly CalWORKs check or a family of three in California (1 adult + 2 children)</h3>
       <img large
-        src="../../images/charts/Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16.png" 
+        src="../../images/charts/Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16.png"
         alt="Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16">
       <img small
-        src="../../images/charts/Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16.png" 
+        src="../../images/charts/Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16.png"
         alt="Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16">
       <hr />
     </figure>
@@ -710,11 +710,15 @@
     <hr>
     <div lookup>
       <h3>Look Up Your Representatives</h3>
-      <input type="text" placeholder="Enter an address here" />
+      <input autofocus type="text" id="addressSearch" placeholder="Enter an address here" />
+
+      <input class="hidden" type="text" name="lat" id="latitudeSearch">
+      <input class="hidden" type="text" name="lng" id="longitudeSearch">
+
       <section>
-        <button lookup>Look Up</button>
+        <button lookup id="submit">Look Up</button>
         <span>&nbsp;OR&nbsp;</span>
-        <button location>Use My Location</button>
+        <button location id="findme">Use My Location</button>
       </section>
       <output></output>
     </div>
@@ -874,6 +878,9 @@
       </noscript>
       <!-- end comscore stats -->
 
+  <script src="//maps.google.com/maps/api/js?key=AIzaSyAtS1OYyuRY0inb23BK0nuGId3FiOC6Rb8&libraries=places"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geocomplete/1.4/jquery.geocomplete.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
   <script src="index.js"></script>
   </body>
 </html>
