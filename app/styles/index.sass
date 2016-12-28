@@ -1,0 +1,605 @@
+@import '../../node_modules/normalize.css/normalize'
+@import './player'
+
+// NOTES:
+//
+// Because this is a one-off project, and anything derived from it would be used in the same way,
+// this is where specificity in CSS helps us.  Nothing here is general-purpose.  The corresponding
+// markup should also be easy to understand.  Ideally, a non-coder should be able to theoretically
+// be able to reason about the document and make copy changes.  If you're adding more than a couple
+// classes to the elements to achieve something, you might be doing it wrong.  The CSS is intended
+// to be re-used but not re-purposed.  Rather than building a grid system, you may want to consider
+// building grid-like behavior into your elements with flex display.
+//
+// There are no "default" fonts or colors here, and they are specified on a more specific basis
+// because I simply find it annoying to deal with these properties when they cascade.  I'd rather
+// be able to simply override these properties on an individual basis when needed, so I have fonts
+// and colors set as variables.  If you are using this project as a scaffold for a new one, it's 
+// really up to you how to write your styles.  Personally, I find it more useful to be very specific
+// about component display/behavior instead of having a bunch of interdependent framework code.
+//
+// When it comes to deciding where a font should be specified, I try to do so on inline elements
+// because those are usually the actual elements to display text.
+//
+//
+// STYLE GUIDELINES:
+//
+// - Try to make definitions as close to the order of how the elements would typically appear.
+// - Properties should be specified in alphabetical order.
+// - Similar to the markup, separate relatively high-level concepts with two spaces.
+// - Consider taking advantage of scope before using classes, so think about using the `>` "child combinator" and first/last child selectors.
+// - The order of definitions should be: 
+//   1) variables 
+//   2) properties
+//   3) media queries
+//   4) classes/selectors
+//   5) pseudo-elements
+//   6) children
+
+
+$serif: "abril-text", Georgia, serif
+$serif-titling: "abril-titling", Georgia, serif
+$sans: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif
+$sans-alt: "fira-sans", Arial, sans-serif;
+
+$color-dark: #1F5154
+$color-medium: #388B90
+$color-light: #BBCACB
+$color-black: #0F1620
+$color-grey: #6C7579
+$color-grey-light: #DEE4E5
+
+$screen-mobile: 31.25em;
+$screen-tablet: 56rem;
+$screen-desktop: 64rem;
+// $media-wide: 84rem;
+
+header
+  display: block
+  left: 0
+  opacity: 1
+  padding: 18px 32px
+  position: absolute
+  right: 0
+  top: 0
+  transform: translateY(0)
+  transition: all .3s ease-in-out
+  z-index: 50
+  color: #fff
+  div[branding]
+    font-family: $serif
+    opacity: 1
+    transition: opacity .8s linear
+    transition-delay: 0.3s
+    a[logo]
+      text-decoration: none
+      img
+        border: 0
+        max-width: 100%
+        @media (max-width: $screen-mobile)
+          height: 16px
+    span[pipe]
+      background: #fff
+      display: inline-block
+      height: 20px
+      margin: 0 8px
+      width: 1px
+    h3
+      display: inline-block
+      font-weight: 400
+      font-size: 20px
+      font-family: $sans
+      margin: 0
+      vertical-align: bottom
+      @media (max-width: $screen-mobile)
+        display: none
+    label
+      display: inline-block
+      font-weight: 400
+      font-size: 20px
+      font-family: $sans
+      margin: 0
+      vertical-align: bottom
+      visibility: hidden
+      @media (max-width: $screen-mobile)
+        font-size: 16px
+        visibility: visible
+      &:after
+        content: url('../../images/icon_caret.svg')
+        display: inline-block
+        margin-left: 5px
+  > label
+    // the label, in this case, is a toggler
+    // button for the dropdown drawer and operates
+    // using a checkbox with the :checked state
+    background: 0 0
+    border: 0
+    color: #fff
+    cursor: pointer
+    font-family: $sans
+    line-height: normal
+    outline: 0
+    position: absolute
+    right: 32px
+    text-transform: uppercase
+    top: 20px
+    &[open]
+      @media (max-width: 500px)
+        display: none
+    @media (max-width: 768px)
+      right: 18px
+
+
+header[fixed] 
+  // This if for the version of the header
+  // that slides down when you scroll.
+  background: #fff
+  position: fixed
+  transform: translateY(-100%)
+  transition: all .3s ease-in-out
+  z-index: 50
+  &.active
+    box-shadow: 0 0 10px rgba(0,0,0,.3)
+    transform: translateY(0)
+    opacity: 1
+  div[branding]
+    h3
+      color: #000
+      &[mobile]:after
+        content: url('../../images/icon_caret-blue.svg')
+    span[pipe]
+      background: #000
+  label
+    color: #212121
+
+
+div[share-story]
+  list-style: none
+  margin: 2em auto
+  padding: 0
+  text-align: center
+  a
+    display: inline-block
+    margin: 0 4px
+
+
+#nav-drawer-toggler-checkbox
+  display: none
+#nav-drawer-toggler-checkbox:checked ~ nav[drawer]
+  opacity: 1
+  transform: translateY(0)
+
+
+nav[drawer]
+  // The dropdown menu
+  align-content: stretch
+  align-items: stretch
+  background: #fff
+  box-shadow: rgba(0,0,0,.3) 0 0 10px
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  left: 0
+  opacity: 0
+  overflow: hidden
+  padding: 100px 30px 20px
+  position: fixed
+  right: 0
+  top: 0
+  transform: translateY(-100%)
+  transition: all 0.4s ease-in-out
+  z-index: 120
+  &.active
+    opacity: 1
+    transform: translateY(0)
+  header
+    div[branding]
+      h3
+        color: #000
+        label:after
+          content: url('../../images/icon_caret-blue.svg')
+      span[pipe]
+        background: #000
+    label
+      color: #212121
+  div[contents]
+    flex: 3.2 0 0
+    margin-right: 22px
+    ul
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      list-style: none
+      margin: 0
+      padding: 0
+      li
+        flex-grow: 1
+        margin: 0 2%
+        width: 29%
+
+
+article
+  // margin-bottom: 14em
+
+
+  > *
+    margin: 0 auto // Top-level elements should be centered.  This as close to a default as we will get.
+
+
+  .hero  // The large lead asset at the beginning of the story.
+    align-items: center
+    background: url('https://placeholdit.imgix.net/~text?txtsize=33&txt=hero%20image&w=2048&h=1024') no-repeat center top
+    background-size: cover
+    display: flex
+    justify-content: center
+    height: 100vh
+    margin-bottom: 4em
+    min-height: 48em
+    width: 100%
+    h1
+      // The caption for the hero image.
+      align-self: flex-end
+      color: white
+      display: block
+      font-family: $serif-titling
+      font-size: 7.4375em
+      font-weight: 800
+      line-height: 1.0756em
+      margin: 0 auto
+      max-width: 1040px
+      padding: 48px
+      text-align: center
+      @media (max-width: 800px)
+        font-size: 5.0625em
+        line-height: 1.1728em
+      @media (max-width: 600px)
+        font-size: 3.75em
+        line-height: 1.1666em
+
+
+  > address
+    // the publishedAt timestamp and byline
+    color: #6C7579
+    font-family: $sans
+    font-size: 1.125em
+    max-width: 37.5em
+    text-align: center
+    a
+      color: #388B90
+      text-decoration: none
+        
+
+  hr
+    // a typical horizontal rule
+    $width: 860px
+    background: #D0D0D0
+    border: 0
+    height: 1px
+    &[fancy]
+      // a "fancy" horizontal rule
+      $height: 2px
+      $diamond-size: 10px
+      $diamond-border: 5px
+      background: #8b9d9f
+      height: $height
+      margin-bottom: 57px
+      margin-top: 130px
+      max-width: $width
+      @media screen and (max-width: $width)
+        margin-left: 20px
+        margin-right: 20px
+      &:before
+        content: ""
+        background: $color-medium
+        background-clip: content-box
+        height: $diamond-size
+        left: 50%
+        position: absolute
+        transform: translateY(-40%) translateX(-50%) rotate(45deg)
+        width: $diamond-size
+        z-index: 2
+      &:after
+        content: ""
+        background: #fff
+        background-clip: content-box
+        height: $height * 2
+        left: 50%
+        position: absolute
+        transform: translateY(-10%) translateX(-50%)
+        width: $diamond-size + ($diamond-border * 4)
+        z-index: 1
+
+
+
+
+  > h2
+    color: #0F1620
+    display: block
+    font-family: $sans
+    font-size: 1.7em
+    font-weight: normal
+    line-height: 1.3em
+    margin: 0 auto
+    margin-top: 34px
+    margin-bottom: 34px
+    max-width: 860px
+    text-align: center
+
+
+  > aside[audio]
+    // The audio play element inside the body of the story
+    $width: 53.75em
+    background: $color-grey-light
+    cursor: pointer
+    display: flex
+    height: 4em
+    max-width: $width
+    padding-left: 146px
+    position: relative
+    @media screen and (max-width: $width)
+      margin-left: 20px
+      margin-right: 20px
+    button
+      background: url(../../images/ctrl_audio-play.svg) 53px 16px no-repeat $color-medium
+      border: 0
+      display: block
+      outline: 0
+      position: absolute
+      left: 0
+      top: 0
+      bottom: 0
+      width: 128px
+    div[details]
+      align-self: center
+      span[title]
+        color: $color-dark
+        display: inline-block
+        font-family: $sans
+        font-size: 1.125em
+        font-weight: 400
+        margin-right: 32px
+      span[duration]
+        color: $color-dark
+        display: inline-block
+        font-family: $sans
+        font-size: 0.875em
+        font-weight: 300
+        text-transform: uppercase
+
+
+  > section 
+    // A group of paragraphs and figures at the top-level in an article element.
+    $width: 37.5em
+    margin: 0 auto
+    max-width: $width
+    @media screen and (max-width: $width)
+      margin-left: 20px
+      margin-right: 20px
+
+
+    > p
+      color: #0F1620
+      font-family: $sans
+      font-size: 1.125em
+      line-height: 1.7777777778em
+      margin: 0 auto
+      margin-bottom: 2em
+      margin-top: 0
+
+
+    > figure // a figure inside a section becomes smaller and floats right
+      display: block
+      float: right
+      margin: 2em -13.125em 2em 2em
+      max-width: 420px
+      @media screen and (max-width: 37.375em)
+        // add gutters on mobile
+        padding-left: 20px
+        padding-right: 20px
+      @media screen and (max-width: 70em)
+        // on small screens, don't float
+        float: none
+        margin: 2em auto
+        max-width: 100%
+      > *
+        border: 0
+        display: block
+        margin-bottom: 2em
+        max-width: 100%
+      img
+        margin: 0 auto
+        margin-bottom: 2em
+      figcaption
+        color: #6C7579
+        display: block
+        font-size: 0.9em
+        font-style: normal
+        font-weight: 500
+        line-height: 1.375em
+        address
+          color: #388B90
+          display: inline
+          font-size: 0.95em
+          font-style: normal
+          font-weight: 400
+          line-height: 1.57em
+          text-transform: uppercase
+
+
+    > ul
+      color: #333
+      li
+        color: #212121
+        font-family: $sans
+        font-size: 1.125em
+        line-height: 1.77em
+        list-style: none
+        margin-bottom: 2em
+        margin-top: 0
+        &:before
+          background-color: #388B90
+          content: ""
+          display: block
+          float: left
+          height: 10px
+          position: absolute
+          transform: translate(-25px, 100%)
+          width: 10px
+          
+        h4
+          color: #575E68
+          font-family: $sans
+          font-size: 1.125em
+          line-height: 1.77em
+          margin-bottom: 0
+          text-transform: none
+
+
+  > blockquote
+    border-left: 1px solid #D5E1F3
+    color: #1F5154
+    font-family: $serif
+    font-size: 1.875em
+    font-weight: 300
+    line-height: 1.46em
+    margin: 0 auto
+    margin-bottom: 2em
+    margin-left: 25%
+    max-width: 730px
+    padding: 1em
+    position: relative
+    @media screen and (max-width: 61.8125em)
+      font-size: 1.5em
+      line-height: 1.5em
+      margin-left: 60px
+      padding: 0 0 0 20px
+    &:before
+      background: url('../../images/icon_pullquote.svg') left top no-repeat
+      content: ""
+      display: block
+      // fill: #bbcacb // the color of the svg
+      filter: grayscale(20%)
+      position: absolute
+      width: 134px
+      height: 119px
+      left: -119px
+      top: 24px
+      @media screen and (max-width: 61.8125em)
+        background-size: 100% 100%
+        height: 60px
+        left: -67px
+        top: 0
+        width: 67px
+
+
+  > figure
+    display: block
+    margin: 4em auto
+    max-width: 53.75em
+    padding: 2em 0
+    &[graphic]
+      max-width: 37.5em
+    > *
+      border: 0
+      display: block
+      margin-bottom: 2em
+      max-width: 100%
+    h3
+      color: $color-black
+      display: block
+      font-family: $sans
+      font-size: 1.4em
+      font-weight: 400
+      line-height: 1.8823529412em
+      margin: 0 auto
+      margin-top: 34px
+      margin-bottom: 34px
+      max-width: 860px
+      text-align: center
+    figcaption:first-child // A caption that appears beneath a heading, usually describing a graphic rather than a photo
+      color: #575E68
+      font-family: $sans
+      font-size: 1.125em
+      font-weight: 700
+      line-height: 2em
+      text-align: center
+      em
+        color: #254998
+        font-weight: 700
+    img
+      margin: 0 auto
+      margin-bottom: 2em
+      &[large]
+        @media (max-width: $screen-mobile)
+          display: none
+      &[small]
+        display: none
+        @media (max-width: $screen-mobile)
+          display: block
+
+    figcaption:last-child // The caption at the bottom of the figure
+      color: #6C7579
+      display: block
+      font-size: 0.9em
+      font-style: normal
+      font-weight: 500
+      line-height: 1.375em
+      @media (max-width: $screen-mobile)
+        margin-left: 20px
+        margin-right: 20px
+      address
+        color: #388B90
+        display: inline
+        font-size: 0.95em
+        font-style: normal
+        font-weight: 400
+        line-height: 1.57em
+        text-transform: uppercase
+
+
+footer
+  align-content: center
+  background: $color-grey-light
+  box-shadow: inset 0px 2px 2px 0px $color-light
+  box-sizing: border-box
+  color: $color-black
+  display: flex
+  flex-direction: column
+  min-height: 178px
+  justify-content: center
+  line-height: 1.57em
+  width: 100%
+  align-items: center
+  @media (max-width: 880px)
+    align-items: flex-start
+  > div
+    // this is a row/column
+    display: flex
+    font-family: $sans
+    font-size: 0.9em
+    justify-content: space-between
+    @media (max-width: 880px)
+      flex-direction: column
+      margin: 0 auto
+      width: 500px
+    @media (max-width: 520px)
+      margin: 0
+      width: 100%
+    > div
+      // this is a cell
+      display: flex
+      @media (max-width: 520px)
+        flex-direction: column
+        margin-bottom: 10px
+        span[comma]
+          display: none
+      & + div::before
+        content: " | "
+        padding-left: 10px
+        padding-right: 10px
+        @media (max-width: 880px)
+          display: none
+      span[title]
+        font-weight: 500
+        text-transform: uppercase
+
