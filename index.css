@@ -723,12 +723,13 @@ article .hero {
     -ms-flex-item-align: end;
         align-self: flex-end;
     color: white;
-    display: block;
     font-family: "abril-titling", Georgia, serif;
     font-size: 7.4375em;
     font-weight: 800;
     line-height: 1.0756em;
-    margin: 0 auto;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
     max-width: 1040px;
     padding: 48px;
     text-align: center; }
