@@ -934,7 +934,6 @@ article > blockquote {
   line-height: 1.46em;
   margin: 0 auto;
   margin-bottom: 2em;
-  margin-left: 25%;
   max-width: 730px;
   padding: 1em;
   position: relative; }
@@ -1027,6 +1026,142 @@ article > figure {
       font-weight: 400;
       line-height: 1.57em;
       text-transform: uppercase; }
+
+form[representative] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-preferred-size: auto;
+      flex-basis: auto;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding-bottom: 90px;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 90px;
+  margin: 0 auto;
+  max-width: 1000px; }
+  form[representative] > h2 {
+    color: #1F5154;
+    display: block;
+    font-family: "abril-titling", Georgia, serif;
+    font-size: 3em;
+    font-weight: 800;
+    line-height: 1.0756em;
+    margin: 0;
+    width: 50%; }
+    @media (max-width: 56rem) {
+      form[representative] > h2 {
+        margin-bottom: 0.5em;
+        width: 100%; } }
+  form[representative] > span {
+    color: #0F1620;
+    display: block;
+    font-size: 1.3em;
+    line-height: 1.57em;
+    max-width: 620px;
+    padding-left: 5%;
+    width: 45%; }
+    @media (max-width: 56rem) {
+      form[representative] > span {
+        padding-left: 0;
+        width: 100%; } }
+  form[representative] hr {
+    margin-top: 2em;
+    margin-bottom: 1.5em;
+    width: 100%; }
+  form[representative] h3 {
+    color: #1F5154;
+    font-family: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif;
+    font-size: 0.9em;
+    font-weight: 500;
+    text-transform: uppercase; }
+  form[representative] button {
+    background: transparent;
+    border: 1px solid #388B90;
+    color: #388B90;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "fira-sans", Arial, sans-serif;
+    font-size: 0.7em;
+    font-weight: 600;
+    height: 29px;
+    text-decoration: none;
+    vertical-align: bottom; }
+    form[representative] button:hover {
+      background: #388B90;
+      border-color: #388B90;
+      color: #fff; }
+  form[representative] div[lookup] {
+    width: 50%; }
+    @media (max-width: 56rem) {
+      form[representative] div[lookup] {
+        width: 100%; } }
+    form[representative] div[lookup] input {
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid #388B90;
+      border-radius: 0;
+      color: #0F1620;
+      font-size: 1.125rem;
+      padding: 0.25rem 0; }
+      form[representative] div[lookup] input::-webkit-input-placeholder {
+        color: #6C7579;
+        font-family: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif;
+        font-size: 0.8em;
+        font-weight: 300;
+        font-style: italic; }
+      form[representative] div[lookup] input::-moz-placeholder {
+        color: #6C7579;
+        font-family: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif;
+        font-size: 0.8em;
+        font-weight: 300;
+        font-style: italic; }
+      form[representative] div[lookup] input:-ms-input-placeholder {
+        color: #6C7579;
+        font-family: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif;
+        font-size: 0.8em;
+        font-weight: 300;
+        font-style: italic; }
+      form[representative] div[lookup] input::placeholder {
+        color: #6C7579;
+        font-family: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif;
+        font-size: 0.8em;
+        font-weight: 300;
+        font-style: italic; }
+      form[representative] div[lookup] input:focus {
+        border-bottom-color: #388B90;
+        outline: 0; }
+        form[representative] div[lookup] input:focus::-webkit-input-placeholder {
+          opacity: 0; }
+        form[representative] div[lookup] input:focus::-moz-placeholder {
+          opacity: 0; }
+        form[representative] div[lookup] input:focus:-ms-input-placeholder {
+          opacity: 0; }
+        form[representative] div[lookup] input:focus::placeholder {
+          opacity: 0; }
+    form[representative] div[lookup] section {
+      display: inline-block;
+      vertical-align: middle; }
+      form[representative] div[lookup] section span {
+        color: #6C7579;
+        font-family: "fira-sans", Arial, sans-serif;
+        font-size: 0.8em;
+        font-weight: 600;
+        height: 29px; }
+  form[representative] div[suggestion] {
+    padding-left: 5%;
+    width: 45%; }
+    @media (max-width: 56rem) {
+      form[representative] div[suggestion] {
+        padding-left: 0;
+        width: 100%; } }
+    form[representative] div[suggestion] section {
+      font-family: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif;
+      font-size: 1em; }
 
 footer {
   -ms-flex-line-pack: center;

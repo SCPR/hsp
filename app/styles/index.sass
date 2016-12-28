@@ -457,7 +457,7 @@ article
     line-height: 1.46em
     margin: 0 auto
     margin-bottom: 2em
-    margin-left: 25%
+    // margin-left: 25%   // not sure why I had this
     max-width: 730px
     padding: 1em
     position: relative
@@ -548,6 +548,114 @@ article
         font-weight: 400
         line-height: 1.57em
         text-transform: uppercase
+
+
+form[representative]
+  display: flex
+  flex-basis: auto
+  flex-grow: 1
+  flex-wrap: wrap
+  padding-bottom: 90px
+  // padding-left: 160px
+  // padding-right: 160px
+  padding-left: 5%
+  padding-right: 5%
+  padding-top: 90px
+  margin: 0 auto
+  max-width: 1000px
+  // @media (max-width: $screen-tablet)
+  //   flex-direction: column
+  > h2
+    color: $color-dark
+    display: block
+    font-family: $serif-titling
+    font-size: 3em
+    font-weight: 800
+    line-height: 1.0756em
+    margin: 0
+    width: 50%
+    @media (max-width: $screen-tablet)
+      margin-bottom: 0.5em
+      width: 100%
+  > span
+    color: $color-black
+    display: block
+    font-size: 1.3em
+    line-height: 1.57em
+    max-width: 620px
+    padding-left: 5% 
+    width: 45%
+    @media (max-width: $screen-tablet)
+      padding-left: 0
+      width: 100%
+  hr
+    margin-top: 2em
+    margin-bottom: 1.5em
+    width: 100%
+  h3
+    color: $color-dark
+    font-family: $sans
+    font-size: 0.9em
+    font-weight: 500
+    text-transform: uppercase
+  button
+    background: transparent
+    border: 1px solid $color-medium
+    color: $color-medium
+    cursor: pointer
+    display: inline-block
+    font-family: $sans-alt
+    font-size: 0.7em
+    font-weight: 600
+    height: 29px
+    // padding: 0.875rem 1.125rem
+    text-decoration: none
+    vertical-align: bottom
+    &:hover
+      background: $color-medium
+      border-color: $color-medium
+      color: #fff
+  div[lookup]
+    width: 50%
+    @media (max-width: $screen-tablet)
+      width: 100%
+    input
+      background: transparent
+      border: 0
+      border-bottom: 1px solid $color-medium
+      border-radius: 0
+      color: $color-black
+      font-size: 1.125rem
+      padding: 0.25rem 0
+      &::placeholder
+        color: $color-grey
+        font-family: $sans
+        font-size: 0.8em
+        font-weight: 300
+        font-style: italic
+      &:focus
+        border-bottom-color: $color-medium
+        outline: 0
+        &::placeholder
+          opacity: 0 // hide placeholder when input is in focus
+    section
+      display: inline-block
+      vertical-align: middle
+      span
+        color: $color-grey
+        font-family: $sans-alt
+        font-size: 0.8em
+        font-weight: 600
+        height: 29px
+  div[suggestion]
+    padding-left: 5% 
+    width: 45%
+    @media (max-width: $screen-tablet)
+      padding-left: 0
+      width: 100%
+    section
+      font-family: $sans
+      font-size: 1em
 
 
 footer
