@@ -306,6 +306,8 @@ article
 
 
   > h2
+    $width: 860px
+    $margin: 20px
     color: #0F1620
     display: block
     font-family: $sans
@@ -315,8 +317,12 @@ article
     margin: 0 auto
     margin-top: 34px
     margin-bottom: 34px
-    max-width: 860px
+    max-width: $width
     text-align: center
+    @media screen and (max-width: $width + $margin)
+      margin-left: $margin
+      margin-right: $margin
+
 
 
   > aside[audio]
@@ -362,10 +368,11 @@ article
 
   > section 
     // A group of paragraphs and figures at the top-level in an article element.
-    $width: 37.5em
+    $width: 592px
+    $margin: 20px
     margin: 0 auto
     max-width: $width
-    @media screen and (max-width: $width)
+    @media screen and (max-width: $width + $margin)
       margin-left: 20px
       margin-right: 20px
 
@@ -498,6 +505,8 @@ article
       margin-bottom: 2em
       max-width: 100%
     h3
+      $width: 860px
+      $margin: 20px
       color: $color-black
       display: block
       font-family: $sans
@@ -509,6 +518,9 @@ article
       margin-bottom: 34px
       max-width: 860px
       text-align: center
+      @media (max-width: $width + $margin)
+        margin-left: $margin
+        margin-right: $margin
     figcaption:first-child // A caption that appears beneath a heading, usually describing a graphic rather than a photo
       color: #575E68
       font-family: $sans
@@ -550,21 +562,74 @@ article
         text-transform: uppercase
 
 
+$feedback-border-width: 1px
+$feedback-height: 115px
+$feedback-left: 0
+$feedback-padding: 10px
+$feedback-position: fixed
+$feedback-top: 78.5%
+$feedback-width: 250px
+aside[feedback]
+  align-items: center
+  background-color: #fff
+  border-color: $color-light
+  border-left-style: none
+  border-right-style: none
+  border-style: solid
+  border-width: $feedback-border-width
+  display: flex
+  flex-direction: column
+  height: 115px
+  justify-content: center
+  left: $feedback-left
+  padding: $feedback-padding
+  position: $feedback-position
+  text-align: center
+  top: $feedback-top
+  width: $feedback-width
+  z-index: 49
+  @media (max-width: 1190px)
+    height: 40px
+    position: relative
+    width: 100%
+  div[description]
+    color: $color-black
+    font-family: $sans
+    font-size: 14px
+    margin-bottom: 15px
+    @media (max-width: 1190px)
+      margin-bottom: 10px
+  a
+    background: transparent
+    border: 1px solid $color-medium
+    color: $color-medium
+    cursor: pointer
+    font-family: $sans-alt
+    font-size: 0.9375rem
+    font-weight: 500
+    padding: 14px 18px
+    text-decoration: none
+    text-transform: uppercase
+    @media (max-width: 1190px)
+      font-size: 0.7rem
+      padding: 0.5rem 0.625rem
+    &:hover
+      background: $color-medium
+      border-color: $color-medium
+      color: #fff
+
+
 form[representative]
   display: flex
   flex-basis: auto
   flex-grow: 1
   flex-wrap: wrap
   padding-bottom: 90px
-  // padding-left: 160px
-  // padding-right: 160px
   padding-left: 5%
   padding-right: 5%
   padding-top: 90px
   margin: 0 auto
   max-width: 1000px
-  // @media (max-width: $screen-tablet)
-  //   flex-direction: column
   > h2
     color: $color-dark
     display: block
@@ -656,6 +721,21 @@ form[representative]
     section
       font-family: $sans
       font-size: 1em
+div[feedback-shadow]
+  // this element is hidden and
+  // is just used by the code
+  // that gives the feedback
+  // element boundaries
+  border-style: solid
+  border-width: $feedback-border-width
+  height: $feedback-height
+  left: $feedback-left
+  top: $feedback-top
+  padding: $feedback-padding
+  position: $feedback-position
+  visibility: hidden
+  width: $feedback-width
+  z-index: -1
 
 
 footer
@@ -696,6 +776,8 @@ footer
         span[comma]
           display: none
       & + div::before
+        // If the column has a right-neighbor
+        // place a pipe between them
         content: " | "
         padding-left: 10px
         padding-right: 10px

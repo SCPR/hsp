@@ -801,6 +801,10 @@ article > h2 {
   margin-bottom: 34px;
   max-width: 860px;
   text-align: center; }
+  @media screen and (max-width: 880px) {
+    article > h2 {
+      margin-left: 20px;
+      margin-right: 20px; } }
 
 article > aside[audio] {
   background: #DEE4E5;
@@ -847,8 +851,8 @@ article > aside[audio] {
 
 article > section {
   margin: 0 auto;
-  max-width: 37.5em; }
-  @media screen and (max-width: 37.5em) {
+  max-width: 592px; }
+  @media screen and (max-width: 612px) {
     article > section {
       margin-left: 20px;
       margin-right: 20px; } }
@@ -986,6 +990,10 @@ article > figure {
     margin-bottom: 34px;
     max-width: 860px;
     text-align: center; }
+    @media (max-width: 880px) {
+      article > figure h3 {
+        margin-left: 20px;
+        margin-right: 20px; } }
   article > figure figcaption:first-child {
     color: #575E68;
     font-family: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif;
@@ -1026,6 +1034,67 @@ article > figure {
       font-weight: 400;
       line-height: 1.57em;
       text-transform: uppercase; }
+
+aside[feedback] {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #fff;
+  border-color: #BBCACB;
+  border-left-style: none;
+  border-right-style: none;
+  border-style: solid;
+  border-width: 1px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 115px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  left: 0;
+  padding: 10px;
+  position: fixed;
+  text-align: center;
+  top: 78.5%;
+  width: 250px;
+  z-index: 49; }
+  @media (max-width: 1190px) {
+    aside[feedback] {
+      height: 40px;
+      position: relative;
+      width: 100%; } }
+  aside[feedback] div[description] {
+    color: #0F1620;
+    font-family: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif;
+    font-size: 14px;
+    margin-bottom: 15px; }
+    @media (max-width: 1190px) {
+      aside[feedback] div[description] {
+        margin-bottom: 10px; } }
+  aside[feedback] a {
+    background: transparent;
+    border: 1px solid #388B90;
+    color: #388B90;
+    cursor: pointer;
+    font-family: "fira-sans", Arial, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    padding: 14px 18px;
+    text-decoration: none;
+    text-transform: uppercase; }
+    @media (max-width: 1190px) {
+      aside[feedback] a {
+        font-size: 0.7rem;
+        padding: 0.5rem 0.625rem; } }
+    aside[feedback] a:hover {
+      background: #388B90;
+      border-color: #388B90;
+      color: #fff; }
 
 form[representative] {
   display: -webkit-box;
@@ -1162,6 +1231,18 @@ form[representative] {
     form[representative] div[suggestion] section {
       font-family: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif;
       font-size: 1em; }
+
+div[feedback-shadow] {
+  border-style: solid;
+  border-width: 1px;
+  height: 115px;
+  left: 0;
+  top: 78.5%;
+  padding: 10px;
+  position: fixed;
+  visibility: hidden;
+  width: 250px;
+  z-index: -1; }
 
 footer {
   -ms-flex-line-pack: center;
