@@ -1030,6 +1030,9 @@ article > figure {
 footer {
   -ms-flex-line-pack: center;
       align-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background: #DEE4E5;
   box-shadow: inset 0px 2px 2px 0px #BBCACB;
   box-sizing: border-box;
@@ -1041,15 +1044,13 @@ footer {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  min-height: 178px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   line-height: 1.57em;
-  width: 100%;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center; }
+  min-height: 178px;
+  padding: 20px;
+  width: 100%; }
   @media (max-width: 880px) {
     footer {
       -webkit-box-align: start;

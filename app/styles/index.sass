@@ -3,20 +3,12 @@
 
 // NOTES:
 //
-// Because this is a one-off project, and anything derived from it would be used in the same way,
-// this is where specificity in CSS helps us.  Nothing here is general-purpose.  The corresponding
-// markup should also be easy to understand.  Ideally, a non-coder should be able to theoretically
-// be able to reason about the document and make copy changes.  If you're adding more than a couple
-// classes to the elements to achieve something, you might be doing it wrong.  The CSS is intended
-// to be re-used but not re-purposed.  Rather than building a grid system, you may want to consider
-// building grid-like behavior into your elements with flex display.
-//
-// There are no "default" fonts or colors here, and they are specified on a more specific basis
-// because I simply find it annoying to deal with these properties when they cascade.  I'd rather
-// be able to simply override these properties on an individual basis when needed, so I have fonts
-// and colors set as variables.  If you are using this project as a scaffold for a new one, it's 
-// really up to you how to write your styles.  Personally, I find it more useful to be very specific
-// about component display/behavior instead of having a bunch of interdependent framework code.
+// Nothing here is general-purpose.  The corresponding markup should also be easy to understand.  
+// Ideally, a non-coder should be able to theoretically be able to reason about the document and
+// make copy changes.  If you're adding more than a couple classes to the elements to achieve 
+// something, you might be doing it wrong.  The CSS is intended to be re-used but not re-purposed.  
+// Rather than building a grid system, you may want to consider building grid-like behavior into
+// your elements with flex display.
 //
 // When it comes to deciding where a font should be specified, I try to do so on inline elements
 // because those are usually the actual elements to display text.
@@ -559,17 +551,18 @@ article
 
 footer
   align-content: center
+  align-items: center
   background: $color-grey-light
   box-shadow: inset 0px 2px 2px 0px $color-light
   box-sizing: border-box
   color: $color-black
   display: flex
   flex-direction: column
-  min-height: 178px
   justify-content: center
   line-height: 1.57em
+  min-height: 178px
+  padding: 20px
   width: 100%
-  align-items: center
   @media (max-width: 880px)
     align-items: flex-start
   > div
