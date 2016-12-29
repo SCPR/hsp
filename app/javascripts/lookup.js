@@ -2,48 +2,46 @@
 
 const jQuery   = require('jquery');
 const $        = jQuery;
+const Wherewolf   = require('wherewolf');
 
 var fn = fn || {};
 
 $(document).ready(function(){
-    // fn._init();
-
-    console.log("works");
-
+    fn._init();
 });
 
 var fn = {
 
+    _data: "https://s3-us-west-1.amazonaws.com/scpr-projects/state_rep_boundaries/",
+
     _init: function(){
         fn._events();
         window.wherewolf = {};
-        window.wherewolf.la_county = Wherewolf();
-        window.wherewolf.ca_senate = Wherewolf();
+        window.wherewolf.lac = Wherewolf();
+        window.wherewolf.ca_sen = Wherewolf();
         window.wherewolf.ca_asem = Wherewolf();
         fn.loadData(window.wherewolf);
     },
 
     _events: function(){
 
-        // trigger to access user's location
-        $(".action-controls a").click(function(){
-            var target_function = $(this).attr("class");
-            if (target_function === "searchMe"){
-                fn.searchMe();
-            } else {
-                $(".data-loading").removeClass("hidden");
-                fn.findMe();
-            };
-        });
-
         // trigger to address search
         $("input[id='addressSearch']").focus(function(event){
+            fn.searchMe()
             fn.addressSearch(event);
         });
 
-        // trigger to access user's state reps
-        $("button#submit").click(function(){
+        // trigger to submit users address
+        $("button#submit").click(function(event){
+            event.preventDefault();
             fn.navigate();
+        });
+
+        // trigger to find users location
+        $("button#findme").click(function(event){
+            event.preventDefault();
+            $(".data-loading").removeClass("hidden");
+            fn.findMe();
         });
 
         // trigger to reset the view
@@ -54,26 +52,24 @@ var fn = {
     },
 
     loadData: function(wherewolf){
-        $.getJSON("{% static 'data/la-county-board-of-supervisors-districts-2011.json' %}", function(data){
-            window.wherewolf.la_county.addAll(data);
+        $.getJSON(fn._data + "la-county-board-of-supervisors-districts-2011.json", function(data){
+            window.wherewolf.lac.addAll(data);
         });
-        $.getJSON("{% static 'data/state-senate-districts-2011.json' %}", function(data){
-            window.wherewolf.ca_senate.addAll(data);
+        $.getJSON(fn._data + "state-senate-districts-2011.json", function(data){
+            window.wherewolf.ca_sen.addAll(data);
         });
-        $.getJSON("{% static 'data/state-assembly-districts-2011.json' %}", function(data){
+        $.getJSON(fn._data + "state-assembly-districts-2011.json", function(data){
             window.wherewolf.ca_asem.addAll(data);
         });
     },
 
     searchMe: function(){
-        $("#form-controls").removeClass("hidden");
-        $(".searchMe").css("font-weight", "700");
-        $("img.searchMe").css("opacity", "1.0");
-        $(".findMe").css("font-weight", "100");
-        $("img.findMe").css("opacity", "0.3");
+        $("button#submit").css("font-weight", "700");
+        $("button#findme").css("font-weight", "100");
         $("input[id='addressSearch']").val("");
         $("input[id='latitudeSearch']").val("");
         $("input[id='longitudeSearch']").val("");
+        $("#output").empty();
     },
 
     addressSearch: function(event){
@@ -85,22 +81,22 @@ var fn = {
 
     enterKeyPressedEventHandler: function(event){
         if(event.keyCode === 13){
-            $(".data-loading").removeClass("hidden");
             fn.navigate();
         };
     },
 
     findMe: function(){
+        $("button#submit").css("font-weight", "100");
+        $("button#findme").css("font-weight", "700");
+        $("input[id='addressSearch']").val("");
+        $("input[id='latitudeSearch']").val("");
+        $("input[id='longitudeSearch']").val("");
+        $("#output").empty();
         var location_options = {
             enableHighAccuracy: true,
             maximumAge: 30000,
             timeout: 10000
         };
-        $("#form-controls").addClass("hidden");
-        $(".findMe").css("font-weight", "700");
-        $("img.findMe").css("opacity", "1.0");
-        $(".searchMe").css("font-weight", "100");
-        $("img.searchMe").css("opacity", "0.3");
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 fn.locationSuccess,
@@ -108,14 +104,21 @@ var fn = {
                 location_options
             );
         } else {
-            $.jAlert({
-                "replaceOtherAlerts": true,
-                "closeOnClick": true,
-                "theme": "yellow",
-                "title": "<strong>Sorry.</strong>",
-                "content": "Your browser lacks geolocation capabilities."
-              });
+            fn.displayAlert(
+                "red",
+                "Sorry",
+                "Your browser lacks geolocation capabilities."
+            );
         };
+    },
+
+    reset: function(){
+        $(".searchMe").css("font-weight", "700");
+        $(".findMe").css("font-weight", "700");
+        $("input[id='addressSearch']").val('');
+        $("input[id='latitudeSearch']").val('');
+        $("input[id='longitudeSearch']").val('');
+        $("#output").empty();
     },
 
     locationSuccess: function(position){
@@ -126,46 +129,38 @@ var fn = {
 
     locationError: function(error){
         if (error.code === 1){
-            $.jAlert({
-                "replaceOtherAlerts": true,
-                "closeOnClick": true,
-                "theme": "yellow",
-                "title": "<strong>Sorry. " + error.message + "</strong>",
-                "content": "The user denied use of location services or your privacy settings do not allow this application to determine your current location."
-              });
+            fn.displayAlert(
+                "red",
+                "Sorry. " + error.message,
+                "The user denied use of location services or your privacy settings do not allow this application to determine your current location."
+            );
         } else if (error.code === 2){
-            $.jAlert({
-                "replaceOtherAlerts": true,
-                "closeOnClick": true,
-                "theme": "yellow",
-                "title": "<strong>Sorry. " + error.message + "</strong>",
-                "content": "We could not find your location."
-              });
+            fn.displayAlert(
+                "#388B90",
+                "Sorry. " + error.message,
+                "We could not find your location."
+            );
         } else if (error.code === 3){
-            $.jAlert({
-                "replaceOtherAlerts": true,
-                "closeOnClick": true,
-                "theme": "yellow",
-                "title": "<strong>Sorry. " + error.message + "</strong>",
-                "content": "An attempt to locate your position timed out. Please refresh the page and try again."
-              });
+            fn.displayAlert(
+                "#388B90",
+                "Sorry. " + error.message,
+                "An attempt to locate your position timed out. Please refresh the page and try again."
+            );
         };
     },
 
     navigate: function(){
-        if ($("#reps").length){
-            $("#reps").empty();
+        if ($("#output").length){
+            $("#output").empty();
         };
         var latitude = $("input[id='latitudeSearch']").val();
         var longitude = $("input[id='longitudeSearch']").val();
         if (latitude === undefined && longitude === undefined){
-            $.jAlert({
-                "replaceOtherAlerts": true,
-                "closeOnClick": true,
-                "theme": "yellow",
-                "title": "<strong>Sorry.</strong>",
-                "content": "Please enter an address or search by location."
-              });
+            fn.displayAlert(
+                "red",
+                "Sorry.",
+                "Please enter an address or search by location."
+            );
             window.coords = false;
         } else {
             window.coords = {
@@ -174,41 +169,71 @@ var fn = {
             }
         };
         if (_.isEmpty(window.coords) === true){
-            $.jAlert({
-                "replaceOtherAlerts": true,
-                "closeOnClick": true,
-                "theme": "yellow",
-                "title": "<strong>Sorry. " + error.message + "</strong>",
-                "content": "An attempt to locate your position timed out. Please refresh the page and try again."
-              });
+            fn.displayAlert(
+                "#388B90",
+                "Sorry. " + error.message,
+                "An attempt to locate your position timed out. Please refresh the page and try again."
+            );
         } else {
-            fn.identifyDetails(window.coords);
+            $(".data-loading").addClass("hidden");
+            window.reps = fn.identifyBoundaries(window.coords);
+            if (window.reps.count === 3){
+                window.reps.proceed = true;
+            } else if (window.reps.count === 2){
+                window.reps.proceed = true;
+            } else if (window.reps.count === 1){
+                window.reps.proceed = false;
+            } else {
+                window.reps.proceed = false;
+            };
+            if (window.reps.proceed === false){
+                fn.displayAlert(
+                    "red",
+                    "Sorry we were unable to complete your search.",
+                    "We can't determine your representatives from your location. Perhaps you are not in California?"
+                );
+            } else {
+                fn.gather_data();
+            };
         };
     },
 
-    reset: function(){
-        $("#submit").removeClass("hidden");
-        $("#reset").addClass("hidden");
-        $("#form-controls").addClass("hidden");
-        $(".searchMe").css("font-weight", "700");
-        $("img.searchMe").css("opacity", "1.0");
-        $(".findMe").css("font-weight", "700");
-        $("img.findMe").css("opacity", "1.0");
-        $("input[id='addressSearch']").val('');
-        $("input[id='latitudeSearch']").val('');
-        $("input[id='longitudeSearch']").val('');
-        $("#reps").empty();
+    identifyBoundaries: function(coords){
+        var _this = window.wherewolf;
+        var found_reps = {};
+        found_reps.count = 0
+        var found_la = _this.lac.find(window.coords, {wholeFeature: true}["districts"]);
+        var _null_la = _.isNull(found_la["districts"]);
+        var found_sen = _this.ca_sen.find(window.coords, {wholeFeature: true}["districts"]);
+        var _null_sen = _.isNull(found_sen["districts"]);
+        var found_asem = _this.ca_asem.find(window.coords, {wholeFeature: true}["districts"]);
+        var _null_asem = _.isNull(found_asem["districts"]);
+        if (_null_la === false){
+            found_reps.la = _this.lac.find(window.coords, {wholeFeature: true})["districts"]["properties"];
+            found_reps.count += 1;
+        } else {
+            found_reps.la = null;
+        };
+        if (_null_sen === false){
+            found_reps.sen = _this.ca_sen.find(window.coords, {wholeFeature: true})["districts"]["properties"];
+            found_reps.count += 1;
+        } else {
+            found_reps.sen = null;
+        };
+        if (_null_sen === false){
+            found_reps.asem = _this.ca_asem.find(window.coords, {wholeFeature: true})["districts"]["properties"];
+            found_reps.count += 1;
+        } else {
+            found_reps.asem = null;
+        };
+        return found_reps;
     },
 
-    identifyDetails: function(coords){
-        window.reps = {};
-        window.reps.county = window.wherewolf.la_county.find(window.coords, {wholeFeature: true})["districts"]["properties"];
-        window.reps.senate = window.wherewolf.ca_senate.find(window.coords, {wholeFeature: true})["districts"]["properties"];
-        window.reps.asem = window.wherewolf.ca_asem.find(window.coords, {wholeFeature: true})["districts"]["properties"];
-        $.getJSON("{% static 'data/state_rep_data.json' %}", function(data){
-            window.reps.senate.details = _.where(data, {
+    gather_data: function(){
+        $.getJSON(fn._data + "state_rep_data.json", function(data){
+            window.reps.sen.details = _.where(data, {
                 chamber: "senate",
-                district_id: window.reps.senate.external_id
+                district_id: window.reps.sen.external_id
             });
             window.reps.asem.details = _.where(data, {
                 chamber: "assembly",
@@ -216,24 +241,57 @@ var fn = {
             });
         });
 
-        var checkExist = setInterval(function() {
-            var senateCheck = _.has(window.reps.senate, "details");
+        window.reps.gov = {};
+        window.reps.gov.details = {
+            rep_name: "Gov. Jerry Brown",
+            email: "Jerry.Brown@gov.ca.gov",
+            district_name: "California Governor",
+            party: "Democrat",
+            short_party: "D",
+            address: "State Capitol Suite 1173",
+            city: "Sacramento",
+            state: "CA",
+            zip: "95814",
+            phones: "(916) 445-2841",
+        };
+
+        var checkExist = setInterval(function(){
+            var senCheck = _.has(window.reps.sen, "details");
             var asemCheck = _.has(window.reps.asem, "details");
-            var countyCheck = _.has(window.reps.county, "details");
-            if (senateCheck === true && asemCheck === true && countyCheck === true){
+            if (senCheck === true && asemCheck === true){
                 clearInterval(checkExist);
-                var ready_data = window.reps;
-                fn.displayOfficials(ready_data);
-            } else {
-                $.jAlert({
-                    "replaceOtherAlerts": true,
-                    "closeOnClick": true,
-                    "theme": "red",
-                    "title": "<strong>Sorry.</strong>",
-                    "content": "We can't determine your representatives from the address you entered. Try a more specific address or use your current location."
-                  });
+                if (window.reps.count === 3){
+                    fn.compileDetails(window.reps.sen.details[0]);
+                    fn.compileDetails(window.reps.asem.details[0]);
+                    fn.compileDetails(window.reps.la.details);
+                    fn.compileDetails(window.reps.gov.details);
+                } else if (window.reps.count === 2){
+                    fn.compileDetails(window.reps.sen.details[0]);
+                    fn.compileDetails(window.reps.asem.details[0]);
+                    fn.compileDetails(window.reps.gov.details);
+                }
             };
         }, 500);
+    },
+
+    compileDetails: function(rep){
+        console.log(rep);
+        var mailto = fn.generateMailTo(rep.email, "homeless@scpr.org");
+        if (rep.short_party != null || rep.short_party != undefined){
+            var title = rep.short_party + "&mdash;" + rep.district_name;
+        } else {
+            var title = rep.district_name;
+        }
+        var address = rep.address + "<br />" + rep.city + ", " + rep.state + " " + rep.zip;
+        var rep_deets = fn.writeToDom(
+            "representative",
+            rep.rep_name,
+            title,
+            address,
+            rep.phones,
+            "<a href='" + mailto + "' target='_top'>" + rep.email + "</a>"
+        );
+        fn.displayOfficials("#output", rep_deets);
     },
 
     generateMailTo: function(email, cc){
@@ -253,68 +311,15 @@ var fn = {
         return html;
     },
 
-    displayOfficials: function(reps){
-        $(".data-loading").addClass("hidden");
-        $("#submit").addClass("hidden");
-        $("#reset").removeClass("hidden");
-        $("#letter-display").removeClass("hidden");
-        var div_size = 12 / 4
-        var selector = "col-xs-" + div_size + " col-sm-" + div_size + " col-md-" + div_size + " col-lg-" + div_size;
+    displayOfficials: function(selector, details){
+        $(selector).append(details);
+    },
 
-        var gov_mailto = fn.generateMailTo("Jerry.Brown@gov.ca.gov", "homeless@scpr.org");
-        var gov_title = "D&mdash;California Governor";
-        var gov_address = "State Capitol, Suite 1173<br />Sacramento, CA 95814";
-        var gov_deets = fn.writeToDom(
-            selector,
-            "Gov. Jerry Brown",
-            gov_title,
-            gov_address,
-            "(916) 445-2841",
-            "<a href='" + gov_mailto + "' target='_top'>" + "Email Gov. Jerry Brown</a>"
+    displayAlert: function(color, title, content){
+        $("#output").css("height", "150px");
+        $("#output").html(
+            "<div><h4 style='" + color + "'>" + title + "</h4>" +
+            "<p style='" + color + "'>" + content + "</p>"
         );
-        $("#reps").append(gov_deets);
-
-
-        var sen = reps.senate.details[0];
-        var sen_mailto = fn.generateMailTo(sen.email, "homeless@scpr.org");
-        var sen_title = sen.short_party + "&mdash;" + sen.district_name;
-        var sen_address = sen.address + "<br />" + sen.city + ", " + sen.state + " " + sen.zip;
-        var sen_deets = fn.writeToDom(
-            selector,
-            sen.rep_name,
-            sen_title,
-            sen_address,
-            sen.phones,
-            "<a href='" + sen_mailto + "' target='_top'>" + "Email " + sen.rep_name + "</a>"
-        );
-        $("#reps").append(sen_deets);
-
-        var asem = reps.asem.details[0];
-        var asem_mailto = fn.generateMailTo(asem.email, "homeless@scpr.org");
-        var asem_title = asem.short_party + "&mdash;" + asem.district_name;
-        var asem_address = asem.address + "<br />" + asem.city + ", " + asem.state + " " + asem.zip;
-        var asem_deets = fn.writeToDom(
-            selector,
-            asem.rep_name,
-            asem_title,
-            asem_address,
-            asem.phones,
-            "<a href='" + asem_mailto + "' target='_top'>" + "Email " + asem.rep_name + "</a>"
-        );
-        $("#reps").append(asem_deets);
-
-        var supe = reps.county.details;
-        var supe_mailto = fn.generateMailTo(supe.rep_email, "homeless@scpr.org");
-        var supe_title = supe.district_name;
-        var supe_address = supe.address + "<br />" + supe.city + ", " + supe.state + " " + supe.zip;
-        var supe_deets = fn.writeToDom(
-            selector,
-            supe.rep_name,
-            supe_title,
-            supe_address,
-            supe.phones,
-            "<a href='" + supe_mailto + "' target='_top'>" + "Email " + supe.rep_name + "</a>"
-        );
-        $("#reps").append(supe_deets);
     }
 };
