@@ -409,16 +409,19 @@ template {
   opacity: 0;
   overflow: hidden;
   position: absolute;
-  left: 350px;
+  left: 700px;
   top: 0;
   bottom: 0;
-  right: 168px; }
+  right: 280px; }
   .jp-audio.now-playing {
     opacity: 1; }
+    @media (max-width: 1342px) {
+      .jp-audio.now-playing {
+        left: 270px; } }
     @media (max-width: 900px) {
       .jp-audio.now-playing {
         left: 0; } }
-    @media (max-width: 500px) {
+    @media (max-width: 640px) {
       .jp-audio.now-playing {
         right: 0; } }
   .jp-audio button {
@@ -515,8 +518,32 @@ template {
   left: 80px;
   top: 10px; }
 
+html, body {
+  height: 100%; }
+
+body {
+  overflow-y: hidden; }
+
+main {
+  height: 100%;
+  overflow-y: scroll; }
+
 header {
+  color: #fff;
   display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
   left: 0;
   opacity: 1;
   padding: 18px 32px;
@@ -527,8 +554,7 @@ header {
           transform: translateY(0);
   -webkit-transition: all .3s ease-in-out;
   transition: all .3s ease-in-out;
-  z-index: 50;
-  color: #fff; }
+  z-index: 50; }
   header div[branding] {
     font-family: "abril-text", Georgia, serif;
     opacity: 1;
@@ -537,7 +563,8 @@ header {
     -webkit-transition-delay: 0.3s;
             transition-delay: 0.3s; }
     header div[branding] a[logo] {
-      text-decoration: none; }
+      text-decoration: none;
+      vertical-align: middle; }
       header div[branding] a[logo] img {
         border: 0;
         max-width: 100%; }
@@ -549,16 +576,27 @@ header {
       display: inline-block;
       height: 20px;
       margin: 0 8px;
-      width: 1px; }
+      margin-bottom: 6px;
+      width: 1px;
+      vertical-align: middle; }
     header div[branding] h3 {
+      color: #fff;
       display: inline-block;
-      font-weight: 400;
+      font-weight: 600;
       font-size: 20px;
-      font-family: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif;
-      margin: 0;
-      vertical-align: bottom; }
+      font-family: "abril-text", Georgia, serif;
+      margin: 0; }
       @media (max-width: 31.25em) {
         header div[branding] h3 {
+          display: none; } }
+    header div[branding] span[tagline] {
+      color: #fff;
+      font-family: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif;
+      font-size: 19px;
+      font-weight: 300;
+      margin-left: -3px; }
+      @media (max-width: 1342px) {
+        header div[branding] span[tagline] {
           display: none; } }
     header div[branding] label {
       display: inline-block;
@@ -566,7 +604,6 @@ header {
       font-size: 20px;
       font-family: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif;
       margin: 0;
-      vertical-align: bottom;
       visibility: hidden; }
       @media (max-width: 31.25em) {
         header div[branding] label {
@@ -588,7 +625,7 @@ header {
     right: 32px;
     text-transform: uppercase;
     top: 20px; }
-    @media (max-width: 500px) {
+    @media (max-width: 640px) {
       header > label[open] {
         display: none; } }
     @media (max-width: 768px) {
@@ -609,9 +646,11 @@ header[fixed] {
             transform: translateY(0);
     opacity: 1; }
   header[fixed] div[branding] h3 {
-    color: #000; }
+    color: #388B90; }
     header[fixed] div[branding] h3[mobile]:after {
       content: url("../../images/icon_caret-blue.svg"); }
+  header[fixed] div[branding] span[tagline] {
+    color: #0F1620; }
   header[fixed] div[branding] span[pipe] {
     background: #000; }
   header[fixed] label {
@@ -629,10 +668,12 @@ div[share-story] {
 #nav-drawer-toggler-checkbox {
   display: none; }
 
-#nav-drawer-toggler-checkbox:checked ~ nav[drawer] {
-  opacity: 1;
-  -webkit-transform: translateY(0);
-          transform: translateY(0); }
+#nav-drawer-toggler-checkbox:checked ~ main {
+  overflow-y: hidden; }
+  #nav-drawer-toggler-checkbox:checked ~ main nav[drawer] {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+            transform: translateY(0); }
 
 nav[drawer] {
   -ms-flex-line-pack: stretch;
@@ -651,10 +692,10 @@ nav[drawer] {
           flex-direction: row;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
+  height: 100%;
   left: 0;
   opacity: 0;
   overflow: hidden;
-  padding: 100px 30px 20px;
   position: fixed;
   right: 0;
   top: 0;
@@ -667,38 +708,23 @@ nav[drawer] {
     opacity: 1;
     -webkit-transform: translateY(0);
             transform: translateY(0); }
-  nav[drawer] header div[branding] h3 {
-    color: #000; }
-    nav[drawer] header div[branding] h3 label:after {
+  nav[drawer] header {
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); }
+    nav[drawer] header div[branding] h3 {
+      color: #388B90; }
+    nav[drawer] header div[branding] span[tagline] {
+      color: #0F1620; }
+    nav[drawer] header div[branding] label:after {
       content: url("../../images/icon_caret-blue.svg"); }
-  nav[drawer] header div[branding] span[pipe] {
-    background: #000; }
-  nav[drawer] header label {
-    color: #212121; }
+    nav[drawer] header div[branding] span[pipe] {
+      background: #000; }
+    nav[drawer] header label {
+      color: #212121; }
   nav[drawer] div[contents] {
-    -webkit-box-flex: 3.2;
-        -ms-flex: 3.2 0 0px;
-            flex: 3.2 0 0;
-    margin-right: 22px; }
-    nav[drawer] div[contents] ul {
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-orient: horizontal;
-      -webkit-box-direction: normal;
-          -ms-flex-direction: row;
-              flex-direction: row;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-      list-style: none;
-      margin: 0;
-      padding: 0; }
-      nav[drawer] div[contents] ul li {
-        -webkit-box-flex: 1;
-            -ms-flex-positive: 1;
-                flex-grow: 1;
-        margin: 0 2%;
-        width: 29%; }
+    height: 100%;
+    width: 100%;
+    overflow-y: auto; }
 
 article > * {
   margin: 0 auto; }
@@ -813,10 +839,11 @@ article > aside[audio] {
   display: -ms-flexbox;
   display: flex;
   height: 4em;
+  margin-top: 35px;
   max-width: 53.75em;
   padding-left: 146px;
   position: relative; }
-  @media screen and (max-width: 53.75em) {
+  @media screen and (max-width: 73.75em) {
     article > aside[audio] {
       margin-left: 20px;
       margin-right: 20px; } }
@@ -869,10 +896,6 @@ article > section {
     float: right;
     margin: 2em -13.125em 2em 2em;
     max-width: 420px; }
-    @media screen and (max-width: 37.375em) {
-      article > section > figure {
-        padding-left: 20px;
-        padding-right: 20px; } }
     @media screen and (max-width: 70em) {
       article > section > figure {
         float: none;
@@ -941,6 +964,9 @@ article > blockquote {
   max-width: 730px;
   padding: 1em;
   position: relative; }
+  @media (max-width: 750px) {
+    article > blockquote {
+      margin-right: 20px; } }
   @media screen and (max-width: 61.8125em) {
     article > blockquote {
       font-size: 1.5em;
@@ -968,11 +994,15 @@ article > blockquote {
 
 article > figure {
   display: block;
-  margin: 4em auto;
+  margin: 0 auto;
   max-width: 53.75em;
   padding: 2em 0; }
   article > figure[graphic] {
-    max-width: 37.5em; }
+    max-width: 37.5emf; }
+    @media (max-width: 880px) {
+      article > figure[graphic] {
+        padding-left: 20px;
+        padding-right: 20px; } }
   article > figure > * {
     border: 0;
     display: block;
@@ -1127,6 +1157,9 @@ form[representative] {
         margin-bottom: 0.5em;
         width: 100%; } }
   form[representative] > span {
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
     color: #0F1620;
     display: block;
     font-size: 1.3em;

@@ -1,6 +1,5 @@
 'use strict';
 
-const $           = require('jquery');
 const feedback    = $('aside[feedback]');
 const shadow      = $('[feedback-shadow]');
 const topBound    = $('[top-bound]');
@@ -26,4 +25,5 @@ let adjust = (e) => {
 }
 
 $(window).on('scroll resize', adjust);
+$('main').on('scroll', adjust);
 adjust();

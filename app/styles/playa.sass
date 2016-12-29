@@ -1,0 +1,127 @@
+.jp-audio
+  background: #fff
+  border-left: 1px solid #D0D0D0
+  border-right: 1px solid #D0D0D0
+  opacity: 0
+  display: flex
+  align-items: flex-start
+  // overflow: hidden
+  // position: absolute
+  // position: relative
+  // left: 700px
+  // top: 0
+  // bottom: 0
+  // right: 280px
+  // width: 500px
+  &.now-playing
+    opacity: 1
+    @media (max-width: 900px)
+      left: 0
+    @media (max-width: 500px)
+      right: 0
+  
+
+  .progress
+    display: flex
+    justify-content: center
+    align-content: stretch
+    align-items: center
+
+  button
+    background: 0 0
+    border: 0
+    opacity: 0.7
+    outline: 0
+    &:hover
+      opacity: 1
+    
+// .jp-controls
+//   position: absolute
+//   top: 10px
+//   left: 20px
+//   @media (max-width: 500px)
+//     top: 7px
+
+// .jp-controls-holder
+  // position: absolute
+  // left: 0
+  // top: 0
+  // right: 0
+  // bottom: 0
+
+.jp-volume-controls
+  // position: absolute
+  // top: 10px
+  // right: 20px
+  width: 100px
+  // @media (max-width: 500px)
+  //   top: 7px
+
+.volume
+  // position: absolute
+  // right: 58px
+  width: 27px
+  align-self: center
+
+.jp-mute, .jp-volume-max
+  // width: 27px
+  // height: 27px
+  padding: 0
+  // position: absolute
+  // top: 10px
+  // left: 0
+  &.hidden, &.hidden img
+    display: none
+  
+  // @media (max-width: 500px)
+  //   top: 8px
+  
+.jp-stop
+  align-self: flex-end
+//   position: absolute
+//   right: 0
+//   top: 3px
+  // @media (max-width: 500px)
+  //   top: 2px
+
+.jp-current-time
+  padding-right: 5px
+.jp-duration
+  padding-left: 5px
+  
+.jp-current-time, .jp-duration
+  color: #575E68
+  font-family: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif
+  font-size: 14
+  // position: absolute
+  // top: 32px
+
+// .jp-current-time
+//   left: 80px
+
+// .jp-duration
+//   right: 125px
+
+.jp-progress
+  min-width: 50px
+//   position: absolute
+//   top: 39px
+//   left: 128px
+//   right: 180px
+//   height: 4px
+
+.jp-seek-bar
+  background: #D0D0D0
+
+.jp-play-bar
+  background: #7da9ac
+  height: 4px
+
+.jp-title
+  color: #7da9ac
+  font-family: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif
+  font-size: 14
+  font-weight: 600
+  // position: absolute
+  // left: 80px
+  // top: 10px

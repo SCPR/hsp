@@ -1,18 +1,23 @@
 'use strict';
 
-const $        = require('jquery');
 const OnScreen = require('onscreen');
 
 let os = new OnScreen({
   tolerance: 0,
   debounce: 100,
-  container: window
+  container: 'main'
 });
 
+let headerFixed = $('header[fixed]');
+
 os.on('enter', 'header[top]', () => {
-  $('header[fixed]').removeClass('active');
+  headerFixed.removeClass('active');
 });
 
 os.on('leave', 'header[top]', () => {
-  $('header[fixed]').addClass('active');
-})
+  headerFixed.addClass('active');
+});
+
+if($(document).scrollTop() > $('header[top]').height()){
+  headerFixed.addClass('active');
+}

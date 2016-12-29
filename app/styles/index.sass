@@ -1,5 +1,6 @@
 @import '../../node_modules/normalize.css/normalize'
 @import './player'
+// @import './playa'
 
 // NOTES:
 //
@@ -46,8 +47,30 @@ $screen-tablet: 56rem;
 $screen-desktop: 64rem;
 // $media-wide: 84rem;
 
+
+html, body
+  height: 100%
+
+
+body
+  overflow-y: hidden
+
+
+main
+  height: 100%
+  overflow-y: scroll
+
+
 header
+  color: #fff
   display: block
+  // flex
+  display: flex
+  flex-wrap: nowrap
+  justify-content: flex-start
+  align-items: flex-start
+  align-content: stretch
+  // /flex
   left: 0
   opacity: 1
   padding: 18px 32px
@@ -57,14 +80,16 @@ header
   transform: translateY(0)
   transition: all .3s ease-in-out
   z-index: 50
-  color: #fff
   div[branding]
+    // flex: 2 1 auto
+    // align-self: auto
     font-family: $serif
     opacity: 1
     transition: opacity .8s linear
     transition-delay: 0.3s
     a[logo]
       text-decoration: none
+      vertical-align: middle
       img
         border: 0
         max-width: 100%
@@ -75,15 +100,25 @@ header
       display: inline-block
       height: 20px
       margin: 0 8px
+      margin-bottom: 6px
       width: 1px
+      vertical-align: middle
     h3
+      color: #fff
       display: inline-block
-      font-weight: 400
+      font-weight: 600
       font-size: 20px
-      font-family: $sans
+      font-family: $serif
       margin: 0
-      vertical-align: bottom
       @media (max-width: $screen-mobile)
+        display: none
+    span[tagline]
+      color: #fff
+      font-family: $sans
+      font-size: 19px
+      font-weight: 300
+      margin-left: -3px
+      @media (max-width: 1342px)
         display: none
     label
       display: inline-block
@@ -91,7 +126,6 @@ header
       font-size: 20px
       font-family: $sans
       margin: 0
-      vertical-align: bottom
       visibility: hidden
       @media (max-width: $screen-mobile)
         font-size: 16px
@@ -116,7 +150,7 @@ header
     text-transform: uppercase
     top: 20px
     &[open]
-      @media (max-width: 500px)
+      @media (max-width: 640px)
         display: none
     @media (max-width: 768px)
       right: 18px
@@ -136,9 +170,11 @@ header[fixed]
     opacity: 1
   div[branding]
     h3
-      color: #000
+      color: $color-medium
       &[mobile]:after
         content: url('../../images/icon_caret-blue.svg')
+    span[tagline]
+      color: $color-black
     span[pipe]
       background: #000
   label
@@ -157,10 +193,11 @@ div[share-story]
 
 #nav-drawer-toggler-checkbox
   display: none
-#nav-drawer-toggler-checkbox:checked ~ nav[drawer]
-  opacity: 1
-  transform: translateY(0)
-
+#nav-drawer-toggler-checkbox:checked ~ main
+  overflow-y: hidden
+  nav[drawer]
+    opacity: 1
+    transform: translateY(0)
 
 nav[drawer]
   // The dropdown menu
@@ -171,10 +208,10 @@ nav[drawer]
   display: flex
   flex-direction: row
   flex-wrap: nowrap
+  height: 100%
   left: 0
   opacity: 0
   overflow: hidden
-  padding: 100px 30px 20px
   position: fixed
   right: 0
   top: 0
@@ -185,29 +222,23 @@ nav[drawer]
     opacity: 1
     transform: translateY(0)
   header
+    background: #fff
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3)
     div[branding]
       h3
-        color: #000
-        label:after
-          content: url('../../images/icon_caret-blue.svg')
+        color: $color-medium
+      span[tagline]
+        color: $color-black
+      label:after
+        content: url('../../images/icon_caret-blue.svg')
       span[pipe]
         background: #000
     label
       color: #212121
   div[contents]
-    flex: 3.2 0 0
-    margin-right: 22px
-    ul
-      display: flex
-      flex-direction: row
-      flex-wrap: wrap
-      list-style: none
-      margin: 0
-      padding: 0
-      li
-        flex-grow: 1
-        margin: 0 2%
-        width: 29%
+    height: 100%
+    width: 100%
+    overflow-y: auto // allows scrolling
 
 
 article
@@ -328,16 +359,18 @@ article
   > aside[audio]
     // The audio play element inside the body of the story
     $width: 53.75em
+    $gutter: 20px
     background: $color-grey-light
     cursor: pointer
     display: flex
     height: 4em
+    margin-top: 35px
     max-width: $width
     padding-left: 146px
     position: relative
-    @media screen and (max-width: $width)
-      margin-left: 20px
-      margin-right: 20px
+    @media screen and (max-width: $width + 20)
+      margin-left: $gutter
+      margin-right: $gutter
     button
       background: url(../../images/ctrl_audio-play.svg) 53px 16px no-repeat $color-medium
       border: 0
@@ -392,10 +425,6 @@ article
       float: right
       margin: 2em -13.125em 2em 2em
       max-width: 420px
-      @media screen and (max-width: 37.375em)
-        // add gutters on mobile
-        padding-left: 20px
-        padding-right: 20px
       @media screen and (max-width: 70em)
         // on small screens, don't float
         float: none
@@ -456,6 +485,8 @@ article
 
 
   > blockquote
+    $width: 730px
+    $gutter: 20px
     border-left: 1px solid #D5E1F3
     color: #1F5154
     font-family: $serif
@@ -465,14 +496,16 @@ article
     margin: 0 auto
     margin-bottom: 2em
     // margin-left: 25%   // not sure why I had this
-    max-width: 730px
+    max-width: $width
     padding: 1em
     position: relative
+    @media (max-width: $width + $gutter)
+      margin-right: $gutter
     @media screen and (max-width: 61.8125em)
       font-size: 1.5em
       line-height: 1.5em
       margin-left: 60px
-      padding: 0 0 0 20px
+      padding: 0 0 0 $gutter
     &:before
       background: url('../../images/icon_pullquote.svg') left top no-repeat
       content: ""
@@ -493,12 +526,17 @@ article
 
 
   > figure
+    $width: 860px
+    $margin: 20px
     display: block
-    margin: 4em auto
+    margin: 0 auto
     max-width: 53.75em
     padding: 2em 0
     &[graphic]
-      max-width: 37.5em
+      max-width: 37.5emf
+      @media (max-width: $width + $margin)
+        padding-left: $margin
+        padding-right: $margin
     > *
       border: 0
       display: block
@@ -631,6 +669,7 @@ form[representative]
   margin: 0 auto
   max-width: 1000px
   > h2
+    // the big heading
     color: $color-dark
     display: block
     font-family: $serif-titling
@@ -643,6 +682,8 @@ form[representative]
       margin-bottom: 0.5em
       width: 100%
   > span
+    // the main description
+    align-self: center
     color: $color-black
     display: block
     font-size: 1.3em

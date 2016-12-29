@@ -5,15 +5,17 @@
   opacity: 0
   overflow: hidden
   position: absolute
-  left: 350px
+  left: 700px
   top: 0
   bottom: 0
-  right: 168px
+  right: 280px
   &.now-playing
     opacity: 1
+    @media (max-width: 1342px)
+      left: 270px
     @media (max-width: 900px)
       left: 0
-    @media (max-width: 500px)
+    @media (max-width: 640px)
       right: 0
   
   button
