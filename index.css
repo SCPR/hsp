@@ -515,6 +515,20 @@ template {
   left: 80px;
   top: 10px; }
 
+form[representative] .hidden {
+  display: none; }
+
+form[representative] output .data-loading {
+  width: 50%;
+  margin: 15px 25% 0 25%; }
+
+form[representative] output h3 {
+  width: 75%;
+  margin: 0 0 0 0; }
+
+form[representative] output .output-display {
+  margin-top: 15px; }
+
 header {
   display: block;
   left: 0;
