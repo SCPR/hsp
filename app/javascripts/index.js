@@ -2,6 +2,6 @@
 
 require('./header');
 require('./player');
-require('./topojson');
-require('./wherewolf');
+// require('./wherewolf');
+require('./geocomplete');
 require('./lookup');
