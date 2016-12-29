@@ -7,7 +7,7 @@
 
   //If it's a node module, require topojson
   if (npm) {
-     tj = require("topojson");
+     tj = require("./topojson");
   //Otherwise, if topojson exists, save the reference
   } else if (typeof topojson !== "undefined" && "feature" in topojson) {
     tj = topojson;
