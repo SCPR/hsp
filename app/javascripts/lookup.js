@@ -284,7 +284,7 @@ var fn = {
         }
         var address = rep.address + "<br />" + rep.city + ", " + rep.state + " " + rep.zip;
         var rep_deets = fn.writeToDom(
-            "representative",
+            "rep-block",
             rep.rep_name,
             title,
             address,
@@ -303,11 +303,13 @@ var fn = {
 
     writeToDom: function(selector, name, office, address, phone, email){
         var html = "<div class='" + selector + " flex-item'>" +
-            "<p>" + name + "<br />" +
-            office + "<br />" +
-            address + "<br />" +
-            phone + "<br />" +
-            email + "</p>" +
+            "<p>"+
+                "<span class='name'>" + name + "</span><br />" +
+                "<span class='office'>" + office + "</span><br />" +
+                "<span class='address'>" + address + "</span><br />" +
+                "<span class='phone'>" + phone + "</span><br />" +
+                "<span class='email'>" + email + "</span>" +
+            "</p>" +
             "</div>";
         return html;
     },
