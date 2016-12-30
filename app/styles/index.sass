@@ -746,6 +746,10 @@ form[representative]
       background: $color-medium
       border-color: $color-medium
       color: #fff
+    &:focus
+      outline: none
+    &:active
+      background: $color-dark
   div[lookup]
     width: 45%
     @media (max-width: $screen-tablet)
@@ -773,7 +777,6 @@ form[representative]
           opacity: 0 // hide placeholder when input is in focus
     section[inputs]
       display: flex
-      float: left
       justify-content: flex-start
       margin-top: 22px
       vertical-align: middle
@@ -796,6 +799,17 @@ form[representative]
           margin-left: 10px
           margin-right: 10px
           transform: translateY(25%)
+  output
+    display: block
+    .output-display
+      display: flex
+      flex-wrap: wrap
+      justify-content: space-between
+      .flex-item
+        width: 45%
+        word-wrap: break-word
+      // .flex-item
+      //   flex: 1
   div[suggestion]
     width: 50%
     @media (max-width: $screen-tablet)
@@ -804,6 +818,28 @@ form[representative]
     section
       font-family: $sans
       font-size: 1em
+    button[copy]
+      &:before
+        opacity: 1
+        position: absolute
+        top: -200px
+        left: 50%
+        transform: translateX(-50%)
+        padding: 7px
+        background-color: #000
+        background-color: hsla(0, 0%, 20%, 0.9)
+        color: #fff
+        content: attr(aria-label)
+        text-align: center
+        font-size: 14px
+        line-height: 1.2
+        z-index: 999
+        transition: top .3s ease-in-out
+        transition-delay: 1.5s;
+      &[aria-label]:hover:before
+        transition-delay: 0s;
+        top: 0
+
 
 footer
   align-content: center

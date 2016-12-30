@@ -18,6 +18,6 @@ os.on('leave', 'header[top]', () => {
   headerFixed.addClass('active');
 });
 
-if($(document).scrollTop() > $('header[top]').height()){
+if($('main').scrollTop() > $('header[top]').height()){
   headerFixed.addClass('active');
 }

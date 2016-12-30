@@ -6,3 +6,4 @@ require('./player');
 require('./feedback');
 require('./geocomplete');
 require('./lookup');
+require('./copy-message');
