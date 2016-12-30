@@ -1,6 +1,5 @@
 @import '../../node_modules/normalize.css/normalize'
 @import './player'
-// @import './playa'
 
 // NOTES:
 //
@@ -121,17 +120,19 @@ header
       @media (max-width: 1342px)
         display: none
     label
+      color: #fff
       display: inline-block
-      font-weight: 400
+      font-weight: 600
       font-size: 20px
-      font-family: $sans
+      font-family: $serif
       margin: 0
       visibility: hidden
       @media (max-width: $screen-mobile)
+        color: #fff
         font-size: 16px
         visibility: visible
       &:after
-        content: url('../../images/icon_caret.svg')
+        content: url('../../images/icon_caret-blue.svg')
         display: inline-block
         margin-left: 5px
   > label
@@ -177,8 +178,10 @@ header[fixed]
       color: $color-black
     span[pipe]
       background: #000
+    label
+      color: $color-medium
   label
-    color: #212121
+    color: $color-black
 
 
 div[share-story]
@@ -229,12 +232,10 @@ nav[drawer]
         color: $color-medium
       span[tagline]
         color: $color-black
-      label:after
-        content: url('../../images/icon_caret-blue.svg')
       span[pipe]
         background: #000
     label
-      color: #212121
+      color: $color-medium
   div[contents]
     height: 100%
     width: 100%
@@ -334,8 +335,6 @@ article
         z-index: 1
 
 
-
-
   > h2
     $width: 860px
     $margin: 20px
@@ -355,7 +354,6 @@ article
       margin-right: $margin
 
 
-
   > aside[audio]
     // The audio play element inside the body of the story
     $width: 53.75em
@@ -363,8 +361,8 @@ article
     background: $color-grey-light
     cursor: pointer
     display: flex
-    height: 4em
     margin-top: 35px
+    max-height: 4em
     max-width: $width
     padding-left: 146px
     position: relative

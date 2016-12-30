@@ -599,18 +599,20 @@ header {
         header div[branding] span[tagline] {
           display: none; } }
     header div[branding] label {
+      color: #fff;
       display: inline-block;
-      font-weight: 400;
+      font-weight: 600;
       font-size: 20px;
-      font-family: "franklin-gothic-urw", "Avenir Next", "Avenir", Arial, sans-serif;
+      font-family: "abril-text", Georgia, serif;
       margin: 0;
       visibility: hidden; }
       @media (max-width: 31.25em) {
         header div[branding] label {
+          color: #fff;
           font-size: 16px;
           visibility: visible; } }
       header div[branding] label:after {
-        content: url("../../images/icon_caret.svg");
+        content: url("../../images/icon_caret-blue.svg");
         display: inline-block;
         margin-left: 5px; }
   header > label {
@@ -653,8 +655,10 @@ header[fixed] {
     color: #0F1620; }
   header[fixed] div[branding] span[pipe] {
     background: #000; }
+  header[fixed] div[branding] label {
+    color: #388B90; }
   header[fixed] label {
-    color: #212121; }
+    color: #0F1620; }
 
 div[share-story] {
   list-style: none;
@@ -715,12 +719,10 @@ nav[drawer] {
       color: #388B90; }
     nav[drawer] header div[branding] span[tagline] {
       color: #0F1620; }
-    nav[drawer] header div[branding] label:after {
-      content: url("../../images/icon_caret-blue.svg"); }
     nav[drawer] header div[branding] span[pipe] {
       background: #000; }
     nav[drawer] header label {
-      color: #212121; }
+      color: #388B90; }
   nav[drawer] div[contents] {
     height: 100%;
     width: 100%;
@@ -838,8 +840,8 @@ article > aside[audio] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 4em;
   margin-top: 35px;
+  max-height: 4em;
   max-width: 53.75em;
   padding-left: 146px;
   position: relative; }
