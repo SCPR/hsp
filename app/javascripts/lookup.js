@@ -21,6 +21,19 @@ var fn = {
         fn._data.wherewolf.lac = Wherewolf();
         fn._data.wherewolf.sen = Wherewolf();
         fn._data.wherewolf.asem = Wherewolf();
+
+        $("input[id='nav-drawer-toggler-checkbox']").bind("click", function(){
+            var drawer = $(this).is(":checked");
+            if(drawer === true){
+                fn._reset();
+                $("#draw-form").toggleClass("inactive active");
+                $("#page-form").toggleClass("active inactive");
+            } else {
+                fn._reset();
+                $("#draw-form").toggleClass("active inactive");
+                $("#page-form").toggleClass("inactive active");
+            };
+        });
         fn._events();
         fn._loaddata();
     },
@@ -35,17 +48,16 @@ var fn = {
         // trigger to find users location
         $("button#findme").click(function(event){
             event.preventDefault();
-            $(".data-loading").removeClass("hidden");
+            $(".active .data-loading").removeClass("hidden");
             fn._findme();
         });
 
         // trigger to submit users address
         $("button#submit").click(function(event){
             event.preventDefault();
-            $(".data-loading").removeClass("hidden");
+            $(".active .data-loading").removeClass("hidden");
             fn._navigate();
         });
-
     },
 
     _loaddata: function(){
@@ -60,13 +72,19 @@ var fn = {
         });
     },
 
-    _searchme: function(){
-        $("button#submit").css("font-weight", "700");
-        $("button#_findme").css("font-weight", "100");
+    _reset: function(){
+        if ($(".active #output").length){
+            $(".active #output").empty();
+        };
         $("input[id='addressSearch']").val("");
         $("input[id='latitudeSearch']").val("");
         $("input[id='longitudeSearch']").val("");
-        $("#output").empty();
+    },
+
+    _searchme: function(){
+        $("button#submit").css("font-weight", "700");
+        $("button#_findme").css("font-weight", "100");
+        fn._reset();
         $("input[id='addressSearch']").geocomplete({
             details: "form"
         });
@@ -75,10 +93,7 @@ var fn = {
     _findme: function(){
         $("button#submit").css("font-weight", "100");
         $("button#_findme").css("font-weight", "700");
-        $("input[id='addressSearch']").val("");
-        $("input[id='latitudeSearch']").val("");
-        $("input[id='longitudeSearch']").val("");
-        $("#output").empty();
+        fn._reset();
         var location_options = {
             enableHighAccuracy: true,
             maximumAge: 30000,
@@ -128,8 +143,8 @@ var fn = {
     },
 
     _navigate: function(){
-        if ($("#output").length){
-            $("#output").empty();
+        if ($(".active #output").length){
+            $(".active #output").empty();
         };
 
         var latitude = $("input[id='latitudeSearch']").val();
@@ -151,10 +166,9 @@ var fn = {
                 );
             } else {
                 clearInterval(checkExist);
-                $(".data-loading").addClass("hidden");
                 fn._render();
             };
-        }, 500);
+        }, 1000);
     },
 
     _render: function(){
@@ -277,6 +291,7 @@ var fn = {
             rep.phones,
             "<a href='" + mailto + "' target='_top'>" + rep.email + "</a>"
         );
+        $(".data-loading").addClass("hidden");
         fn.displayOfficials("#output", rep_deets);
     },
 
@@ -298,7 +313,8 @@ var fn = {
     },
 
     displayOfficials: function(selector, details){
-        $(selector).append(details);
+        $(".active " + selector).append(details);
+        $(".inactive " + selector).empty();
     },
 
     displayAlert: function(color, title, content){
