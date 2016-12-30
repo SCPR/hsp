@@ -61,6 +61,10 @@ main
   overflow-y: scroll
 
 
+button
+  cursor: pointer
+
+
 header
   color: #fff
   display: block
@@ -363,7 +367,7 @@ article
     cursor: pointer
     display: flex
     margin-top: 35px
-    max-height: 4em
+    min-height: 4em
     max-width: $width
     padding-left: 146px
     position: relative
@@ -493,7 +497,7 @@ article
     font-weight: 300
     line-height: 1.46em
     margin: 0 auto
-    margin-bottom: 2em
+    // margin-bottom: 2em
     // margin-left: 25%   // not sure why I had this
     max-width: $width
     padding: 1em
@@ -522,6 +526,22 @@ article
         left: -67px
         top: 0
         width: 67px
+    p
+      margin-top: 0
+      margin-bottom: 20px
+    & ~ div[share]
+      // The group of share links that
+      // appear directly after a blockquote
+      list-style: none
+      margin: 2em auto
+      margin-bottom: 70px
+      margin-top: -10px
+      max-width: $width
+      padding: 0
+      text-align: right
+      a
+        display: inline-block
+        margin: 0 4px
 
 
   > figure

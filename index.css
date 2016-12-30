@@ -542,6 +542,9 @@ main {
   height: 100%;
   overflow-y: scroll; }
 
+button {
+  cursor: pointer; }
+
 header {
   color: #fff;
   display: block;
@@ -855,7 +858,7 @@ article > aside[audio] {
   display: -ms-flexbox;
   display: flex;
   margin-top: 35px;
-  max-height: 4em;
+  min-height: 4em;
   max-width: 53.75em;
   padding-left: 146px;
   position: relative; }
@@ -976,7 +979,6 @@ article > blockquote {
   font-weight: 300;
   line-height: 1.46em;
   margin: 0 auto;
-  margin-bottom: 2em;
   max-width: 730px;
   padding: 1em;
   position: relative; }
@@ -1007,6 +1009,20 @@ article > blockquote {
         left: -67px;
         top: 0;
         width: 67px; } }
+  article > blockquote p {
+    margin-top: 0;
+    margin-bottom: 20px; }
+  article > blockquote ~ div[share] {
+    list-style: none;
+    margin: 2em auto;
+    margin-bottom: 70px;
+    margin-top: -10px;
+    max-width: 730px;
+    padding: 0;
+    text-align: right; }
+    article > blockquote ~ div[share] a {
+      display: inline-block;
+      margin: 0 4px; }
 
 article > figure {
   display: block;
