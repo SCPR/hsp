@@ -4,3 +4,5 @@ window.$      = jQuery;
 require('./header');
 require('./player');
 require('./feedback');
+require('./geocomplete');
+require('./lookup');

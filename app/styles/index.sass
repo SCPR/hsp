@@ -1,12 +1,13 @@
 @import '../../node_modules/normalize.css/normalize'
 @import './player'
+@import './lookup'
 
 // NOTES:
 //
-// Nothing here is general-purpose.  The corresponding markup should also be easy to understand.  
+// Nothing here is general-purpose.  The corresponding markup should also be easy to understand.
 // Ideally, a non-coder should be able to theoretically be able to reason about the document and
-// make copy changes.  If you're adding more than a couple classes to the elements to achieve 
-// something, you might be doing it wrong.  The CSS is intended to be re-used but not re-purposed.  
+// make copy changes.  If you're adding more than a couple classes to the elements to achieve
+// something, you might be doing it wrong.  The CSS is intended to be re-used but not re-purposed.
 // Rather than building a grid system, you may want to consider building grid-like behavior into
 // your elements with flex display.
 //
@@ -20,8 +21,8 @@
 // - Properties should be specified in alphabetical order.
 // - Similar to the markup, separate relatively high-level concepts with two spaces.
 // - Consider taking advantage of scope before using classes, so think about using the `>` "child combinator" and first/last child selectors.
-// - The order of definitions should be: 
-//   1) variables 
+// - The order of definitions should be:
+//   1) variables
 //   2) properties
 //   3) media queries
 //   4) classes/selectors
@@ -157,7 +158,7 @@ header
       right: 18px
 
 
-header[fixed] 
+header[fixed]
   // This if for the version of the header
   // that slides down when you scroll.
   background: #fff
@@ -292,7 +293,7 @@ article
     a
       color: #388B90
       text-decoration: none
-        
+
 
   hr
     // a typical horizontal rule
@@ -397,7 +398,7 @@ article
         text-transform: uppercase
 
 
-  > section 
+  > section
     // A group of paragraphs and figures at the top-level in an article element.
     $width: 592px
     $margin: 20px
@@ -472,7 +473,7 @@ article
           position: absolute
           transform: translate(-25px, 100%)
           width: 10px
-          
+
         h4
           color: #575E68
           font-family: $sans
@@ -691,7 +692,7 @@ form[representative]
     font-size: 1.3em
     line-height: 1.57em
     max-width: 620px
-    padding-left: 5% 
+    padding-left: 5%
     width: 45%
     @media (max-width: $screen-tablet)
       padding-left: 0
@@ -756,7 +757,7 @@ form[representative]
         font-weight: 600
         height: 29px
   div[suggestion]
-    padding-left: 5% 
+    padding-left: 5%
     width: 45%
     @media (max-width: $screen-tablet)
       padding-left: 0
