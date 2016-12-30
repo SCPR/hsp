@@ -55,7 +55,7 @@
       </header>
 
 
-      <div id="jquery_jplayer_1" class="jp-jplayer"></div>  
+      <div id="jquery_jplayer_1" class="jp-jplayer"></div>
 
 
       <header fixed>
@@ -111,7 +111,7 @@
             </div>
           </div>
         </div>
-        
+
 
         <label open for="nav-drawer-toggler-checkbox">
           <img src="../../images/icon_plus.svg">
@@ -137,7 +137,7 @@
           </label>
         </header>
         <div contents>
-          <form representative>
+          <form representative id="draw-form" class="inactive">
             <h2>Contact your state representatives about CalWORKs</h2>
             <span description>Use this tool to look up your state senator and assemblymember.  Then email, call, or write them about how you feel about the impact of CalWORKs on Southern California families.</span>
             <hr>
@@ -164,9 +164,18 @@
             <div suggestion>
               <h3>Suggested Message</h3>
               <section>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque molestie molestie neque vel volutpat. Sed suscipit mauris eget enim lobortis, consectetur interdum nunc sodales. Nam viverra mi sit amet enim pellentesque dictum. Cras rutrum ultricies ante, non rutrum enim laoreet ut. Sed at viverra metus. Aenean condimentum vel ipsum ut laoreet. Curabitur id commodo neque. Cras pellentesque mauris quis velit congue mollis.</p>
-                <p>Nam leo tellus, pulvinar a lectus quis, ultricies gravida erat. Donec eu lectus nisi. Donec ut commodo justo, in aliquam eros. Nullam tincidunt tempor velit et bibendum. Maecenas eu mattis tellus. Curabitur aliquet velit nec porta euismod. Donec sed dui et est laoreet commodo sit amet sed tellus. Etiam non lorem quis velit maximus maximus. Mauris blandit dictum rutrum. Sed ultrices ex sed volutpat dictum.</p>
-                <p>Sed egestas pulvinar ullamcorper. Praesent turpis neque, ultricies et venenatis non, fermentum ac purus. Quisque luctus ante vel libero auctor, pharetra finibus tellus eleifend. Quisque maximus malesuada augue pretium fermentum. Ut lobortis aliquet eros, eget semper eros molestie eget. Morbi rhoncus pellentesque orci, vitae viverra ipsum rhoncus id.</p>
+                <p>I'm concerned about growing family homelessness in California.</p>
+                <p>Public radio KPCC is reporting that:<br/>
+                <ul>
+                    <li>Nearly 60,000 families called L.A. County's 2011 line for help finding emergency shelter in 2015. And women and children surpassed the number of single men seeking refuge at Los Angeles' Union Rescue Mission on Skid Row last year&mdash;the first time that's happened in its 125-year history.</li>
+                    <br/>
+                    <li>Since 2010, eight infants identified by Los Angles County officials as homeless died sleeping in conditions experts call unsuitable, but were the families only option.</li>
+                    <br/>
+                    <li>Harvest House, in Venice, can take in about two dozen pregnant women at a time. Workers there estimate they had to turn away about 500 pregnant women last year.</li>
+                    <br/>
+                    <li>Orange and San Bernardino county school officials report the number of students without stable housing tripled over the past decade, to 26,064 in Orange County public schools and 35,165 in San Bernardino. Los Angeles public schools have identified 54,916 homeless students.</li>
+                </ul>
+                <p>What are you doing to reduce the number of children and families in my community who become homeless?</p>
               </section>
               <button copy type="button" data-clipboard-target="div[suggestion]">Copy this text</button>
             </div>
@@ -196,7 +205,7 @@
 
 
         <hr>
-     
+
 
         <aside audio story-audio-1
         data-title="Hero cops"
@@ -228,7 +237,7 @@
 
           <p>“I remember we were just about to go and they were like: it’s too late,” Marshall recalled. “And I just broke. You know. I broke.”
 
-          <p>An autopsy would turn up no illness that could explain it. Zahnyah’s death was reported as SIDS and the medical examiner noted “co-sleeping” as a factor. 
+          <p>An autopsy would turn up no illness that could explain it. Zahnyah’s death was reported as SIDS and the medical examiner noted “co-sleeping” as a factor.
 
           <p>The shelter didn’t have a crib, just bunk beds. Marshall said the shelter operators didn’t allow her to bring a bassinet or any other “outside” furniture. Fearing Zahnyah would fall and hurt herself, Marshall had dragged the mattresses onto the floor and that’s where the two slept every night.
 
@@ -270,10 +279,10 @@
           <hr />
           <h3>Maximum monthly CalWORKs check for family of three (2007-2016)</h3>
           <img large
-            src="../../images/charts/Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16.png" 
+            src="../../images/charts/Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16.png"
             alt="Maximum monthly CalWORKs check for family of three (2007-2016)">
           <img small
-            src="../../images/charts/Maximum_monthly_CalWORKs_check_for_family_of_three_in_California_07-16_-_SMALL.png" 
+            src="../../images/charts/Maximum_monthly_CalWORKs_check_for_family_of_three_in_California_07-16_-_SMALL.png"
             alt="Maximum monthly CalWORKs check for family of three (2007-2016)">
           <hr />
         </figure>
@@ -294,10 +303,10 @@
           <hr />
           <h3>Homeless families on CalWORKs in LA County</h3>
           <img large
-            src="../../images/charts/Homeless_families_on_CalWORKs_in_LA_County.png" 
+            src="../../images/charts/Homeless_families_on_CalWORKs_in_LA_County.png"
             alt="Homeless families on CalWORKs in LA County">
           <img small
-            src="../../images/charts/Homeless_families_on_CalWORKs_in_LA_County_-_SMALL.png" 
+            src="../../images/charts/Homeless_families_on_CalWORKs_in_LA_County_-_SMALL.png"
             alt="Homeless families on CalWORKs in LA County">
           <hr />
         </figure>
@@ -328,10 +337,10 @@
           <hr />
           <h3>Chronically mentally ill homeless people compared to the number of homeless families on CalWORKs</h3>
           <img large
-            src="../../images/charts/Chronically_mentally_ill_homeless_people_compared_to_the_number_of_homeless_families_on_CalWORKs.png" 
+            src="../../images/charts/Chronically_mentally_ill_homeless_people_compared_to_the_number_of_homeless_families_on_CalWORKs.png"
             alt="Chronically mentally ill homeless people compared to the number of homeless families on CalWORKs">
           <img small
-            src="../../images/charts/Chronically_mentally_ill_homeless_people_compared_to_the_number_of_homeless_families_on_CalWORKs_-_SMALL.png" 
+            src="../../images/charts/Chronically_mentally_ill_homeless_people_compared_to_the_number_of_homeless_families_on_CalWORKs_-_SMALL.png"
             alt="Chronically mentally ill homeless people compared to the number of homeless families on CalWORKs">
           <hr />
         </figure>
@@ -393,7 +402,7 @@
           <p>For now, Monteagudo and Salvago sleep in the RV’s full-size bed with A.J. Aaron curls up on the kitchen bench. They cook on portable stoves and drink bottled water. They shower at a nearby 24-hour fitness. The monthly fee is worth it for the showers. </p>
 
           <p>During the day, while Aaron’s at school, Salvago sometimes works as an in-home caregiver.</p>
-          
+
           <p>But it’s hard.</p>
 
           <p>Even before he was born, A.J. was diagnosed with a serious neurological condition, spina bifida. Doctors performed an emergency C section and A.J. emerged with fluid in his brain. Doctors in East L.A. rushed him to L.A.’s Children’s Hospital, where he spent months in the neonatal intensive care unit.</p>
@@ -434,7 +443,7 @@
         </section>
 
 
-        <hr fancy>    
+        <hr fancy>
 
 
         <h2>The number of displaced families in Southern California is growing exponentially:</h2>
@@ -461,10 +470,10 @@
           <hr />
           <h3>Students in public schools who are homeless</h3>
           <img large
-            src="../../images/charts/Students_in_public_schools_who_are_homeless.png" 
+            src="../../images/charts/Students_in_public_schools_who_are_homeless.png"
             alt="Students in public schools who are homeless">
           <img small
-            src="../../images/charts/Students_in_public_schools_who_are_homeless_-_SMALL.png" 
+            src="../../images/charts/Students_in_public_schools_who_are_homeless_-_SMALL.png"
             alt="Students in public schools who are homeless">
           <hr />
         </figure>
@@ -560,10 +569,10 @@
           <hr />
           <h3>Maximum monthly CalWORKs check or a family of three in California (1 adult + 2 children)</h3>
           <img large
-            src="../../images/charts/Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16.png" 
+            src="../../images/charts/Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16.png"
             alt="Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16">
           <img small
-            src="../../images/charts/Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16.png" 
+            src="../../images/charts/Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16.png"
             alt="Maxiumum_monthly_CalWORKs_check_for_a_family_of_three_in_California_07-16">
           <hr />
         </figure>
@@ -855,7 +864,7 @@
       <hr thick>
 
 
-      <form representative>
+      <form representative id="page-form" class="active">
         <h2>Contact your state representatives about CalWORKs</h2>
         <span description>Use this tool to look up your state senator and assemblymember.  Then email, call, or write them about how you feel about the impact of CalWORKs on Southern California families.</span>
         <hr>
@@ -882,9 +891,18 @@
         <div suggestion>
           <h3>Suggested Message</h3>
           <section>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque molestie molestie neque vel volutpat. Sed suscipit mauris eget enim lobortis, consectetur interdum nunc sodales. Nam viverra mi sit amet enim pellentesque dictum. Cras rutrum ultricies ante, non rutrum enim laoreet ut. Sed at viverra metus. Aenean condimentum vel ipsum ut laoreet. Curabitur id commodo neque. Cras pellentesque mauris quis velit congue mollis.</p>
-            <p>Nam leo tellus, pulvinar a lectus quis, ultricies gravida erat. Donec eu lectus nisi. Donec ut commodo justo, in aliquam eros. Nullam tincidunt tempor velit et bibendum. Maecenas eu mattis tellus. Curabitur aliquet velit nec porta euismod. Donec sed dui et est laoreet commodo sit amet sed tellus. Etiam non lorem quis velit maximus maximus. Mauris blandit dictum rutrum. Sed ultrices ex sed volutpat dictum.</p>
-            <p>Sed egestas pulvinar ullamcorper. Praesent turpis neque, ultricies et venenatis non, fermentum ac purus. Quisque luctus ante vel libero auctor, pharetra finibus tellus eleifend. Quisque maximus malesuada augue pretium fermentum. Ut lobortis aliquet eros, eget semper eros molestie eget. Morbi rhoncus pellentesque orci, vitae viverra ipsum rhoncus id.</p>
+            <p>I'm concerned about growing family homelessness in California.</p>
+            <p>Public radio KPCC is reporting that:<br/>
+            <ul>
+                <li>Nearly 60,000 families called L.A. County's 2011 line for help finding emergency shelter in 2015. And women and children surpassed the number of single men seeking refuge at Los Angeles' Union Rescue Mission on Skid Row last year&mdash;the first time that's happened in its 125-year history.</li>
+                <br/>
+                <li>Since 2010, eight infants identified by Los Angles County officials as homeless died sleeping in conditions experts call unsuitable, but were the families only option.</li>
+                <br/>
+                <li>Harvest House, in Venice, can take in about two dozen pregnant women at a time. Workers there estimate they had to turn away about 500 pregnant women last year.</li>
+                <br/>
+                <li>Orange and San Bernardino county school officials report the number of students without stable housing tripled over the past decade, to 26,064 in Orange County public schools and 35,165 in San Bernardino. Los Angeles public schools have identified 54,916 homeless students.</li>
+            </ul>
+            <p>What are you doing to reduce the number of children and families in my community who become homeless?</p>
           </section>
           <button copy type="button" data-clipboard-target="div[suggestion]">Copy this text</button>
         </div>
@@ -980,6 +998,7 @@
           <img src="http://b.scorecardresearch.com/p?c1=2&c2=6035974&c3=&c4=&c5=&c6=&c15=&cv=2.0&cj=1" />
       </noscript>
       <!-- end comscore stats -->
+
   <script src="//maps.google.com/maps/api/js?key=AIzaSyAtS1OYyuRY0inb23BK0nuGId3FiOC6Rb8&libraries=places"></script>
   <script src="./index.js"></script>
   </body>

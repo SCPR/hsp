@@ -22,6 +22,19 @@ var fn = {
         fn._data.wherewolf.lac = Wherewolf();
         fn._data.wherewolf.sen = Wherewolf();
         fn._data.wherewolf.asem = Wherewolf();
+
+        $("input[id='nav-drawer-toggler-checkbox']").bind("click", function(){
+            var drawer = $(this).is(":checked");
+            if(drawer === true){
+                fn._reset();
+                $("#draw-form").toggleClass("inactive active");
+                $("#page-form").toggleClass("active inactive");
+            } else {
+                fn._reset();
+                $("#draw-form").toggleClass("active inactive");
+                $("#page-form").toggleClass("inactive active");
+            };
+        });
         fn._events();
         fn._loaddata();
     },
@@ -36,17 +49,16 @@ var fn = {
         // trigger to find users location
         $("button#findme").click(function(event){
             event.preventDefault();
-            $(".data-loading").removeClass("hidden");
+            $(".active .data-loading").removeClass("hidden");
             fn._findme();
         });
 
         // trigger to submit users address
         $("button#submit").click(function(event){
             event.preventDefault();
-            $(".data-loading").removeClass("hidden");
+            $(".active .data-loading").removeClass("hidden");
             fn._navigate();
         });
-
     },
 
     _loaddata: function(){
@@ -61,13 +73,19 @@ var fn = {
         });
     },
 
-    _searchme: function(){
-        $("button#submit").css("font-weight", "700");
-        $("button#_findme").css("font-weight", "100");
+    _reset: function(){
+        if ($(".active #output").length){
+            $(".active #output").empty();
+        };
         $("input[id='addressSearch']").val("");
         $("input[id='latitudeSearch']").val("");
         $("input[id='longitudeSearch']").val("");
-        $("#output").empty();
+    },
+
+    _searchme: function(){
+        $("button#submit").css("font-weight", "700");
+        $("button#_findme").css("font-weight", "100");
+        fn._reset();
         $("input[id='addressSearch']").geocomplete({
             details: "form"
         });
@@ -76,10 +94,7 @@ var fn = {
     _findme: function(){
         $("button#submit").css("font-weight", "100");
         $("button#_findme").css("font-weight", "700");
-        $("input[id='addressSearch']").val("");
-        $("input[id='latitudeSearch']").val("");
-        $("input[id='longitudeSearch']").val("");
-        $("#output").empty();
+        fn._reset();
         var location_options = {
             enableHighAccuracy: true,
             maximumAge: 30000,
@@ -129,8 +144,8 @@ var fn = {
     },
 
     _navigate: function(){
-        if ($("#output").length){
-            $("#output").empty();
+        if ($(".active #output").length){
+            $(".active #output").empty();
         };
 
         var latitude = $("input[id='latitudeSearch']").val();
@@ -152,10 +167,9 @@ var fn = {
                 );
             } else {
                 clearInterval(checkExist);
-                $(".data-loading").addClass("hidden");
                 fn._render();
             };
-        }, 500);
+        }, 1000);
     },
 
     _render: function(){
@@ -271,35 +285,39 @@ var fn = {
         }
         var address = rep.address + "<br />" + rep.city + ", " + rep.state + " " + rep.zip;
         var rep_deets = fn.writeToDom(
-            "representative",
+            "rep-block",
             rep.rep_name,
             title,
             address,
             rep.phones,
             "<a href='" + mailto + "' target='_top'>" + rep.email + "</a>"
         );
+        $(".data-loading").addClass("hidden");
         fn.displayOfficials("#output", rep_deets);
     },
 
     generateMailTo: function(email, cc){
         var subject = "Homeless%20Families";
-        var body = "Fox News treated me terrible, I tweeted winner smarter Mexico self-funded doesn't know what he is doing bomb the oil fields, bang I'm Protestant lock her up. \n\n Muslims Celebrating the blacks love me I was talking about her persona twitter followers anchor baby the big lie. \n\n Beating us up email scandal politician Muslims Celebrating no time for political correctness. \n\n Yuge hair tweeted bigly.";
+        var body = "I'm concerned about growing family homelessness in California.\n\nPublic radio KPCC is reporting that:\n\n&#8226; Nearly 60,000 families called L.A. County's 2011 line for help finding emergency shelter in 2015. And women and children surpassed the number of single men seeking refuge at Los Angeles' Union Rescue Mission on Skid Row last year&mdash;the first time that's happened in its 125-year history.\n\n&#8226; Since 2010, eight infants identified by Los Angles County officials as homeless died sleeping in conditions experts call unsuitable, but were the families only option.\n\n&#8226; Harvest House, in Venice, can take in about two dozen pregnant women at a time. Workers there estimate they had to turn away about 500 pregnant women last year.\n\n&#8226; Orange and San Bernardino county school officials report the number of students without stable housing tripled over the past decade, to 26,064 in Orange County public schools and 35,165 in San Bernardino. Los Angeles public schools have identified 54,916 homeless students.\n\nWhat are you doing to reduce the number of children and families in my community who become homeless?";
         return "mailto:" + email + "?cc=" + cc + "&subject=" + subject + "&body=" + escape(body);
     },
 
     writeToDom: function(selector, name, office, address, phone, email){
         var html = "<div class='" + selector + " flex-item'>" +
-            "<p>" + name + "<br />" +
-            office + "<br />" +
-            address + "<br />" +
-            phone + "<br />" +
-            email + "</p>" +
+            "<p>"+
+                "<span class='name'>" + name + "</span><br />" +
+                "<span class='office'>" + office + "</span><br />" +
+                "<span class='address'>" + address + "</span><br />" +
+                "<span class='phone'>" + phone + "</span><br />" +
+                "<span class='email'>" + email + "</span>" +
+            "</p>" +
             "</div>";
         return html;
     },
 
     displayOfficials: function(selector, details){
-        $(selector).append(details);
+        $(".active " + selector).append(details);
+        $(".inactive " + selector).empty();
     },
 
     displayAlert: function(color, title, content){
