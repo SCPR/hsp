@@ -14,9 +14,8 @@ let adjust = (e) => {
   let bottom = top + height; // bottom of element
   let above  = topBound.offset().top + topBound.outerHeight(); // top-bound
   let below  = bottomBound.offset().top; // bottom-bound
-  // if((top > above) && (below < bottom)){
+
   if((above < 1) && (below > 1)){
-    console.log(above)
     if(!isVisible){
       isVisible = true;
       feedback.addClass('visible');
