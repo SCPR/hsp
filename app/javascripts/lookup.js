@@ -1,8 +1,9 @@
 'use strict';
 
-const jQuery   = require('jquery');
-const $        = jQuery;
-const Wherewolf   = require('wherewolf');
+const jQuery    = require('jquery');
+const $         = jQuery;
+const _         = require('underscore')._;
+const Wherewolf = require('wherewolf');
 
 var fn = fn || {};
 
