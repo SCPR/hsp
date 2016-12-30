@@ -18,12 +18,17 @@
     "browserify-shim": "^3.8.12",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^2.3.2",
+    "gulp-md5-plus": "^0.2.5",
     "gulp-sass": "^3.0.0",
+    "gulp-uglify": "^2.0.0",
     "gulp-watch": "^4.3.11",
     "jplayer": "^2.9.2",
     "jquery": "^3.1.1",
     "normalize.css": "^5.0.0",
     "onscreen": "^1.2.0",
+    "underscore": "^1.8.3",
     "vinyl-source-stream": "^1.1.0",
     "wherewolf": "1.0.3"
   }
