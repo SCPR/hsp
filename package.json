@@ -23,7 +23,6 @@
     "gulp-md5-plus": "^0.2.5",
     "gulp-sass": "^3.0.0",
     "gulp-uglify": "^2.0.0",
-    "gulp-uglifycss": "^1.0.6",
     "gulp-watch": "^4.3.11",
     "jplayer": "^2.9.2",
     "jquery": "^3.1.1",
