@@ -600,14 +600,14 @@ article
         text-transform: uppercase
 
 
-$feedback-border-width: 1px
-$feedback-height: 115px
-$feedback-left: 0
-$feedback-padding: 10px
-$feedback-position: fixed
-$feedback-top: 78.5%
-$feedback-width: 250px
 aside[feedback]
+  $feedback-border-width: 1px
+  $feedback-height: 115px
+  $feedback-padding: 10px
+  $feedback-position: fixed
+  $feedback-top: 78.5%
+  $feedback-width: 250px
+  $feedback-left: -($feedback-width + ($feedback-padding * 2) + ($feedback-border-width * 2))
   align-items: center
   background-color: #fff
   border-color: $color-light
@@ -623,13 +623,17 @@ aside[feedback]
   padding: $feedback-padding
   position: $feedback-position
   text-align: center
+  transition: all .3s ease-in-out
   top: $feedback-top
   width: $feedback-width
   z-index: 49
   @media (max-width: 1190px)
-    height: 40px
+    height: initial
+    left: 0
     position: relative
-    width: 100%
+    // width: 100%
+  &.visible
+    left: 0
   div[description]
     color: $color-black
     font-family: $sans
@@ -762,22 +766,6 @@ form[representative]
     section
       font-family: $sans
       font-size: 1em
-div[feedback-shadow]
-  // this element is hidden and
-  // is just used by the code
-  // that gives the feedback
-  // element boundaries
-  border-style: solid
-  border-width: $feedback-border-width
-  height: $feedback-height
-  left: $feedback-left
-  top: $feedback-top
-  padding: $feedback-padding
-  position: $feedback-position
-  visibility: hidden
-  width: $feedback-width
-  z-index: -1
-
 
 footer
   align-content: center
