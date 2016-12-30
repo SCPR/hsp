@@ -12,82 +12,69 @@ $(document).ready(function(){
 
 var fn = {
 
-    _data: "https://s3-us-west-1.amazonaws.com/scpr-projects/state_rep_boundaries/",
+    _s3url: "https://s3-us-west-1.amazonaws.com/scpr-projects/state_rep_boundaries/",
+
+    _data: {},
 
     _init: function(){
+        fn._data.wherewolf = {};
+        fn._data.wherewolf.lac = Wherewolf();
+        fn._data.wherewolf.sen = Wherewolf();
+        fn._data.wherewolf.asem = Wherewolf();
         fn._events();
-        window.wherewolf = {};
-        window.wherewolf.lac = Wherewolf();
-        window.wherewolf.ca_sen = Wherewolf();
-        window.wherewolf.ca_asem = Wherewolf();
-        fn.loadData(window.wherewolf);
+        fn._loaddata();
     },
 
     _events: function(){
 
         // trigger to address search
         $("input[id='addressSearch']").focus(function(event){
-            fn.searchMe()
-            fn.addressSearch(event);
-        });
-
-        // trigger to submit users address
-        $("button#submit").click(function(event){
-            event.preventDefault();
-            fn.navigate();
+            fn._searchme();
         });
 
         // trigger to find users location
         $("button#findme").click(function(event){
             event.preventDefault();
             $(".data-loading").removeClass("hidden");
-            fn.findMe();
+            fn._findme();
         });
 
-        // trigger to reset the view
-        $("button#reset").click(function(){
-            fn.reset();
+        // trigger to submit users address
+        $("button#submit").click(function(event){
+            event.preventDefault();
+            $(".data-loading").removeClass("hidden");
+            fn._navigate();
         });
 
     },
 
-    loadData: function(wherewolf){
-        $.getJSON(fn._data + "la-county-board-of-supervisors-districts-2011.json", function(data){
-            window.wherewolf.lac.addAll(data);
+    _loaddata: function(){
+        $.getJSON(fn._s3url + "la-county-board-of-supervisors-districts-2011.json", function(data){
+            fn._data.wherewolf.lac.addAll(data);
         });
-        $.getJSON(fn._data + "state-senate-districts-2011.json", function(data){
-            window.wherewolf.ca_sen.addAll(data);
+        $.getJSON(fn._s3url + "state-senate-districts-2011.json", function(data){
+            fn._data.wherewolf.sen.addAll(data);
         });
-        $.getJSON(fn._data + "state-assembly-districts-2011.json", function(data){
-            window.wherewolf.ca_asem.addAll(data);
+        $.getJSON(fn._s3url + "state-assembly-districts-2011.json", function(data){
+            fn._data.wherewolf.asem.addAll(data);
         });
     },
 
-    searchMe: function(){
+    _searchme: function(){
         $("button#submit").css("font-weight", "700");
-        $("button#findme").css("font-weight", "100");
+        $("button#_findme").css("font-weight", "100");
         $("input[id='addressSearch']").val("");
         $("input[id='latitudeSearch']").val("");
         $("input[id='longitudeSearch']").val("");
         $("#output").empty();
-    },
-
-    addressSearch: function(event){
-        event.preventDefault();
         $("input[id='addressSearch']").geocomplete({
             details: "form"
         });
     },
 
-    enterKeyPressedEventHandler: function(event){
-        if(event.keyCode === 13){
-            fn.navigate();
-        };
-    },
-
-    findMe: function(){
+    _findme: function(){
         $("button#submit").css("font-weight", "100");
-        $("button#findme").css("font-weight", "700");
+        $("button#_findme").css("font-weight", "700");
         $("input[id='addressSearch']").val("");
         $("input[id='latitudeSearch']").val("");
         $("input[id='longitudeSearch']").val("");
@@ -110,15 +97,6 @@ var fn = {
                 "Your browser lacks geolocation capabilities."
             );
         };
-    },
-
-    reset: function(){
-        $(".searchMe").css("font-weight", "700");
-        $(".findMe").css("font-weight", "700");
-        $("input[id='addressSearch']").val('');
-        $("input[id='latitudeSearch']").val('');
-        $("input[id='longitudeSearch']").val('');
-        $("#output").empty();
     },
 
     locationSuccess: function(position){
@@ -149,100 +127,92 @@ var fn = {
         };
     },
 
-    navigate: function(){
+    _navigate: function(){
         if ($("#output").length){
             $("#output").empty();
         };
+
         var latitude = $("input[id='latitudeSearch']").val();
         var longitude = $("input[id='longitudeSearch']").val();
-        if (latitude === undefined && longitude === undefined){
-            fn.displayAlert(
-                "red",
-                "Sorry.",
-                "Please enter an address or search by location."
-            );
-            window.coords = false;
-        } else {
-            window.coords = {
-                "lng": parseFloat(longitude),
-                "lat": parseFloat(latitude),
-            }
+
+        fn._data.coords = {
+            "lng": parseFloat(longitude),
+            "lat": parseFloat(latitude),
         };
-        if (_.isEmpty(window.coords) === true){
-            fn.displayAlert(
-                "#388B90",
-                "Sorry. " + error.message,
-                "An attempt to locate your position timed out. Please refresh the page and try again."
-            );
-        } else {
-            $(".data-loading").addClass("hidden");
-            window.reps = fn.identifyBoundaries(window.coords);
-            if (window.reps.count === 3){
-                window.reps.proceed = true;
-            } else if (window.reps.count === 2){
-                window.reps.proceed = true;
-            } else if (window.reps.count === 1){
-                window.reps.proceed = false;
-            } else {
-                window.reps.proceed = false;
-            };
-            if (window.reps.proceed === false){
+
+        var checkExist = setInterval(function(){
+            var lngCheck = _.has(fn._data.coords, "lng");
+            var latCheck = _.has(fn._data.coords, "lat");
+            if (lngCheck === false && latCheck === false){
                 fn.displayAlert(
-                    "red",
-                    "Sorry we were unable to complete your search.",
-                    "We can't determine your representatives from your location. Perhaps you are not in California?"
+                    "#388B90",
+                    "Sorry. " + error.message,
+                    "An attempt to locate your position timed out. Please refresh the page and try again."
                 );
             } else {
-                fn.gather_data();
+                clearInterval(checkExist);
+                $(".data-loading").addClass("hidden");
+                fn._render();
             };
+        }, 500);
+    },
+
+    _render: function(){
+        fn.identifyBoundaries();
+        if (fn._data.reps.count > 4){
+            console.log("whoa");
+        } else if (fn._data.reps.count === 4){
+            fn._data.proceed = true;
+            fn.gatherData();
+        } else if (fn._data.reps.count === 3){
+            fn._data.proceed = true;
+            fn.gatherData();
+        } else if (fn._data.reps.count === 2){
+            fn._data.proceed = true;
+            fn.gatherData();
+        } else if (fn._data.reps.count === 1){
+            fn._data.proceed = true;
+            fn.compileDetails(fn._data.reps.gov.details);
+        } else {
+            fn._data.reps.proceed = false;
+            fn.displayAlert(
+                "red",
+                "Sorry we were unable to complete your search.",
+                "We can't determine your representatives from your location. Perhaps you are not in California?"
+            );
         };
     },
 
-    identifyBoundaries: function(coords){
-        var _this = window.wherewolf;
-        var found_reps = {};
-        found_reps.count = 0
-        var found_la = _this.lac.find(window.coords, {wholeFeature: true}["districts"]);
-        var _null_la = _.isNull(found_la["districts"]);
-        var found_sen = _this.ca_sen.find(window.coords, {wholeFeature: true}["districts"]);
-        var _null_sen = _.isNull(found_sen["districts"]);
-        var found_asem = _this.ca_asem.find(window.coords, {wholeFeature: true}["districts"]);
-        var _null_asem = _.isNull(found_asem["districts"]);
-        if (_null_la === false){
-            found_reps.la = _this.lac.find(window.coords, {wholeFeature: true})["districts"]["properties"];
-            found_reps.count += 1;
+    identifyBoundaries: function(data){
+        fn._data.reps = {};
+        fn._data.reps.count = 0;
+        var _this = fn._data.wherewolf;
+        var found_lac = _this.lac.find(fn._data.coords, {wholeFeature: true}["districts"]);
+        var null_lac = _.isNull(found_lac["districts"]);
+        var found_sen = _this.sen.find(fn._data.coords, {wholeFeature: true}["districts"]);
+        var null_sen = _.isNull(found_sen["districts"]);
+        var found_asem = _this.asem.find(fn._data.coords, {wholeFeature: true}["districts"]);
+        var null_asem = _.isNull(found_asem["districts"]);
+        if (null_lac === false){
+            fn._data.reps.lac = _this.lac.find(fn._data.coords, {wholeFeature: true})["districts"]["properties"];
+            fn._data.reps.count += 1;
         } else {
-            found_reps.la = null;
+            fn._data.reps.lac = null;
         };
-        if (_null_sen === false){
-            found_reps.sen = _this.ca_sen.find(window.coords, {wholeFeature: true})["districts"]["properties"];
-            found_reps.count += 1;
+        if (null_sen === false){
+            fn._data.reps.sen = _this.sen.find(fn._data.coords, {wholeFeature: true})["districts"]["properties"];
+            fn._data.reps.count += 1;
         } else {
-            found_reps.sen = null;
+            fn._data.reps.sen = null;
         };
-        if (_null_sen === false){
-            found_reps.asem = _this.ca_asem.find(window.coords, {wholeFeature: true})["districts"]["properties"];
-            found_reps.count += 1;
+        if (null_sen === false){
+            fn._data.reps.asem = _this.asem.find(fn._data.coords, {wholeFeature: true})["districts"]["properties"];
+            fn._data.reps.count += 1;
         } else {
-            found_reps.asem = null;
+            fn._data.reps.asem = null;
         };
-        return found_reps;
-    },
-
-    gather_data: function(){
-        $.getJSON(fn._data + "state_rep_data.json", function(data){
-            window.reps.sen.details = _.where(data, {
-                chamber: "senate",
-                district_id: window.reps.sen.external_id
-            });
-            window.reps.asem.details = _.where(data, {
-                chamber: "assembly",
-                district_id: window.reps.asem.external_id
-            });
-        });
-
-        window.reps.gov = {};
-        window.reps.gov.details = {
+        fn._data.reps.gov = {};
+        fn._data.reps.gov.details = {
             rep_name: "Gov. Jerry Brown",
             email: "Jerry.Brown@gov.ca.gov",
             district_name: "California Governor",
@@ -254,21 +224,37 @@ var fn = {
             zip: "95814",
             phones: "(916) 445-2841",
         };
+        fn._data.reps.count += 1;
+    },
 
+    gatherData: function(){
+        $.getJSON(fn._s3url + "state_rep_data.json", function(data){
+            fn._data.reps.sen.details = _.where(data, {
+                chamber: "senate",
+                district_id: fn._data.reps.sen.external_id
+            });
+            fn._data.reps.asem.details = _.where(data, {
+                chamber: "assembly",
+                district_id: fn._data.reps.asem.external_id
+            });
+        });
         var checkExist = setInterval(function(){
-            var senCheck = _.has(window.reps.sen, "details");
-            var asemCheck = _.has(window.reps.asem, "details");
+            var senCheck = _.has(fn._data.reps.sen, "details");
+            var asemCheck = _.has(fn._data.reps.asem, "details");
             if (senCheck === true && asemCheck === true){
                 clearInterval(checkExist);
-                if (window.reps.count === 3){
-                    fn.compileDetails(window.reps.sen.details[0]);
-                    fn.compileDetails(window.reps.asem.details[0]);
-                    fn.compileDetails(window.reps.la.details);
-                    fn.compileDetails(window.reps.gov.details);
-                } else if (window.reps.count === 2){
-                    fn.compileDetails(window.reps.sen.details[0]);
-                    fn.compileDetails(window.reps.asem.details[0]);
-                    fn.compileDetails(window.reps.gov.details);
+                if (fn._data.reps.count === 4){
+                    fn.compileDetails(fn._data.reps.sen.details[0]);
+                    fn.compileDetails(fn._data.reps.asem.details[0]);
+                    fn.compileDetails(fn._data.reps.lac.details);
+                    fn.compileDetails(fn._data.reps.gov.details);
+                } else if (fn._data.reps.count === 3){
+                    fn.compileDetails(fn._data.reps.sen.details[0]);
+                    fn.compileDetails(fn._data.reps.asem.details[0]);
+                    fn.compileDetails(fn._data.reps.gov.details);
+                } else if (fn._data.reps.count === 2){
+                    fn.compileDetails(fn._data.reps.sen.details[0]);
+                    fn.compileDetails(fn._data.reps.asem.details[0]);
                 }
             };
         }, 500);
