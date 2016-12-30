@@ -545,6 +545,46 @@ main {
 button {
   cursor: pointer; }
 
+hr {
+  background: #D0D0D0;
+  border: 0;
+  height: 1px; }
+  hr[fancy] {
+    background: #8b9d9f;
+    height: 2px;
+    margin-bottom: 57px;
+    margin-top: 130px;
+    max-width: 860px; }
+    @media screen and (max-width: 860px) {
+      hr[fancy] {
+        margin-left: 20px;
+        margin-right: 20px; } }
+    hr[fancy]:before {
+      content: "";
+      background: #388B90;
+      background-clip: content-box;
+      height: 10px;
+      left: 50%;
+      position: absolute;
+      -webkit-transform: translateY(-40%) translateX(-50%) rotate(45deg);
+              transform: translateY(-40%) translateX(-50%) rotate(45deg);
+      width: 10px;
+      z-index: 2; }
+    hr[fancy]:after {
+      content: "";
+      background: #fff;
+      background-clip: content-box;
+      height: 4px;
+      left: 50%;
+      position: absolute;
+      -webkit-transform: translateY(-10%) translateX(-50%);
+              transform: translateY(-10%) translateX(-50%);
+      width: 30px;
+      z-index: 1; }
+  hr[thick] {
+    height: 3px;
+    background: #388B90; }
+
 header {
   color: #fff;
   display: block;
@@ -796,43 +836,6 @@ article > address {
   article > address a {
     color: #388B90;
     text-decoration: none; }
-
-article hr {
-  background: #D0D0D0;
-  border: 0;
-  height: 1px; }
-  article hr[fancy] {
-    background: #8b9d9f;
-    height: 2px;
-    margin-bottom: 57px;
-    margin-top: 130px;
-    max-width: 860px; }
-    @media screen and (max-width: 860px) {
-      article hr[fancy] {
-        margin-left: 20px;
-        margin-right: 20px; } }
-    article hr[fancy]:before {
-      content: "";
-      background: #388B90;
-      background-clip: content-box;
-      height: 10px;
-      left: 50%;
-      position: absolute;
-      -webkit-transform: translateY(-40%) translateX(-50%) rotate(45deg);
-              transform: translateY(-40%) translateX(-50%) rotate(45deg);
-      width: 10px;
-      z-index: 2; }
-    article hr[fancy]:after {
-      content: "";
-      background: #fff;
-      background-clip: content-box;
-      height: 4px;
-      left: 50%;
-      position: absolute;
-      -webkit-transform: translateY(-10%) translateX(-50%);
-              transform: translateY(-10%) translateX(-50%);
-      width: 30px;
-      z-index: 1; }
 
 article > h2 {
   color: #0F1620;
@@ -1173,12 +1176,15 @@ form[representative] {
           flex-grow: 1;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   padding-bottom: 90px;
   padding-left: 5%;
   padding-right: 5%;
   padding-top: 90px;
   margin: 0 auto;
-  max-width: 1000px; }
+  max-width: 1190px; }
   form[representative] > h2 {
     color: #1F5154;
     display: block;
@@ -1187,7 +1193,7 @@ form[representative] {
     font-weight: 800;
     line-height: 1.0756em;
     margin: 0;
-    width: 50%; }
+    width: 45%; }
     @media (max-width: 56rem) {
       form[representative] > h2 {
         margin-bottom: 0.5em;
@@ -1201,8 +1207,7 @@ form[representative] {
     font-size: 1.3em;
     line-height: 1.57em;
     max-width: 620px;
-    padding-left: 5%;
-    width: 45%; }
+    width: 50%; }
     @media (max-width: 56rem) {
       form[representative] > span {
         padding-left: 0;
@@ -1234,7 +1239,7 @@ form[representative] {
       border-color: #388B90;
       color: #fff; }
   form[representative] div[lookup] {
-    width: 50%; }
+    width: 45%; }
     @media (max-width: 56rem) {
       form[representative] div[lookup] {
         width: 100%; } }
@@ -1244,6 +1249,10 @@ form[representative] {
       border-bottom: 1px solid #388B90;
       border-radius: 0;
       color: #0F1620;
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+      float: left;
       font-size: 1.125rem;
       padding: 0.25rem 0; }
       form[representative] div[lookup] input::-webkit-input-placeholder {
@@ -1281,18 +1290,44 @@ form[representative] {
           opacity: 0; }
         form[representative] div[lookup] input:focus::placeholder {
           opacity: 0; }
-    form[representative] div[lookup] section {
-      display: inline-block;
-      vertical-align: middle; }
-      form[representative] div[lookup] section span {
-        color: #6C7579;
-        font-family: "fira-sans", Arial, sans-serif;
-        font-size: 0.8em;
-        font-weight: 600;
-        height: 29px; }
+    form[representative] div[lookup] section[inputs] {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      float: left;
+      -webkit-box-pack: start;
+          -ms-flex-pack: start;
+              justify-content: flex-start;
+      margin-top: 22px;
+      vertical-align: middle;
+      width: 100%; }
+      form[representative] div[lookup] section[inputs] input {
+        -webkit-box-flex: 1;
+            -ms-flex: 1;
+                flex: 1; }
+      form[representative] div[lookup] section[inputs] section[buttons] {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        float: left;
+        -webkit-box-pack: end;
+            -ms-flex-pack: end;
+                justify-content: flex-end;
+        vertical-align: middle; }
+        form[representative] div[lookup] section[inputs] section[buttons] button {
+          padding-left: 10px;
+          padding-right: 10px; }
+        form[representative] div[lookup] section[inputs] section[buttons] span {
+          color: #6C7579;
+          font-family: "fira-sans", Arial, sans-serif;
+          font-size: 0.8em;
+          font-weight: 600;
+          margin-left: 10px;
+          margin-right: 10px;
+          -webkit-transform: translateY(25%);
+                  transform: translateY(25%); }
   form[representative] div[suggestion] {
-    padding-left: 5%;
-    width: 45%; }
+    width: 50%; }
     @media (max-width: 56rem) {
       form[representative] div[suggestion] {
         padding-left: 0;

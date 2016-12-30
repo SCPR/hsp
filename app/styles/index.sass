@@ -65,6 +65,50 @@ button
   cursor: pointer
 
 
+hr
+  // a typical horizontal rule
+  $width: 860px
+  background: #D0D0D0
+  border: 0
+  height: 1px
+  &[fancy]
+    // a "fancy" horizontal rule
+    $height: 2px
+    $diamond-size: 10px
+    $diamond-border: 5px
+    background: #8b9d9f
+    height: $height
+    margin-bottom: 57px
+    margin-top: 130px
+    max-width: $width
+    @media screen and (max-width: $width)
+      margin-left: 20px
+      margin-right: 20px
+    &:before
+      content: ""
+      background: $color-medium
+      background-clip: content-box
+      height: $diamond-size
+      left: 50%
+      position: absolute
+      transform: translateY(-40%) translateX(-50%) rotate(45deg)
+      width: $diamond-size
+      z-index: 2
+    &:after
+      content: ""
+      background: #fff
+      background-clip: content-box
+      height: $height * 2
+      left: 50%
+      position: absolute
+      transform: translateY(-10%) translateX(-50%)
+      width: $diamond-size + ($diamond-border * 4)
+      z-index: 1
+  &[thick]
+    height: 3px
+    background: $color-medium
+
+
 header
   color: #fff
   display: block
@@ -297,47 +341,6 @@ article
     a
       color: #388B90
       text-decoration: none
-
-
-  hr
-    // a typical horizontal rule
-    $width: 860px
-    background: #D0D0D0
-    border: 0
-    height: 1px
-    &[fancy]
-      // a "fancy" horizontal rule
-      $height: 2px
-      $diamond-size: 10px
-      $diamond-border: 5px
-      background: #8b9d9f
-      height: $height
-      margin-bottom: 57px
-      margin-top: 130px
-      max-width: $width
-      @media screen and (max-width: $width)
-        margin-left: 20px
-        margin-right: 20px
-      &:before
-        content: ""
-        background: $color-medium
-        background-clip: content-box
-        height: $diamond-size
-        left: 50%
-        position: absolute
-        transform: translateY(-40%) translateX(-50%) rotate(45deg)
-        width: $diamond-size
-        z-index: 2
-      &:after
-        content: ""
-        background: #fff
-        background-clip: content-box
-        height: $height * 2
-        left: 50%
-        position: absolute
-        transform: translateY(-10%) translateX(-50%)
-        width: $diamond-size + ($diamond-border * 4)
-        z-index: 1
 
 
   > h2
@@ -685,12 +688,13 @@ form[representative]
   flex-basis: auto
   flex-grow: 1
   flex-wrap: wrap
+  justify-content: space-between
   padding-bottom: 90px
   padding-left: 5%
   padding-right: 5%
   padding-top: 90px
   margin: 0 auto
-  max-width: 1000px
+  max-width: 1190px
   > h2
     // the big heading
     color: $color-dark
@@ -700,7 +704,7 @@ form[representative]
     font-weight: 800
     line-height: 1.0756em
     margin: 0
-    width: 50%
+    width: 45%
     @media (max-width: $screen-tablet)
       margin-bottom: 0.5em
       width: 100%
@@ -712,8 +716,7 @@ form[representative]
     font-size: 1.3em
     line-height: 1.57em
     max-width: 620px
-    padding-left: 5%
-    width: 45%
+    width: 50%
     @media (max-width: $screen-tablet)
       padding-left: 0
       width: 100%
@@ -737,7 +740,6 @@ form[representative]
     font-size: 0.7em
     font-weight: 600
     height: 29px
-    // padding: 0.875rem 1.125rem
     text-decoration: none
     vertical-align: bottom
     &:hover
@@ -745,7 +747,7 @@ form[representative]
       border-color: $color-medium
       color: #fff
   div[lookup]
-    width: 50%
+    width: 45%
     @media (max-width: $screen-tablet)
       width: 100%
     input
@@ -754,6 +756,8 @@ form[representative]
       border-bottom: 1px solid $color-medium
       border-radius: 0
       color: $color-black
+      flex: 1
+      float: left
       font-size: 1.125rem
       padding: 0.25rem 0
       &::placeholder
@@ -767,18 +771,33 @@ form[representative]
         outline: 0
         &::placeholder
           opacity: 0 // hide placeholder when input is in focus
-    section
-      display: inline-block
+    section[inputs]
+      display: flex
+      float: left
+      justify-content: flex-start
+      margin-top: 22px
       vertical-align: middle
-      span
-        color: $color-grey
-        font-family: $sans-alt
-        font-size: 0.8em
-        font-weight: 600
-        height: 29px
+      width: 100%
+      input
+        flex: 1
+      section[buttons]
+        display: flex
+        float: left
+        justify-content: flex-end
+        vertical-align: middle
+        button
+          padding-left: 10px
+          padding-right: 10px
+        span
+          color: $color-grey
+          font-family: $sans-alt
+          font-size: 0.8em
+          font-weight: 600
+          margin-left: 10px
+          margin-right: 10px
+          transform: translateY(25%)
   div[suggestion]
-    padding-left: 5%
-    width: 45%
+    width: 50%
     @media (max-width: $screen-tablet)
       padding-left: 0
       width: 100%
