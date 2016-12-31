@@ -46,7 +46,8 @@ $screen-mobile: 31.25em;
 $screen-tablet: 56rem;
 $screen-desktop: 64rem;
 // $media-wide: 84rem;
-
+// *
+//   outline: 1px solid red !important
 
 html, body
   height: 100%
@@ -58,6 +59,7 @@ body
 
 main
   height: 100%
+  overflow-x: hidden
   overflow-y: scroll
 
 
@@ -542,6 +544,9 @@ article
       max-width: $width
       padding: 0
       text-align: right
+      @media (max-width: $width + 20)
+        margin-left: 20px
+        margin-right: 20px
       a
         display: inline-block
         margin: 0 4px
@@ -684,6 +689,8 @@ aside[feedback]
       border-color: $color-medium
       color: #fff
 
+.pac-container
+  width: 900px
 
 form[representative]
   display: flex
@@ -708,6 +715,7 @@ form[representative]
     margin: 0
     width: 45%
     @media (max-width: $screen-tablet)
+      font-size: 9.5vw
       margin-bottom: 0.5em
       width: 100%
   > span
@@ -785,11 +793,15 @@ form[representative]
       width: 100%
       input
         flex: 1
+        @media (max-width: 30em)
+          width: 50%
       section[buttons]
         display: flex
         float: left
         justify-content: flex-end
         vertical-align: middle
+        @media (max-width: 30em)
+          width: 50%
         button
           padding-left: 10px
           padding-right: 10px
@@ -823,7 +835,7 @@ form[representative]
     button[copy]
       &:before
         opacity: 1
-        position: absolute
+        position: fixed
         top: -200px
         left: 50%
         transform: translateX(-50%)
@@ -835,7 +847,7 @@ form[representative]
         text-align: center
         font-size: 14px
         line-height: 1.2
-        z-index: 999
+        z-index: 60
         transition: top .3s ease-in-out
         transition-delay: 1.5s;
       &[aria-label]:hover:before
