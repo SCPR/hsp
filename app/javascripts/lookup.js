@@ -307,6 +307,7 @@ var fn = {
             "<p>"+
                 "<span class='name'>" + name + "</span><br />" +
                 "<span class='office'>" + office + "</span><br />" +
+                "<hr>" +
                 "<span class='address'>" + address + "</span><br />" +
                 "<span class='phone'>" + phone + "</span><br />" +
                 "<span class='email'>" + email + "</span>" +

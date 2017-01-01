@@ -815,15 +815,31 @@ form[representative]
           transform: translateY(25%)
   output
     display: block
+    font-family: $sans
+    font-size: 14px
     .output-display
       display: flex
       flex-wrap: wrap
       justify-content: space-between
       .flex-item
+        line-height: 1.3em
         width: 45%
         word-wrap: break-word
-      // .flex-item
-      //   flex: 1
+        .name
+          font-weight: 500
+        hr
+          height: 2px
+          margin-bottom: 15px
+          margin-top: -1px
+        .phone
+          $phone-margin: 13px
+          display: inline-block
+          margin-bottom: $phone-margin
+          margin-top: $phone-margin
+        .email a
+          color: $color-medium
+          text-decoration: none
+          text-transform: lowercase
   div[suggestion]
     width: 50%
     @media (max-width: $screen-tablet)
