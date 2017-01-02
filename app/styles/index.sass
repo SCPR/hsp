@@ -60,7 +60,9 @@ body
 main
   height: 100%
   overflow-x: hidden
-  overflow-y: scroll
+  overflow-y: auto
+  position: relative
+  z-index: 100
 
 
 button
@@ -380,7 +382,7 @@ article
       margin-left: $gutter
       margin-right: $gutter
     button
-      background: url(../../images/ctrl_audio-play.svg) 53px 16px no-repeat $color-medium
+      background: url(../../images/ctrl_audio-play.svg) no-repeat center $color-medium
       border: 0
       display: block
       outline: 0
@@ -391,6 +393,7 @@ article
       width: 128px
     div[details]
       align-self: center
+      width: 100%
       span[title]
         color: $color-dark
         display: inline-block
@@ -398,6 +401,7 @@ article
         font-size: 1.125em
         font-weight: 400
         margin-right: 32px
+        width: 100%
       span[duration]
         color: $color-dark
         display: inline-block
