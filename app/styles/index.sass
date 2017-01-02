@@ -21,6 +21,9 @@
 // - Properties should be specified in alphabetical order.
 // - Similar to the markup, separate relatively high-level concepts with two spaces.
 // - Consider taking advantage of scope before using classes, so think about using the `>` "child combinator" and first/last child selectors.
+// - It's not 2007.  Just use pixels.  If you must use relative units, either use REM(not EM) or VW/VH.  See the following:
+//   - http://stackoverflow.com/a/11803273/3141240
+//   - https://benfrain.com/just-use-pixels/
 // - The order of definitions should be:
 //   1) variables
 //   2) properties
@@ -42,9 +45,15 @@ $color-black: #0F1620
 $color-grey: #6C7579
 $color-grey-light: #DEE4E5
 
-$screen-mobile: 31.25em;
-$screen-tablet: 56rem;
-$screen-desktop: 64rem;
+// $screen-mobile: 31.25em;
+// $screen-tablet: 56rem;
+// $screen-desktop: 64rem;
+
+$screen-mobile: 500px
+$screen-tablet: 896px
+$screen-desktop: 1024px
+
+$gutter: 20px
 // $media-wide: 84rem;
 // *
 //   outline: 1px solid red !important
@@ -241,7 +250,7 @@ header[fixed]
 
 div[share-story]
   list-style: none
-  margin: 2em auto
+  margin: 32px auto
   padding: 0
   text-align: center
   a
@@ -298,8 +307,6 @@ nav[drawer]
 
 
 article
-  // margin-bottom: 14em
-
 
   > *
     margin: 0 auto // Top-level elements should be centered.  This as close to a default as we will get.
@@ -312,17 +319,17 @@ article
     display: flex
     justify-content: center
     height: 100vh
-    margin-bottom: 4em
-    min-height: 48em
+    margin-bottom: 64px
+    min-height: 768px
     width: 100%
     h1
       // The caption for the hero image.
       align-self: flex-end
       color: white
       font-family: $serif-titling
-      font-size: 7.4375em
+      font-size: 119px
       font-weight: 800
-      line-height: 1.0756em
+      line-height: 128px
       margin-bottom: 0px
       margin-right: 0px
       margin-top: 0px
@@ -330,19 +337,19 @@ article
       padding: 48px
       text-align: center
       @media (max-width: 800px)
-        font-size: 5.0625em
-        line-height: 1.1728em
+        font-size: 81px
+        line-height: 99px
       @media (max-width: 600px)
-        font-size: 3.75em
-        line-height: 1.1666em
+        font-size: 60px
+        line-height: 70px
 
 
   > address
     // the publishedAt timestamp and byline
     color: #6C7579
     font-family: $sans
-    font-size: 1.125em
-    max-width: 37.5em
+    font-size: 18px
+    max-width: 675px
     text-align: center
     a
       color: #388B90
@@ -351,36 +358,34 @@ article
 
   > h2
     $width: 860px
-    $margin: 20px
     color: #0F1620
     display: block
     font-family: $sans
-    font-size: 1.7em
+    font-size: 27.2px
     font-weight: normal
-    line-height: 1.3em
+    line-height: 35.36px
     margin: 0 auto
     margin-top: 34px
     margin-bottom: 34px
     max-width: $width
     text-align: center
-    @media screen and (max-width: $width + $margin)
-      margin-left: $margin
-      margin-right: $margin
+    @media screen and (max-width: $width + $gutter)
+      margin-left: $gutter
+      margin-right: $gutter
 
 
   > aside[audio]
     // The audio play element inside the body of the story
-    $width: 53.75em
-    $gutter: 20px
+    $width: 860px
     background: $color-grey-light
     cursor: pointer
     display: flex
     margin-top: 35px
-    min-height: 4em
+    min-height: 64px
     max-width: $width
     padding-left: 146px
     position: relative
-    @media screen and (max-width: $width + 20)
+    @media screen and (max-width: $width + $gutter)
       margin-left: $gutter
       margin-right: $gutter
     button
@@ -400,7 +405,7 @@ article
         color: $color-dark
         display: inline-block
         font-family: $sans
-        font-size: 1.125em
+        font-size: 18px
         font-weight: 400
         margin-right: 32px
         width: 100%
@@ -408,7 +413,7 @@ article
         color: $color-dark
         display: inline-block
         font-family: $sans
-        font-size: 0.875em
+        font-size: 14px
         font-weight: 300
         text-transform: uppercase
 
@@ -416,56 +421,57 @@ article
   > section
     // A group of paragraphs and figures at the top-level in an article element.
     $width: 592px
-    $margin: 20px
     margin: 0 auto
     max-width: $width
-    @media screen and (max-width: $width + $margin)
-      margin-left: 20px
-      margin-right: 20px
+    @media screen and (max-width: $width + $gutter)
+      margin-left: $gutter
+      margin-right: $gutter
 
 
     > p
       color: #0F1620
       font-family: $sans
-      font-size: 1.125em
-      line-height: 1.7777777778em
+      font-size: 18px
+      line-height: 32px
       margin: 0 auto
-      margin-bottom: 2em
+      margin-bottom: 36px
       margin-top: 0
 
 
-    > figure // a figure inside a section becomes smaller and floats right
+    > figure 
+      // a figure inside a section becomes smaller and floats right
+      $margin: 32px
       display: block
       float: right
-      margin: 2em -13.125em 2em 2em
+      margin: $margin -210px $margin $margin
       max-width: 420px
-      @media screen and (max-width: 70em)
+      @media screen and (max-width: 1120px)
         // on small screens, don't float
         float: none
-        margin: 2em auto
+        margin: $margin auto
         max-width: 100%
       > *
         border: 0
         display: block
-        margin-bottom: 2em
+        margin-bottom: $margin
         max-width: 100%
       img
         margin: 0 auto
-        margin-bottom: 2em
+        margin-bottom: $margin
       figcaption
         color: #6C7579
         display: block
-        font-size: 0.9em
+        font-size: 14.4px
         font-style: normal
         font-weight: 500
-        line-height: 1.375em
+        line-height: 19.8px
         address
           color: #388B90
           display: inline
-          font-size: 0.95em
+          font-size: 13.7px
           font-style: normal
           font-weight: 400
-          line-height: 1.57em
+          line-height: 21.5px
           text-transform: uppercase
 
 
@@ -474,10 +480,10 @@ article
       li
         color: #212121
         font-family: $sans
-        font-size: 1.125em
-        line-height: 1.77em
+        font-size: 18px
+        line-height: 31.8px
         list-style: none
-        margin-bottom: 2em
+        margin-bottom: 36px
         margin-top: 0
         &:before
           background-color: #388B90
@@ -489,35 +495,24 @@ article
           transform: translate(-25px, 100%)
           width: 10px
 
-        h4
-          color: #575E68
-          font-family: $sans
-          font-size: 1.125em
-          line-height: 1.77em
-          margin-bottom: 0
-          text-transform: none
-
 
   > blockquote
     $width: 730px
-    $gutter: 20px
     border-left: 1px solid #D5E1F3
     color: #1F5154
     font-family: $serif
-    font-size: 1.875em
+    font-size: 24px
     font-weight: 300
-    line-height: 1.46em
+    line-height: 36px
     margin: 0 auto
     // margin-bottom: 2em
     // margin-left: 25%   // not sure why I had this
     max-width: $width
-    padding: 1em
+    padding: 24px
     position: relative
     @media (max-width: $width + $gutter)
       margin-right: $gutter
-    @media screen and (max-width: 61.8125em)
-      font-size: 1.5em
-      line-height: 1.5em
+    @media screen and (max-width: 989px)
       margin-left: 60px
       padding: 0 0 0 $gutter
     &:before
@@ -531,7 +526,7 @@ article
       height: 119px
       left: -119px
       top: 24px
-      @media screen and (max-width: 61.8125em)
+      @media screen and (max-width: 989px)
         background-size: 100% 100%
         height: 60px
         left: -67px
@@ -544,7 +539,7 @@ article
       // The group of share links that
       // appear directly after a blockquote
       list-style: none
-      margin: 2em auto
+      margin: 23px auto
       margin-bottom: 70px
       margin-top: -10px
       max-width: $width
@@ -560,51 +555,38 @@ article
 
   > figure
     $width: 860px
-    $margin: 20px
     display: block
     margin: 0 auto
-    max-width: 53.75em
-    padding: 2em 0
+    max-width: $width
+    padding: 32px 0
     &[graphic]
-      max-width: 37.5emf
-      @media (max-width: $width + $margin)
-        padding-left: $margin
-        padding-right: $margin
+      max-width: 600px
+      @media (max-width: $width + $gutter)
+        padding-left: $gutter
+        padding-right: $gutter
     > *
       border: 0
       display: block
-      margin-bottom: 2em
+      margin-bottom: 32px
       max-width: 100%
     h3
-      $width: 860px
-      $margin: 20px
       color: $color-black
       display: block
       font-family: $sans
-      font-size: 1.4em
+      font-size: 22.4px
       font-weight: 400
-      line-height: 1.8823529412em
+      line-height: 28px
       margin: 0 auto
       margin-top: 34px
       margin-bottom: 34px
       max-width: 860px
       text-align: center
-      @media (max-width: $width + $margin)
-        margin-left: $margin
-        margin-right: $margin
-    figcaption:first-child // A caption that appears beneath a heading, usually describing a graphic rather than a photo
-      color: #575E68
-      font-family: $sans
-      font-size: 1.125em
-      font-weight: 700
-      line-height: 2em
-      text-align: center
-      em
-        color: #254998
-        font-weight: 700
+      @media (max-width: $width + $gutter)
+        margin-left: $gutter
+        margin-right: $gutter
     img
       margin: 0 auto
-      margin-bottom: 2em
+      margin-bottom: 32px
       &[large]
         @media (max-width: $screen-mobile)
           display: none
@@ -616,20 +598,20 @@ article
     figcaption:last-child // The caption at the bottom of the figure
       color: #6C7579
       display: block
-      font-size: 0.9em
+      font-size: 14.4px
       font-style: normal
       font-weight: 500
-      line-height: 1.375em
+      line-height: 19.8px
       @media (max-width: $screen-mobile)
         margin-left: 20px
         margin-right: 20px
       address
         color: #388B90
         display: inline
-        font-size: 0.95em
+        font-size: 13.68px
         font-style: normal
         font-weight: 400
-        line-height: 1.57em
+        line-height: 21.5px
         text-transform: uppercase
 
 
@@ -682,21 +664,23 @@ aside[feedback]
     color: $color-medium
     cursor: pointer
     font-family: $sans-alt
-    font-size: 0.9375rem
+    font-size: 15px
     font-weight: 500
     padding: 14px 18px
     text-decoration: none
     text-transform: uppercase
     @media (max-width: 1190px)
-      font-size: 0.7rem
-      padding: 0.5rem 0.625rem
+      font-size: 11.2px
+      padding: 8px 10px
     &:hover
       background: $color-medium
       border-color: $color-medium
       color: #fff
 
+
 .pac-container
   width: 900px
+
 
 form[representative]
   display: flex
@@ -715,30 +699,32 @@ form[representative]
     color: $color-dark
     display: block
     font-family: $serif-titling
-    font-size: 3em
+    font-size: 48px
     font-weight: 800
-    line-height: 1.0756em
+    line-height: 51.6288px
     margin: 0
     width: 45%
     @media (max-width: $screen-tablet)
       font-size: 9.5vw
-      margin-bottom: 0.5em
+      line-height: 1.0756em
+      // ^^ needs to be EM because the font-size is relative
+      margin-bottom: 24px
       width: 100%
   > span
     // the main description
     align-self: center
     color: $color-black
     display: block
-    font-size: 1.3em
-    line-height: 1.57em
+    font-size: 20.8px
+    line-height: 32.6px
     max-width: 620px
     width: 50%
     @media (max-width: $screen-tablet)
       padding-left: 0
       width: 100%
   hr
-    margin-top: 2em
-    margin-bottom: 1.5em
+    margin-top: 32px
+    margin-bottom: 24px
     width: 100%
   h3
     color: $color-dark
@@ -753,7 +739,7 @@ form[representative]
     cursor: pointer
     display: inline-block
     font-family: $sans-alt
-    font-size: 0.7em
+    font-size: 11.2px
     font-weight: 600
     height: 29px
     text-decoration: none
@@ -778,12 +764,12 @@ form[representative]
       color: $color-black
       flex: 1
       float: left
-      font-size: 1.125rem
+      font-size: 18px
       padding: 0.25rem 0
       &::placeholder
         color: $color-grey
         font-family: $sans
-        font-size: 0.8em
+        font-size: 14.4px
         font-weight: 300
         font-style: italic
       &:focus
@@ -802,14 +788,14 @@ form[representative]
         font-family: $sans
         font-size: 16px
         font-weight: 300
-        @media (max-width: 30em)
+        @media (max-width: 480px)
           width: 50%
       section[buttons]
         display: flex
         float: left
         justify-content: flex-end
         vertical-align: middle
-        @media (max-width: 30em)
+        @media (max-width: 480px)
           width: 50%
         button
           padding-left: 10px
@@ -817,7 +803,7 @@ form[representative]
         span
           color: $color-grey
           font-family: $sans-alt
-          font-size: 0.8em
+          font-size: 12.8px
           font-weight: 600
           margin-left: 10px
           margin-right: 10px
@@ -831,7 +817,7 @@ form[representative]
       flex-wrap: wrap
       justify-content: space-between
       .flex-item
-        line-height: 1.3em
+        line-height: 18.2px
         width: 45%
         word-wrap: break-word
         @media (max-width: 560px)
@@ -858,7 +844,7 @@ form[representative]
       width: 100%
     section
       font-family: $sans
-      font-size: 1em
+      font-size: 16px
     button[copy]
       &:before
         opacity: 1
@@ -892,7 +878,7 @@ footer
   display: flex
   flex-direction: column
   justify-content: center
-  line-height: 1.57em
+  line-height: 25.12px
   min-height: 178px
   padding: 20px
   width: 100%
