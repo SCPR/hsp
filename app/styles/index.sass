@@ -162,7 +162,7 @@ header
       font-size: 20px
       font-family: $serif
       margin: 0
-      @media (max-width: $screen-mobile)
+      @media (max-width: 640px)
         display: none
     span[tagline]
       color: #fff
@@ -180,12 +180,12 @@ header
       font-family: $serif
       margin: 0
       visibility: hidden
-      @media (max-width: $screen-mobile)
+      @media (max-width: 640px)
         color: #fff
         font-size: 16px
         visibility: visible
       &:after
-        content: url('../../images/icon_caret-blue.svg')
+        content: url('../../images/icon_caret.svg')
         display: inline-block
         margin-left: 5px
   > label
@@ -226,13 +226,15 @@ header[fixed]
     h3
       color: $color-medium
       &[mobile]:after
-        content: url('../../images/icon_caret-blue.svg')
+        content: url('../../images/icon_caret-green.svg')
     span[tagline]
       color: $color-black
     span[pipe]
       background: #000
     label
       color: $color-medium
+      &:after
+        content: url('../../images/icon_caret-green.svg')
   label
     color: $color-black
 
@@ -896,7 +898,7 @@ footer
   width: 100%
   @media (max-width: 880px)
     align-items: flex-start
-  > div
+  > div[row]
     // this is a row/column
     display: flex
     font-family: $sans
@@ -928,4 +930,7 @@ footer
       span[title]
         font-weight: 500
         text-transform: uppercase
+      address
+        color: $color-medium
+        font-style: normal
 
