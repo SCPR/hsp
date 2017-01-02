@@ -42,6 +42,7 @@ $color-dark: #1F5154
 $color-medium: #388B90
 $color-light: #BBCACB
 $color-black: #0F1620
+$color-white: #FFF
 $color-grey: #6C7579
 $color-grey-light: #DEE4E5
 
@@ -81,7 +82,7 @@ button
 hr
   // a typical horizontal rule
   $width: 860px
-  background: #D0D0D0
+  background: $color-grey-light
   border: 0
   height: 1px
   &[fancy]
@@ -109,7 +110,7 @@ hr
       z-index: 2
     &:after
       content: ""
-      background: #fff
+      background: $color-white
       background-clip: content-box
       height: $height * 2
       left: 50%
@@ -123,7 +124,7 @@ hr
 
 
 header
-  color: #fff
+  color: $color-white
   display: block
   // flex
   display: flex
@@ -157,7 +158,7 @@ header
         @media (max-width: $screen-mobile)
           height: 16px
     span[pipe]
-      background: #fff
+      background: $color-white
       display: inline-block
       height: 20px
       margin: 0 8px
@@ -165,7 +166,7 @@ header
       width: 1px
       vertical-align: middle
     h3
-      color: #fff
+      color: $color-white
       display: inline-block
       font-weight: 600
       font-size: 20px
@@ -174,7 +175,7 @@ header
       @media (max-width: 640px)
         display: none
     span[tagline]
-      color: #fff
+      color: $color-white
       font-family: $sans
       font-size: 19px
       font-weight: 300
@@ -182,7 +183,7 @@ header
       @media (max-width: 1342px)
         display: none
     label
-      color: #fff
+      color: $color-white
       display: inline-block
       font-weight: 600
       font-size: 20px
@@ -190,7 +191,7 @@ header
       margin: 0
       visibility: hidden
       @media (max-width: 640px)
-        color: #fff
+        color: $color-white
         font-size: 16px
         visibility: visible
       &:after
@@ -203,7 +204,7 @@ header
     // using a checkbox with the :checked state
     background: 0 0
     border: 0
-    color: #fff
+    color: $color-white
     cursor: pointer
     font-family: $sans
     line-height: normal
@@ -222,7 +223,7 @@ header
 header[fixed]
   // This if for the version of the header
   // that slides down when you scroll.
-  background: #fff
+  background: $color-white
   position: fixed
   transform: translateY(-100%)
   transition: all .3s ease-in-out
@@ -239,7 +240,7 @@ header[fixed]
     span[tagline]
       color: $color-black
     span[pipe]
-      background: #000
+      background: $color-black
     label
       color: $color-medium
       &:after
@@ -270,7 +271,7 @@ nav[drawer]
   // The dropdown menu
   align-content: stretch
   align-items: stretch
-  background: #fff
+  background: $color-white
   box-shadow: rgba(0,0,0,.3) 0 0 10px
   display: flex
   flex-direction: row
@@ -289,7 +290,7 @@ nav[drawer]
     opacity: 1
     transform: translateY(0)
   header
-    background: #fff
+    background: $color-white
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3)
     div[branding]
       h3
@@ -297,7 +298,7 @@ nav[drawer]
       span[tagline]
         color: $color-black
       span[pipe]
-        background: #000
+        background: $color-black
     label
       color: $color-medium
   div[contents]
@@ -346,19 +347,19 @@ article
 
   > address
     // the publishedAt timestamp and byline
-    color: #6C7579
+    color: $color-grey
     font-family: $sans
     font-size: 18px
     max-width: 675px
     text-align: center
     a
-      color: #388B90
+      color: $color-medium
       text-decoration: none
 
 
   > h2
     $width: 860px
-    color: #0F1620
+    color: $color-black
     display: block
     font-family: $sans
     font-size: 27.2px
@@ -429,7 +430,7 @@ article
 
 
     > p
-      color: #0F1620
+      color: $color-black
       font-family: $sans
       font-size: 18px
       line-height: 32px
@@ -459,14 +460,14 @@ article
         margin: 0 auto
         margin-bottom: $margin
       figcaption
-        color: #6C7579
+        color: $color-grey
         display: block
         font-size: 14.4px
         font-style: normal
         font-weight: 500
         line-height: 19.8px
         address
-          color: #388B90
+          color: $color-medium
           display: inline
           font-size: 13.7px
           font-style: normal
@@ -476,17 +477,16 @@ article
 
 
     > ul
-      color: #333
+      color: $color-black
+      font-family: $sans
       li
-        color: #212121
-        font-family: $sans
         font-size: 18px
         line-height: 31.8px
         list-style: none
         margin-bottom: 36px
         margin-top: 0
         &:before
-          background-color: #388B90
+          background-color: $color-medium
           content: ""
           display: block
           float: left
@@ -498,8 +498,8 @@ article
 
   > blockquote
     $width: 730px
-    border-left: 1px solid #D5E1F3
-    color: #1F5154
+    border-left: 1px solid $color-grey-light
+    color: $color-dark
     font-family: $serif
     font-size: 24px
     font-weight: 300
@@ -519,7 +519,6 @@ article
       background: url('../../images/icon_pullquote.svg') left top no-repeat
       content: ""
       display: block
-      // fill: #bbcacb // the color of the svg
       filter: grayscale(20%)
       position: absolute
       width: 134px
@@ -596,7 +595,7 @@ article
           display: block
 
     figcaption:last-child // The caption at the bottom of the figure
-      color: #6C7579
+      color: $color-grey
       display: block
       font-size: 14.4px
       font-style: normal
@@ -606,7 +605,7 @@ article
         margin-left: 20px
         margin-right: 20px
       address
-        color: #388B90
+        color: $color-medium
         display: inline
         font-size: 13.68px
         font-style: normal
@@ -624,7 +623,7 @@ aside[feedback]
   $feedback-width: 250px
   $feedback-left: -($feedback-width + ($feedback-padding * 2) + ($feedback-border-width * 2))
   align-items: center
-  background-color: #fff
+  background-color: $color-white
   border-color: $color-light
   border-left-style: none
   border-right-style: none
@@ -675,7 +674,7 @@ aside[feedback]
     &:hover
       background: $color-medium
       border-color: $color-medium
-      color: #fff
+      color: $color-white
 
 
 .pac-container
@@ -747,7 +746,7 @@ form[representative]
     &:hover
       background: $color-medium
       border-color: $color-medium
-      color: #fff
+      color: $color-white
     &:focus
       outline: none
     &:active
@@ -853,9 +852,9 @@ form[representative]
         left: 50%
         transform: translateX(-50%)
         padding: 7px
-        background-color: #000
+        background-color: $color-black
         background-color: hsla(0, 0%, 20%, 0.9)
-        color: #fff
+        color: $color-white
         content: attr(aria-label)
         text-align: center
         font-size: 14px
