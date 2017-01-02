@@ -10,7 +10,9 @@ const gulp         = require('gulp'),
       md5          = require('gulp-md5-plus'),
       clean        = require('gulp-clean'),
       cleanCSS     = require('gulp-clean-css'),
-      uglify       = require('gulp-uglify');
+      uglify       = require('gulp-uglify'),
+      del          = require('del'),
+      runSequence  = require('run-sequence');
 
 
 gulp.task('build:sass', () => {
@@ -46,7 +48,7 @@ gulp.task('serve', ['build:sass', 'build:js'], () => {
 
 gulp.task('default', ['serve']);
 
-gulp.task('compile:html', () => {
+gulp.task('compile:html', (cb) => {
   return gulp.src('./index.html')
     .pipe(gulp.dest('./build')); 
 })
@@ -65,9 +67,16 @@ gulp.task('compile:js', () => {
     .pipe(gulp.dest('./build'));
 });
 
-gulp.task('clean', () => {
-  return gulp.src('./build', {read: false})
-    .pipe(clean({force: true}));
+gulp.task('compile:images', () => {
+  return gulp.src(['./images/**/*'])
+    .pipe(md5(10, './build/index.html'))
+    .pipe(gulp.dest('./build/images'));
 });
 
-gulp.task('compile', ['build', 'clean', 'compile:html', 'compile:css', 'compile:js']);
+gulp.task('clean', () => {
+  return del(['./build']);
+});
+
+gulp.task('compile', (cb) => {
+  return runSequence('clean', 'build', 'compile:html', 'compile:css', 'compile:js', 'compile:images', cb)
+});
