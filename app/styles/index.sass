@@ -46,18 +46,16 @@ $color-white: #FFF
 $color-grey: #6C7579
 $color-grey-light: #DEE4E5
 
-// $screen-mobile: 31.25em;
-// $screen-tablet: 56rem;
-// $screen-desktop: 64rem;
-
 $screen-mobile: 500px
 $screen-tablet: 896px
 $screen-desktop: 1024px
 
 $gutter: 20px
-// $media-wide: 84rem;
+
 // *
 //   outline: 1px solid red !important
+//
+// ^^ sometimes helpful in development, so I'm leaving it here
 
 html, body
   height: 100%
@@ -85,6 +83,7 @@ hr
   background: $color-grey-light
   border: 0
   height: 1px
+  max-width: 860px
   &[fancy]
     // a "fancy" horizontal rule
     $height: 2px
@@ -94,7 +93,6 @@ hr
     height: $height
     margin-bottom: 57px
     margin-top: 130px
-    max-width: $width
     @media screen and (max-width: $width)
       margin-left: 20px
       margin-right: 20px
@@ -119,9 +117,10 @@ hr
       width: $diamond-size + ($diamond-border * 4)
       z-index: 1
   &[thick]
-    height: 3px
     background: $color-medium
-
+    height: 3px
+    max-width: 100%
+    
 
 header
   color: $color-white
@@ -386,7 +385,7 @@ article
     max-width: $width
     padding-left: 146px
     position: relative
-    @media screen and (max-width: $width + $gutter)
+    @media screen and (max-width: 1056px)
       margin-left: $gutter
       margin-right: $gutter
     button
@@ -424,12 +423,13 @@ article
     $width: 592px
     margin: 0 auto
     max-width: $width
-    @media screen and (max-width: $width + $gutter)
+    @media screen and (max-width: $width + ($gutter * 2))
       margin-left: $gutter
       margin-right: $gutter
 
 
     > p
+      // The main paragraphs.
       color: $color-black
       font-family: $sans
       font-size: 18px
@@ -599,7 +599,7 @@ article
       font-style: normal
       font-weight: 500
       line-height: 19.8px
-      @media (max-width: $screen-mobile)
+      @media (max-width: $width + ($gutter * 2))
         margin-left: 20px
         margin-right: 20px
       address
