@@ -155,7 +155,11 @@ module.exports = (scope) => {
         _render: function(){
             fn.identifyBoundaries();
             if (fn._data.reps.count > 4){
-                console.log("whoa");
+                fn.displayAlert(
+                    "red",
+                    "Sorry we were unable to complete your search.",
+                    "We can't determine your representatives from your location. Perhaps you are not in California?"
+                );
             } else if (fn._data.reps.count === 4){
                 fn._data.proceed = true;
                 fn.gatherData();
@@ -256,7 +260,6 @@ module.exports = (scope) => {
         },
 
         compileDetails: function(rep){
-            console.log(rep);
             var mailto = fn.generateMailTo(rep.email, "homeless@scpr.org");
             if (rep.short_party != null || rep.short_party != undefined){
                 var title = rep.short_party + "&mdash;" + rep.district_name;
