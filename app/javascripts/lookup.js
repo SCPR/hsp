@@ -21,7 +21,6 @@ module.exports = (scope) => {
             fn._data.wherewolf.lac = Wherewolf();
             fn._data.wherewolf.sen = Wherewolf();
             fn._data.wherewolf.asem = Wherewolf();
-
             fn._events();
             fn._loaddata();
         },
@@ -29,7 +28,7 @@ module.exports = (scope) => {
         _events: function(){
 
             // trigger to address search
-            $("input[id='addressSearch']").focus(function(event){
+            $("input[id='addressSearch']").focus(function(){
                 fn._searchme();
             });
 
