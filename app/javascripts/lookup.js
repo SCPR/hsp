@@ -60,7 +60,6 @@ module.exports = (scope) => {
         },
 
         _reset: function(){
-
             $("#output").empty();
             $("input[id='addressSearch']").val("");
             $("input[id='latitudeSearch']").val("");
@@ -129,12 +128,9 @@ module.exports = (scope) => {
         },
 
         _navigate: function(){
-
             $("#output").empty();
-
             var latitude = $("input[id='latitudeSearch']").val();
             var longitude = $("input[id='longitudeSearch']").val();
-
             fn._data.coords = {
                 "lng": parseFloat(longitude),
                 "lat": parseFloat(latitude),
