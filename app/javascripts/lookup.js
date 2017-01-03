@@ -239,6 +239,7 @@ module.exports = (scope) => {
         },
 
         gatherData: function(){
+            $("#progress-message").html("Finding your representatives");
             jQuery.getJSON(fn._s3url + "state_rep_data.json", function(data){
                 fn._data.reps.sen.details = _.where(data, {
                     chamber: "senate",
