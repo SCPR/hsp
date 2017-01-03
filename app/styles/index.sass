@@ -666,10 +666,10 @@ article
 
 aside[feedback]
   $feedback-border-width: 1px
-  $feedback-height: 115px
+  $feedback-height: 180px
   $feedback-padding: 10px
   $feedback-position: fixed
-  $feedback-top: 78.5%
+  $feedback-top: 71.5%
   $feedback-width: 250px
   $feedback-left: -($feedback-width + ($feedback-padding * 2) + ($feedback-border-width * 2))
   align-items: center
@@ -679,9 +679,11 @@ aside[feedback]
   border-right-style: none
   border-style: solid
   border-width: $feedback-border-width
+  border-left: 0px
+  border-right: 0px
   display: flex
   flex-direction: column
-  height: 115px
+  // height: $feedback-height
   justify-content: center
   left: $feedback-left
   padding: $feedback-padding
@@ -694,16 +696,25 @@ aside[feedback]
   @media (max-width: 1190px)
     height: initial
     left: 0
+    margin-left: $gutter
+    margin-right: $gutter
     position: relative
-    // width: 100%
+    width: 100%
   &.visible
     left: 0
-  div[description]
-    color: $color-black
+  h4
+    color: $color-grey
     font-family: $sans
-    font-size: 14px
+    font-size: 17px
+    font-weight: 500
+    margin-bottom: 5px
+  p
+    color: $color-grey
+    font-family: $sans
+    font-size: 15px
+    margin-top: 0px
     margin-bottom: 15px
-    width: 100%
+    max-width: 220px
     word-wrap: break-word
     @media (max-width: 1190px)
       margin-bottom: 10px
@@ -713,8 +724,10 @@ aside[feedback]
     color: $color-medium
     cursor: pointer
     font-family: $sans-alt
-    font-size: 15px
-    font-weight: 500
+    font-size: 13px
+    font-weight: 600
+    margin-bottom: 20px
+    max-width: 160px
     padding: 14px 18px
     text-decoration: none
     text-transform: uppercase
