@@ -21,7 +21,6 @@ module.exports = (scope) => {
             fn._data.wherewolf.lac = Wherewolf();
             fn._data.wherewolf.sen = Wherewolf();
             fn._data.wherewolf.asem = Wherewolf();
-
             fn._events();
             fn._loaddata();
         },
@@ -29,7 +28,7 @@ module.exports = (scope) => {
         _events: function(){
 
             // trigger to address search
-            $("input[id='addressSearch']").focus(function(event){
+            $("input[id='addressSearch']").focus(function(){
                 fn._searchme();
             });
 
@@ -61,7 +60,6 @@ module.exports = (scope) => {
         },
 
         _reset: function(){
-
             $("#output").empty();
             $("input[id='addressSearch']").val("");
             $("input[id='latitudeSearch']").val("");
@@ -130,25 +128,34 @@ module.exports = (scope) => {
         },
 
         _navigate: function(){
-
             $("#output").empty();
-
             var latitude = $("input[id='latitudeSearch']").val();
             var longitude = $("input[id='longitudeSearch']").val();
-
             fn._data.coords = {
                 "lng": parseFloat(longitude),
                 "lat": parseFloat(latitude),
             };
-
+            $("#progress-message").html("Validating your location");
             var checkExist = setInterval(function(){
-                var lngCheck = _.has(fn._data.coords, "lng");
-                var latCheck = _.has(fn._data.coords, "lat");
-                if (lngCheck === false && latCheck === false){
+                var lngNull = _.has(fn._data.coords, "lng");
+                var latNull = _.has(fn._data.coords, "lat");
+                var lngNaN = _.isNaN(fn._data.coords.lng);
+                var latNaN = _.isNaN(fn._data.coords.lat);
+                if (lngNull === false && latNull === false){
+                    clearInterval(checkExist);
+                    $(".data-loading").addClass("hidden");
                     fn.displayAlert(
                         "#388B90",
-                        "Sorry. " + error.message,
+                        "Sorry \n",
                         "An attempt to locate your position timed out. Please refresh the page and try again."
+                    );
+                } else if (lngNaN === true && latNaN === true){
+                    clearInterval(checkExist);
+                    $(".data-loading").addClass("hidden");
+                    fn.displayAlert(
+                        "#388B90",
+                        "Sorry \n",
+                        "You may have entered an incomplete address. Please enter your complete address."
                     );
                 } else {
                     clearInterval(checkExist);
@@ -160,7 +167,11 @@ module.exports = (scope) => {
         _render: function(){
             fn.identifyBoundaries();
             if (fn._data.reps.count > 4){
-                console.log("whoa");
+                fn.displayAlert(
+                    "red",
+                    "Sorry we were unable to complete your search.",
+                    "We can't determine your representatives from your location. Perhaps you are not in California?"
+                );
             } else if (fn._data.reps.count === 4){
                 fn._data.proceed = true;
                 fn.gatherData();
@@ -228,6 +239,7 @@ module.exports = (scope) => {
         },
 
         gatherData: function(){
+            $("#progress-message").html("Finding your representatives");
             jQuery.getJSON(fn._s3url + "state_rep_data.json", function(data){
                 fn._data.reps.sen.details = _.where(data, {
                     chamber: "senate",
@@ -261,7 +273,6 @@ module.exports = (scope) => {
         },
 
         compileDetails: function(rep){
-            console.log(rep);
             var mailto = fn.generateMailTo(rep.email, "homeless@scpr.org");
             if (rep.short_party != null || rep.short_party != undefined){
                 var title = rep.short_party + "&mdash;" + rep.district_name;
@@ -283,7 +294,7 @@ module.exports = (scope) => {
 
         generateMailTo: function(email, cc){
             var subject = "Homeless%20Families";
-            var body = "I'm concerned about growing family homelessness in California.\n\nPublic radio KPCC is reporting that:\n\n&#8226; Nearly 60,000 families called L.A. County's 2011 line for help finding emergency shelter in 2015. And women and children surpassed the number of single men seeking refuge at Los Angeles' Union Rescue Mission on Skid Row last year&mdash;the first time that's happened in its 125-year history.\n\n&#8226; Since 2010, eight infants identified by Los Angles County officials as homeless died sleeping in conditions experts call unsuitable, but were the families only option.\n\n&#8226; Harvest House, in Venice, can take in about two dozen pregnant women at a time. Workers there estimate they had to turn away about 500 pregnant women last year.\n\n&#8226; Orange and San Bernardino county school officials report the number of students without stable housing tripled over the past decade, to 26,064 in Orange County public schools and 35,165 in San Bernardino. Los Angeles public schools have identified 54,916 homeless students.\n\nWhat are you doing to reduce the number of children and families in my community who become homeless?";
+            var body = "I'm concerned about growing family homelessness in California.\n\nPublic radio KPCC is reporting that:\n\n&#8226; Nearly 60,000 families called L.A. County's 211 line for help finding emergency shelter in 2015. And women and children surpassed the number of single men seeking refuge at Los Angeles' Union Rescue Mission on Skid Row last year&mdash;the first time that's happened in its 125-year history.\n\n&#8226; Since 2010, eight infants identified by Los Angles County officials as homeless died sleeping in conditions experts call unsuitable, but were the families only option.\n\n&#8226; Harvest House, in Venice, can take in about two dozen pregnant women at a time. Workers there estimate they had to turn away about 500 pregnant women last year.\n\n&#8226; Orange and San Bernardino county school officials report the number of students without stable housing tripled over the past decade, to 26,064 in Orange County public schools and 35,165 in San Bernardino. Los Angeles public schools have identified 54,916 homeless students.\n\nWhat are you doing to reduce the number of children and families in my community who become homeless?";
             return "mailto:" + email + "?cc=" + cc + "&subject=" + subject + "&body=" + escape(body);
         },
 
