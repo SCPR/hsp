@@ -135,15 +135,27 @@ module.exports = (scope) => {
                 "lng": parseFloat(longitude),
                 "lat": parseFloat(latitude),
             };
-
+            $("#progress-message").html("Validating your location");
             var checkExist = setInterval(function(){
-                var lngCheck = _.has(fn._data.coords, "lng");
-                var latCheck = _.has(fn._data.coords, "lat");
-                if (lngCheck === false && latCheck === false){
+                var lngNull = _.has(fn._data.coords, "lng");
+                var latNull = _.has(fn._data.coords, "lat");
+                var lngNaN = _.isNaN(fn._data.coords.lng);
+                var latNaN = _.isNaN(fn._data.coords.lat);
+                if (lngNull === false && latNull === false){
+                    clearInterval(checkExist);
+                    $(".data-loading").addClass("hidden");
                     fn.displayAlert(
                         "#388B90",
-                        "Sorry. " + error.message,
+                        "Sorry \n",
                         "An attempt to locate your position timed out. Please refresh the page and try again."
+                    );
+                } else if (lngNaN === true && latNaN === true){
+                    clearInterval(checkExist);
+                    $(".data-loading").addClass("hidden");
+                    fn.displayAlert(
+                        "#388B90",
+                        "Sorry \n",
+                        "You may have entered an incomplete address. Please enter your complete address."
                     );
                 } else {
                     clearInterval(checkExist);
