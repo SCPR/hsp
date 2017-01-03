@@ -44,6 +44,7 @@ $color-light: #BBCACB
 $color-black: #0F1620
 $color-white: #FFF
 $color-grey: #6C7579
+$color-grey-medium: #bcbebd
 $color-grey-light: #DEE4E5
 
 $screen-mobile: 500px
@@ -494,6 +495,57 @@ article
           position: absolute
           transform: translate(-25px, 100%)
           width: 10px
+
+    > aside[call-to-action]
+      $margin: 32px
+      border-bottom: 1px solid $color-grey-medium
+      border-top: 3px solid $color-medium
+      display: block
+      float: right
+      margin: $margin -210px $margin $margin
+      max-width: 420px
+      @media screen and (max-width: 1120px)
+        // on small screens, don't float
+        float: none
+        margin: $margin auto
+        max-width: 100%
+      h4
+        color: $color-grey
+        font-family: $sans
+        font-weight: 500
+        margin-bottom: 0
+        margin-top: 30px
+        text-transform: uppercase
+      h3
+        color: $color-dark
+        font-family: $serif
+        font-size: 26px
+        font-weight: 600
+        line-height: 1.4
+        margin-top: 0
+      ul
+        list-style: none
+        padding-left: 0
+        li
+          margin-bottom: 20px
+          div[title]
+            color: $color-black
+            font-family: $sans
+            font-size: 18px
+            font-weight: 600
+          p
+            color: $color-grey
+            font-family: $sans
+            font-size: 15px
+            font-weight: 400
+            margin-bottom: 8px
+          a
+            color: $color-medium
+            font-size: 15px
+            text-decoration: none
+            &:hover
+              text-decoration: underline
+
 
 
   > blockquote

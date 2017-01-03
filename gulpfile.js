@@ -80,3 +80,4 @@ gulp.task('clean', () => {
 gulp.task('compile', (cb) => {
   return runSequence('clean', 'build', 'compile:html', 'compile:css', 'compile:js', 'compile:images', cb)
 });
+
