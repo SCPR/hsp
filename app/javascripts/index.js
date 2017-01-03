@@ -5,5 +5,6 @@ require('./header');
 require('./player');
 require('./feedback');
 require('./geocomplete');
-require('./lookup');
+require('./lookup')('#page-form');
+require('./lookup')('#draw-form');
 require('./copy-message');
