@@ -378,13 +378,15 @@ article
   > aside[audio]
     // The audio play element inside the body of the story
     $width: 860px
+    $padding-left: 146px
     background: $color-grey-light
     cursor: pointer
     display: flex
+    margin-bottom: 96px
     margin-top: 35px
     min-height: 64px
-    max-width: $width
-    padding-left: 146px
+    max-width: $width - $padding-left
+    padding-left: $padding-left
     position: relative
     @media screen and (max-width: 1056px)
       margin-left: $gutter
@@ -417,6 +419,8 @@ article
         font-size: 14px
         font-weight: 300
         text-transform: uppercase
+    &[story-audio-2]
+      margin-top: 96px
 
 
   > section
