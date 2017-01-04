@@ -24,7 +24,7 @@ gulp.task('build:sass', () => {
 });
 
 gulp.task('build:js', () => {
-  return browserify('./app/javascripts/index.js', {debug: true, extensions: ['.js']})
+  return browserify('./app/scripts/index.js', {debug: true, extensions: ['.js']})
     // .transform('browserify-shim')
     .transform('brfs')
     .transform('babelify', {presets: ['es2015']})
@@ -41,7 +41,7 @@ gulp.task('serve', ['build:sass', 'build:js'], () => {
     server: "./"
   });
   gulp.watch('./app/styles/*.sass', ['build:sass']);
-  gulp.watch('./app/javascripts/*.js', ['build:js']);
+  gulp.watch('./app/scripts/*.js', ['build:js']);
   gulp.watch('./app/images/*.svg').on('change', browserSync.reload);
   gulp.watch('./index.html').on('change', browserSync.reload);
 })
