@@ -7,3 +7,4 @@ require('./feedback');
 require('./geocomplete');
 require('./lookup')('#page-form');
 require('./lookup')('#draw-form');
+require('./lookup-link');
