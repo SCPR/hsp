@@ -519,6 +519,7 @@ article
           transform: translate(-25px, 100%)
           width: 10px
 
+
     > aside[call-to-action]
       $margin: 32px
       border-bottom: 1px solid $color-grey-medium
@@ -532,21 +533,48 @@ article
         float: none
         margin: $margin auto
         max-width: 100%
-      h4
+      > h4
         color: $color-grey
         font-family: $sans
         font-weight: 500
         margin-bottom: 0
         margin-top: 30px
         text-transform: uppercase
-      h3
+      > h3
         color: $color-dark
         font-family: $serif
         font-size: 26px
         font-weight: 600
         line-height: 1.4
         margin-top: 0
-      ul
+      > p
+        font-family: $sans
+        font-size: 16px
+      > label
+        background: transparent
+        border: 1px solid $color-medium
+        color: $color-medium
+        cursor: pointer
+        display: inline-block
+        font-family: $sans-alt
+        font-size: 13px
+        font-weight: 400
+        margin-bottom: 31px
+        padding-bottom: 10px
+        padding-left: 10px
+        padding-right: 10px
+        padding-top: 10px
+        text-decoration: none
+        vertical-align: bottom
+        &:hover
+          background: $color-medium
+          border-color: $color-medium
+          color: $color-white
+        &:focus
+          outline: none
+        &:active
+          background: $color-dark
+      > ul
         list-style: none
         padding-left: 0
         li
@@ -568,7 +596,6 @@ article
             text-decoration: none
             &:hover
               text-decoration: underline
-
 
 
   > blockquote
