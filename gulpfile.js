@@ -74,7 +74,7 @@ gulp.task('compile:images', () => {
 });
 
 gulp.task('clean', () => {
-  return del(['./build']);
+  return del(['./build/**/*', '!./build/.git/']);
 });
 
 gulp.task('compile', (cb) => {
