@@ -273,7 +273,7 @@ module.exports = (scope) => {
         },
 
         compileDetails: function(rep){
-            var mailto = fn.generateMailTo(rep.email, "homeless@scpr.org");
+            var mailto = fn.generateMailTo(rep.rep_name, rep.email, "homeless@scpr.org");
             if (rep.short_party != null || rep.short_party != undefined){
                 var title = rep.short_party + "&mdash;" + rep.district_name;
             } else {
@@ -292,9 +292,9 @@ module.exports = (scope) => {
             fn.displayOfficials("#output", rep_deets);
         },
 
-        generateMailTo: function(email, cc){
+        generateMailTo: function(name, email, cc){
             var subject = "Homeless%20Families";
-            var body = "I'm concerned about growing family homelessness in California.\n\nPublic radio KPCC is reporting that:\n\n&#8226; Nearly 60,000 families called L.A. County's 211 line for help finding emergency shelter in 2015. And women and children surpassed the number of single men seeking refuge at Los Angeles' Union Rescue Mission on Skid Row last year&mdash;the first time that's happened in its 125-year history.\n\n&#8226; Since 2010, eight infants identified by Los Angles County officials as homeless died sleeping in conditions experts call unsuitable, but were the families only option.\n\n&#8226; Harvest House, in Venice, can take in about two dozen pregnant women at a time. Workers there estimate they had to turn away about 500 pregnant women last year.\n\n&#8226; Orange and San Bernardino county school officials report the number of students without stable housing tripled over the past decade, to 26,064 in Orange County public schools and 35,165 in San Bernardino. Los Angeles public schools have identified 54,916 homeless students.\n\nWhat are you doing to reduce the number of children and families in my community who become homeless?";
+            var body = "Dear " + name + ":\n\nI'm concerned about growing family homelessness in California.\n\nPublic radio KPCC is reporting that:\n\n- Nearly 60,000 families called L.A. County's 211 line for help finding emergency shelter in 2015. And women and children surpassed the number of single men seeking refuge at Los Angeles' Union Rescue Mission on Skid Row last year -- the first time that's happened in its 125-year history.\n\n- Since 2010, eight infants identified by Los Angles County officials as homeless died sleeping in conditions experts call unsuitable, but were the families only option.\n\n- Harvest Home, in Venice, can take in about two dozen pregnant women at a time. Workers there estimate they had to turn away about 500 pregnant women last year.\n\n- Orange and San Bernardino county school officials report the number of students without stable housing tripled over the past decade, to 26,064 in Orange County public schools and 35,165 in San Bernardino. Los Angeles public schools have identified 54,916 homeless students.\n\nWhat are you doing to reduce the number of children and families in my community who become homeless?";
             return "mailto:" + email + "?cc=" + cc + "&subject=" + subject + "&body=" + escape(body);
         },
 
