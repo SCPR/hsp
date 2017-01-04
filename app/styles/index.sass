@@ -346,29 +346,36 @@ article
       align-self: flex-end
       color: white
       font-family: $serif-titling
-      font-size: 90px
-      font-size: 6.5vw
+      font-size: 60px
+      // font-size: 6vw
       font-weight: 800
-      line-height: 128px
-      line-height: 8.9vw
+      line-height: 1.35
+      // line-height: 8.9vw
       margin-bottom: 0px
       margin-right: 0px
       margin-top: 0px
-      max-width: 1024px
+      max-width: 900px
       padding: 48px
       text-align: center
+      @media (max-width: 950px)
+        padding-left: $gutter
+        padding-right: $gutter
+        &[lg]
+          display: none
       @media (max-width: 800px)
-        font-size: 81px
-        font-size: 7.5vw
-        line-height: 99px
-        line-height: 8.9vw
-      @media (max-width: 600px)
         font-size: 60px
-        font-size: 13vw
-        line-height: 70px
-        line-height: 15vw
-        // [text-break]
-        //   display: 
+        font-size: 7.5vw
+      @media (max-width: 680px)
+        font-size: 50px
+        font-size: 8vw
+      @media (max-width: 480px)
+        font-size: 30px
+        font-size: 8vw
+      &[md]
+        display: none
+        @media (max-width: 950px)
+          display: inline
+
 
   > address
     // the publishedAt timestamp and byline
