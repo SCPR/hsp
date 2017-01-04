@@ -8,16 +8,18 @@ let os = new OnScreen({
   container: 'main'
 });
 
+let hero        = $('.hero').first();
 let headerFixed = $('header[fixed]');
+let tagline     = headerFixed.find('span[tagline]');
 
-os.on('enter', 'header[top]', () => {
-  headerFixed.removeClass('active');
+os.on('enter', '#headline-sm-breakpoint', () => {
+  tagline.removeClass('active');
 });
 
-os.on('leave', 'header[top]', () => {
-  headerFixed.addClass('active');
+os.on('leave', '#headline-sm-breakpoint', () => {
+  tagline.addClass('active');
 });
 
-if($('main').scrollTop() > $('header[top]').height()){
-  headerFixed.addClass('active');
+if($('main').scrollTop() > hero.height()){
+  tagline.addClass('active');
 }

@@ -77,6 +77,9 @@ main
 button
   cursor: pointer
 
+span[text-break]
+  display: inline-block
+
 
 hr
   // a typical horizontal rule
@@ -220,18 +223,20 @@ header
       right: 18px
 
 
+header[top]
+  box-shadow: inset 0px 64px 71px -24px rgba(0,0,0,0.39);
+
+
 header[fixed]
   // This if for the version of the header
   // that slides down when you scroll.
   background: $color-white
   position: fixed
-  transform: translateY(-100%)
+  // transform: translateY(-100%)
   transition: all .3s ease-in-out
   z-index: 50
-  &.active
-    box-shadow: 0 0 10px rgba(0,0,0,.3)
-    transform: translateY(0)
-    opacity: 1
+  box-shadow: 0 0 10px rgba(0,0,0,.3)
+  opacity: 1
   div[branding]
     h3
       color: $color-medium
@@ -247,6 +252,11 @@ header[fixed]
         content: url('../../images/icon_caret-green.svg')
   label
     color: $color-black
+  span[tagline]
+    opacity: 0
+    transition: all .3s ease-in-out
+    &.active
+      opacity: 1
 
 
 div[share-story]
@@ -317,10 +327,12 @@ article
     align-items: center
     background: url('http://a.scpr.org/i/b10ec0efebe4392a9bcbd2e99a70f0c3/148452-full.jpg') no-repeat center top
     background-size: cover
+    box-shadow: inset 0px -411px 300px -38px rgba(0,0,0,0.45)
     display: flex
     justify-content: center
     height: 100vh
     margin-bottom: 64px
+    margin-top: 64px
     min-height: 768px
     width: 100%
     h1
@@ -328,22 +340,29 @@ article
       align-self: flex-end
       color: white
       font-family: $serif-titling
-      font-size: 119px
+      font-size: 90px
+      font-size: 6.5vw
       font-weight: 800
       line-height: 128px
+      line-height: 8.9vw
       margin-bottom: 0px
       margin-right: 0px
       margin-top: 0px
-      max-width: 1040px
+      max-width: 1024px
       padding: 48px
       text-align: center
       @media (max-width: 800px)
         font-size: 81px
+        font-size: 7.5vw
         line-height: 99px
+        line-height: 8.9vw
       @media (max-width: 600px)
         font-size: 60px
+        font-size: 13vw
         line-height: 70px
-
+        line-height: 15vw
+        // [text-break]
+        //   display: 
 
   > address
     // the publishedAt timestamp and byline
@@ -693,7 +712,7 @@ aside[feedback]
   padding: $feedback-padding
   position: $feedback-position
   text-align: center
-  transition: all .3s ease-in-out
+  transition: all .6s ease-in-out
   top: $feedback-top
   width: $feedback-width
   z-index: 49
@@ -910,8 +929,25 @@ form[representative]
       padding-left: 0
       width: 100%
     section
-      font-family: $sans
-      font-size: 16px
+      ul
+        color: $color-black
+        font-family: $sans
+        li
+          font-size: 18px
+          line-height: 31.8px
+          list-style: none
+          margin-bottom: 36px
+          margin-top: 0
+          &:before
+            background-color: $color-medium
+            content: ""
+            display: block
+            float: left
+            height: 10px
+            margin-right: -10px
+            position: relative
+            transform: translate(-25px, 100%)
+            width: 10px
     button[copy]
       &:before
         opacity: 1
