@@ -313,6 +313,7 @@ nav[drawer]
       color: $color-medium
   div[contents]
     height: 100%
+    margin-top: 60px
     width: 100%
     overflow-y: auto // allows scrolling
 
@@ -716,9 +717,9 @@ aside[feedback]
   border-width: $feedback-border-width
   border-left: 0px
   border-right: 0px
+  box-sizing: border-box
   display: flex
   flex-direction: column
-  // height: $feedback-height
   justify-content: center
   left: $feedback-left
   padding: $feedback-padding
@@ -731,10 +732,10 @@ aside[feedback]
   @media (max-width: 1190px)
     height: initial
     left: 0
-    margin-left: $gutter
-    margin-right: $gutter
+    margin: 0 auto
+    margin-top: 100px
     position: relative
-    width: 100%
+    width: 90%
   &.visible
     left: 0
   h4
@@ -753,6 +754,7 @@ aside[feedback]
     word-wrap: break-word
     @media (max-width: 1190px)
       margin-bottom: 10px
+      max-width: initial
   a
     background: transparent
     border: 1px solid $color-medium
@@ -768,6 +770,7 @@ aside[feedback]
     text-transform: uppercase
     @media (max-width: 1190px)
       font-size: 11.2px
+      max-width: initial
       padding: 8px 10px
     &:hover
       background: $color-medium
