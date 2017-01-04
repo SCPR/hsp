@@ -69,7 +69,7 @@ gulp.task('compile:js', () => {
 
 gulp.task('compile:images', () => {
   return gulp.src(['./images/**/*'])
-    .pipe(md5(10, './build/index.html'))
+    .pipe(md5(10, ['./build/index.html', './build/index_*.css']))
     .pipe(gulp.dest('./build/images'));
 });
 
