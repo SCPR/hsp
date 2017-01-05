@@ -1,5 +1,5 @@
 node_modules/
 build/
-index.js
-index.css
+/index.js
+/index.css
 .git
