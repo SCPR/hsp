@@ -317,7 +317,6 @@ module.exports = (scope) => {
         },
 
         displayAlert: function(color, title, content){
-            $("#output").css("height", "150px");
             $("#output").html(
                 "<div><h4 style='" + color + "'>" + title + "</h4>" +
                 "<p style='" + color + "'>" + content + "</p>"
