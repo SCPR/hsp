@@ -8,10 +8,10 @@
   left: 700px
   top: 0
   bottom: 0
-  right: 280px
+  right: 180px
   &.now-playing
     opacity: 1
-    @media (max-width: 1342px)
+    @media (max-width: 1281px)
       left: 270px
     @media (max-width: 900px)
       left: 0
@@ -37,7 +37,7 @@
   position: absolute
   left: 0
   top: 0
-  right: 0
+  right: 50px
   bottom: 0
 
 .jp-volume-controls
@@ -47,6 +47,21 @@
   width: 100px
   @media (max-width: 500px)
     top: 7px
+
+.jp-audio-download
+  position: absolute
+  // right: 50px
+  // top: 20px
+  // width: 100px
+  right: 30px
+  top: 10px
+  width: 100px
+  opacity: 0.7
+  outline: 0
+  &:hover
+    opacity: 1
+  @media (max-width: 500px)
+    top: 8px
 
 .volume
   position: absolute

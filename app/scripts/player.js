@@ -33,6 +33,8 @@ $("aside[audio]").click(function() {
     title: $(this).attr('data-title'),
     mp3: $(this).attr('data-src')
   });
+  $('.jp-audio-download').attr('href', $(this).attr('data-src'));
+  $('.jp-audio-download').attr('download', $(this).attr('data-src').match(/[^\\/]+$/)[0]);
   $(this).addClass("now-playing");
   $(".jp-audio").addClass("now-playing");
   $("#jquery_jplayer_1").jPlayer("play");
