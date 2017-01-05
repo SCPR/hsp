@@ -8,8 +8,6 @@ module.exports = (scope) => {
 
     var $  = (selector) => { return jQuery(scope).find(selector); }
 
-    var fn = fn || {};
-
     var fn = {
 
         _s3url: "https://s3-us-west-1.amazonaws.com/scpr-projects/state_rep_boundaries/",
@@ -21,64 +19,66 @@ module.exports = (scope) => {
             fn._data.wherewolf.lac = Wherewolf();
             fn._data.wherewolf.sen = Wherewolf();
             fn._data.wherewolf.asem = Wherewolf();
-            fn._events();
-            fn._loaddata();
+            fn.setEvents();
+            fn.loadData();
         },
 
-        _events: function(){
+        setEvents: function(){
 
             // trigger to address search
             $("input[id='addressSearch']").focus(function(){
-                fn._searchme();
+                fn.searchMe();
             });
 
             // trigger to find users location
             $("button#findme").click(function(event){
                 event.preventDefault();
                 $(".data-loading").removeClass("hidden");
-                fn._findme();
+                fn.findMe();
             });
 
             // trigger to submit users address
             $("button#submit").click(function(event){
                 event.preventDefault();
                 $(".data-loading").removeClass("hidden");
-                fn._navigate();
+                fn.processLocation();
             });
         },
 
-        _loaddata: function(){
-            jQuery.getJSON(fn._s3url + "la-county-board-of-supervisors-districts-2011.json", function(data){
+        loadData: function(){
+            jQuery.getJSON(`${fn._s3url}la-county-board-of-supervisors-districts-2011.json`, (data) => {
                 fn._data.wherewolf.lac.addAll(data);
             });
-            jQuery.getJSON(fn._s3url + "state-senate-districts-2011.json", function(data){
+
+            jQuery.getJSON(`${fn._s3url}state-senate-districts-2011.json`, (data) =>{
                 fn._data.wherewolf.sen.addAll(data);
             });
-            jQuery.getJSON(fn._s3url + "state-assembly-districts-2011.json", function(data){
+
+            jQuery.getJSON(`${fn._s3url}state-assembly-districts-2011.json`, (data) =>{
                 fn._data.wherewolf.asem.addAll(data);
             });
         },
 
-        _reset: function(){
+        resetMe: function(){
             $("#output").empty();
             $("input[id='addressSearch']").val("");
             $("input[id='latitudeSearch']").val("");
             $("input[id='longitudeSearch']").val("");
         },
 
-        _searchme: function(){
+        searchMe: function(){
             $("button#submit").css("font-weight", "700");
             $("button#_findme").css("font-weight", "100");
-            fn._reset();
+            fn.resetMe();
             $("input[id='addressSearch']").geocomplete({
                 details: "form"
             });
         },
 
-        _findme: function(){
+        findMe: function(){
             $("button#submit").css("font-weight", "100");
             $("button#_findme").css("font-weight", "700");
-            fn._reset();
+            fn.resetMe();
             var location_options = {
                 enableHighAccuracy: true,
                 maximumAge: 30000,
@@ -91,6 +91,7 @@ module.exports = (scope) => {
                     location_options
                 );
             } else {
+                $(".data-loading").addClass("hidden");
                 fn.displayAlert(
                     "red",
                     "Sorry",
@@ -107,27 +108,33 @@ module.exports = (scope) => {
 
         locationError: function(error){
             if (error.code === 1){
+                $(".data-loading").addClass("hidden");
                 fn.displayAlert(
                     "red",
-                    "Sorry. " + error.message,
-                    "The user denied use of location services or your privacy settings do not allow this application to determine your current location."
+                    `Sorry ${error.message}`,
+                    `The user denied use of location services
+                    or your privacy settings do not allow this
+                    application to determine your current location.`
                 );
             } else if (error.code === 2){
+                $(".data-loading").addClass("hidden");
                 fn.displayAlert(
                     "#388B90",
-                    "Sorry. " + error.message,
+                    `Sorry ${error.message}`,
                     "We could not find your location."
                 );
             } else if (error.code === 3){
+                $(".data-loading").addClass("hidden");
                 fn.displayAlert(
                     "#388B90",
-                    "Sorry. " + error.message,
-                    "An attempt to locate your position timed out. Please refresh the page and try again."
+                    `Sorry ${error.message}`,
+                    `An attempt to locate your position timed out.
+                    Please refresh the page and try again.`
                 );
             };
         },
 
-        _navigate: function(){
+        processLocation: function(){
             $("#output").empty();
             var latitude = $("input[id='latitudeSearch']").val();
             var longitude = $("input[id='longitudeSearch']").val();
@@ -147,7 +154,8 @@ module.exports = (scope) => {
                     fn.displayAlert(
                         "#388B90",
                         "Sorry \n",
-                        "An attempt to locate your position timed out. Please refresh the page and try again."
+                        `An attempt to locate your position timed out.
+                        Please refresh the page and try again.`
                     );
                 } else if (lngNaN === true && latNaN === true){
                     clearInterval(checkExist);
@@ -155,7 +163,8 @@ module.exports = (scope) => {
                     fn.displayAlert(
                         "#388B90",
                         "Sorry \n",
-                        "You may have entered an incomplete address. Please enter your complete address."
+                        `You may have entered an incomplete address.
+                        Please enter your complete address.`
                     );
                 } else {
                     clearInterval(checkExist);
@@ -167,6 +176,7 @@ module.exports = (scope) => {
         _render: function(){
             fn.identifyBoundaries();
             if (fn._data.reps.count > 4){
+                $(".data-loading").addClass("hidden");
                 fn.displayAlert(
                     "red",
                     "Sorry we were unable to complete your search.",
@@ -186,6 +196,7 @@ module.exports = (scope) => {
                 fn.compileDetails(fn._data.reps.gov.details);
             } else {
                 fn._data.reps.proceed = false;
+                $(".data-loading").addClass("hidden");
                 fn.displayAlert(
                     "red",
                     "Sorry we were unable to complete your search.",
@@ -240,7 +251,7 @@ module.exports = (scope) => {
 
         gatherData: function(){
             $("#progress-message").html("Finding your representatives");
-            jQuery.getJSON(fn._s3url + "state_rep_data.json", function(data){
+            jQuery.getJSON(`${fn._s3url}state_rep_data.json`, function(data){
                 fn._data.reps.sen.details = _.where(data, {
                     chamber: "senate",
                     district_id: fn._data.reps.sen.external_id
@@ -286,7 +297,7 @@ module.exports = (scope) => {
                 title,
                 address,
                 rep.phones,
-                "<a href='" + mailto + "' target='_top'>" + rep.email + "</a>"
+                `<a href="${mailto}" target="_top">${rep.email}</a>`
             );
             $(".data-loading").addClass("hidden");
             fn.displayOfficials("#output", rep_deets);
@@ -299,17 +310,16 @@ module.exports = (scope) => {
         },
 
         writeToDom: function(selector, name, office, address, phone, email){
-            var html = "<div class='" + selector + " flex-item'>" +
-                "<p>"+
-                    "<span class='name'>" + name + "</span><br />" +
-                    "<span class='office'>" + office + "</span><br />" +
-                    "<hr>" +
-                    "<span class='address'>" + address + "</span><br />" +
-                    "<span class='phone'>" + phone + "</span><br />" +
-                    "<span class='email'>" + email + "</span>" +
-                "</p>" +
-                "</div>";
-            return html;
+            return `<div class="${selector} flex-item">
+                <p>
+                    <span class="name">${name}</span><br />
+                    <span class="office">${office}</span><br />
+                    <hr>
+                    <span class="address">${address}</span><br />
+                    <span class="phone">${phone}</span><br />
+                    <span class="email">${email}</span><br />
+                </p>
+                </div>`;
         },
 
         displayOfficials: function(selector, details){
@@ -317,13 +327,10 @@ module.exports = (scope) => {
         },
 
         displayAlert: function(color, title, content){
-            $("#output").html(
-                "<div><h4 style='" + color + "'>" + title + "</h4>" +
-                "<p style='" + color + "'>" + content + "</p>"
-            );
+            $("#output").html(`<div><h4 style="${color}">${title}</h4><p style="${color}">${content}</p>`);
         }
     };
 
     fn._init();
 
-}
+};
