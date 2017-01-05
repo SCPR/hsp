@@ -11,15 +11,23 @@ let os = new OnScreen({
 let hero        = $('.hero').first();
 let headerFixed = $('header[fixed]');
 let tagline     = headerFixed.find('span[tagline]');
+let main        = $('main');
+// os.on('enter', '#headline-sm-breakpoint', () => {
+//   tagline.removeClass('active');
+// });
 
-os.on('enter', '#headline-sm-breakpoint', () => {
-  tagline.removeClass('active');
-});
+// os.on('leave', '#headline-sm-breakpoint', () => {
+//   tagline.addClass('active');
+// });
 
-os.on('leave', '#headline-sm-breakpoint', () => {
-  tagline.addClass('active');
-});
-
-if($('main').scrollTop() > hero.height()){
+if(main.scrollTop() > hero.height()){
   tagline.addClass('active');
 }
+
+main.on('scroll', (e) => {
+  if(main.scrollTop() > hero.height()) {
+    tagline.addClass('active');
+  } else {
+    tagline.removeClass('active');
+  }
+});
